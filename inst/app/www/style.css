@@ -1,0 +1,54 @@
+/*** FONTS SET ***/
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('fonts/Montserrat-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: url('fonts/Montserrat-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+h4, h5, h5, h6 {
+  font-family: 'Montserrat-Medium', sans-serif;
+}
+p{font-family: 'Montserrat-Regular', sans-serif}
+
+
+body {
+  font-family: 'Montserrat-Regular', sans-serif;
+  color: #292929
+  height:100%
+}
+
+
+.selectize-input {
+  margin-right: 10px;
+  margin-top: 12px;
+  width: 90%;
+}
+
+.fa-eye:before{
+  color: #037e00;
+}
+
+/** shinyFile**/
+#sF-selectButton{
+  background-color: #037e00;
+  font-family: Montserrat-Bold, sans-serif;
+}
+
+
+.imlist{
+  background-color: #ffffff;
+}
+
+
+.imlist.selected {
+  background-color: #ffba0f;
+}

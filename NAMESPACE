@@ -1,0 +1,87 @@
+#exportPattern("^[[:alpha:]]+")
+
+export(mm_create_hs)
+export(mm_get_metadata)
+export(mm_stack_df)
+export(mm_remove_hs)
+export(mm_get_hs)
+export(mm_app)
+
+
+# Import
+
+# exifr
+importFrom(exifr, exiftool_call)
+importFrom(exifr, read_exif)
+
+
+# base
+importFrom("stats", "setNames")
+importFrom("utils", "write.csv")
+
+#shiny
+importFrom(shiny, shinyOptions)
+importFrom(shiny, shinyApp)
+importFrom(shiny, modalDialog)
+importFrom(shiny, tagList)
+importFrom(shiny, actionButton)
+importFrom(shiny, icon)
+importFrom(shiny, modalButton)
+importFrom(shiny, fluidRow)
+importFrom(shiny, column)
+importFrom(shiny, checkboxInput)
+importFrom(shiny, selectInput)
+importFrom(shiny, verbatimTextOutput)
+importFrom(shiny, showModal)
+importFrom(shiny, reactive)
+importFrom(shiny, eventReactive)
+importFrom(shiny, renderText)
+importFrom(shiny, req)
+importFrom(shiny, strong)
+importFrom(shiny, h2)
+importFrom(shiny, shinyOptions)
+importFrom(shiny, shinyOptions)
+importFrom(shiny, shinyOptions)
+importFrom(shiny, shinyOptions)
+importFrom(shiny, br)
+importFrom(shiny, hr)
+importFrom(shiny, conditionalPanel)
+importFrom(shiny, numericInput)
+importFrom(shiny, renderPrint)
+importFrom(shiny, renderPlot)
+importFrom(shiny, tabsetPanel)
+importFrom(shiny, tabPanel)
+importFrom(shiny, plotOutput)
+importFrom(shiny, observe)
+importFrom(shiny, updateNumericInput)
+importFrom(shiny, reactiveValues)
+importFrom(shiny, eventReactive)
+importFrom(shiny, updateSelectInput )
+importFrom(shiny, updateTextInput)
+importFrom(shiny, observe)
+
+#ds4Dash
+importFrom("bs4Dash", "dashboardHeader")
+importFrom("bs4Dash", "dashboardBody")
+importFrom("bs4Dash", "dashboardPage")
+importFrom("bs4Dash", "dashboardSidebar")
+
+#leaflet
+importFrom("leaflet", "leafletOutput")
+importFrom("leaflet", "renderLeaflet")
+
+
+importFrom("shinyFiles", "getVolumes")
+importFrom("shinyFiles", "parseDirPath")
+importFrom("shinyFiles", "parseFilePaths")
+importFrom("shinyFiles", "parseSavePath")
+importFrom("shinyFiles", "shinyDirButton")
+importFrom("shinyFiles", "shinyDirChoose")
+importFrom("shinyFiles", "shinyDirLink")
+importFrom("shinyFiles", "shinyFileChoose")
+importFrom("shinyFiles", "shinyFileSave")
+importFrom("shinyFiles", "shinyFilesButton")
+importFrom("shinyFiles", "shinySaveButton")
+
+importFrom("shinyTree", "renderTree")
+importFrom("shinyTree", "shinyTree")

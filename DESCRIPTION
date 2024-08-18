@@ -1,0 +1,27 @@
+Package: maimer
+Type: Package
+Title: Handle Camera Trap Data
+Version: 0.2.0
+Date: 2024-08-18
+Imports: 
+  bs4Dash, 
+  exifr,
+  leaflet,
+  shiny, 
+  shinyFiles, 
+  shinyTree
+Authors@R: c(
+    person(given = "Stanislas Mahussi", family = "Gandaho", email = "stangandaho@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0003-4969-1252", affiliation = "Laboratory of Applied Ecology, University of Abomey-Calavi, Benin (LAE/UAC)")
+           )
+    )
+Maintainer: Stanislas Mahussi Gandaho <stangandaho@gmail.com>
+Description: Provided tool to edit, extract, visualize and analyze 
+    cameras trap data. The Graphical User Interface integrated is additional tool to process image labeling/annotation.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
+Roxygen: list(markdown = TRUE)
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
