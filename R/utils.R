@@ -1,0 +1,88 @@
+#' Deep list
+#'
+#' @description
+#' Convert list to tree object format for jstree library
+#'
+deep_list <- function(list_item){
+  setlist <- list()
+  listname <- names(list_item)
+
+  for (n in listname) {
+    val <- list_item[[n]]
+    listed <- as.list(setNames(rep("", length(val)), val))
+
+    setlist[[n]] <- listed
+  }
+
+  return(setlist)
+}
+
+#' Pair to list
+#'
+#' @description
+#' unction that converts a vector into a list with pairs of elements (i.e., two-by-two)
+#'
+pair_to_list <- function(vec) {
+  if (length(vec) %% 2 != 0) {
+    stop("The length of the vector must be even.")
+  }
+
+  result_list <- list()
+  for (i in seq(1, length(vec), by = 2)) {
+    result_list[[vec[i]]] <- vec[i + 1]
+  }
+
+  return(result_list)
+}
+
+
+#' Check seperator
+#' @description
+#' Check and return the seperator in the file (dataset to read)
+#'
+check_sep <- function(file_path){
+
+  readed_line <- readLines(con = file_path, n = 1)
+
+  seps <- c(",", ";", "\\|")
+  separators_is_in <- list()
+  for (sep in seps) {
+    lgc <- grepl(sep, readed_line)
+    separators_is_in[[sep]] <- lgc
+  }
+  separators_is_in <- unlist(separators_is_in)
+  names(separators_is_in) <- NULL
+
+  if (all(separators_is_in == FALSE)) {
+    stop("Unknow seperator in file")
+  }
+
+  sep <- seps[separators_is_in][1L]
+
+  if (sep == "\\|") {
+    sep <- "|"
+  }
+  return(sep)
+}
+
+#' Update list
+#' @description
+#' Update an existing list basing on item in second list.
+#' If the element is in the list, append the value from second list
+#' and ensure the values are unique. If the element is not in the list, add it with its value
+#'
+update_list <- function(first_list, second_list) {
+  for (name in names(second_list)) {
+    if (name %in% names(first_list)) {
+      #
+      combined_values <- unique(c(first_list[[name]], second_list[[name]]))
+      first_list[[name]] <- combined_values
+    } else {
+      #
+      first_list[[name]] <- second_list[[name]]
+    }
+  }
+  return(first_list)
+}
+
+
