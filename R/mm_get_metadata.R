@@ -54,7 +54,7 @@ get_metadata <- function(path){
 #'
 #' # Extract metadata from all images in a directory (non-recursive)
 #' file.copy(image_path, file.path(dirname(image_path), "large2.jpeg"))
-#' metadata_dir <- mm_get_metadata(path = dirname(image_path), ecursive = FALSE)
+#' metadata_dir <- mm_get_metadata(path = dirname(image_path), recursive = FALSE)
 #'
 #'unlink(file.path(dirname(image_path), "large2.jpeg"))
 #'

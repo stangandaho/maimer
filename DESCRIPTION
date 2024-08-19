@@ -5,11 +5,13 @@ Version: 0.2.0
 Date: 2024-08-18
 Imports: 
   bs4Dash, 
+  dplyr,
   exifr,
   leaflet,
   shiny, 
   shinyFiles, 
-  shinyTree
+  shinyTree,
+  tibble
 Authors@R: c(
     person(given = "Stanislas Mahussi", family = "Gandaho", email = "stangandaho@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-4969-1252", affiliation = "Laboratory of Applied Ecology, University of Abomey-Calavi, Benin (LAE/UAC)")

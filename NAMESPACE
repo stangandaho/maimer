@@ -19,6 +19,11 @@ importFrom(exifr, read_exif)
 importFrom("stats", "setNames")
 importFrom("utils", "write.csv")
 
+# dplyr
+importFrom(tibble, is_tibble)
+importFrom(dplyr, arrange)
+
+
 #shiny
 importFrom(shiny, shinyOptions)
 importFrom(shiny, shinyApp)
