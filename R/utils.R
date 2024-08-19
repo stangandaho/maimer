@@ -2,6 +2,8 @@
 #'
 #' @description
 #' Convert list to tree object format for jstree library
+#' @keywords internal
+#' @noRd
 #'
 deep_list <- function(list_item){
   setlist <- list()
@@ -21,6 +23,8 @@ deep_list <- function(list_item){
 #'
 #' @description
 #' unction that converts a vector into a list with pairs of elements (i.e., two-by-two)
+#' @keywords internal
+#' @noRd
 #'
 pair_to_list <- function(vec) {
   if (length(vec) %% 2 != 0) {
@@ -39,6 +43,8 @@ pair_to_list <- function(vec) {
 #' Check seperator
 #' @description
 #' Check and return the seperator in the file (dataset to read)
+#' @keywords internal
+#' @noRd
 #'
 check_sep <- function(file_path){
 
@@ -70,6 +76,8 @@ check_sep <- function(file_path){
 #' Update an existing list basing on item in second list.
 #' If the element is in the list, append the value from second list
 #' and ensure the values are unique. If the element is not in the list, add it with its value
+#' @keywords internal
+#' @noRd
 #'
 update_list <- function(first_list, second_list) {
   for (name in names(second_list)) {
