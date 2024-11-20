@@ -7,11 +7,16 @@ Imports:
   bs4Dash, 
   dplyr,
   exifr,
+  ggplot2,
   leaflet,
+  magrittr,
+  overlap,
   shiny, 
   shinyFiles, 
   shinyTree,
-  tibble
+  tibble,
+  tidyr,
+  rlang
 Authors@R: c(
     person(given = "Stanislas Mahussi", family = "Gandaho", email = "stangandaho@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0003-4969-1252", affiliation = "Laboratory of Applied Ecology, University of Abomey-Calavi, Benin (LAE/UAC)")
