@@ -4,13 +4,19 @@
 \alias{mm_remove_hs}
 \title{Remove Specific or All HierarchicalSubject Values from Image Metadata}
 \usage{
-mm_remove_hs(path, hierarchy = NULL)
+mm_remove_hs(path, hierarchy = NULL, intern = TRUE, quiet = TRUE, ...)
 }
 \arguments{
 \item{path}{A character vector specifying the full path of the image file.}
 
 \item{hierarchy}{A named character vector, e.g c("Species" = "Vulture") specifying the hierarchy to be removed.
 If NULL, the entire \verb{Hierarchical Subject} field is removed.}
+
+\item{intern}{TRUE if output should be returned as a character vector.}
+
+\item{quiet}{Suppress output of the command itself.}
+
+\item{...}{additional arguments to be passed to \code{\link[=system2]{system2()}}}
 }
 \value{
 message indicating image updated

@@ -4,13 +4,19 @@
 \alias{mm_create_hs}
 \title{Create or Add Hierarchical Subject Values in Image Metadata}
 \usage{
-mm_create_hs(path, value = c())
+mm_create_hs(path, value = c(), intern = TRUE, quiet = TRUE, ...)
 }
 \arguments{
 \item{path}{A character vector specifying the full path of the image file.}
 
 \item{value}{named character vector specifying the new hierarchical subjects to add.
 Each value must have a parent specified as the name, e.g c("Species" = "Vulture").}
+
+\item{intern}{TRUE if output should be returned as a character vector.}
+
+\item{quiet}{Suppress output of the command itself.}
+
+\item{...}{additional arguments to be passed to \code{\link[=system2]{system2()}}}
 }
 \description{
 Create or Add Hierarchical Subject Values in Image Metadata
