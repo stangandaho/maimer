@@ -5,12 +5,12 @@
 *'maimer'* is an R package that provides tools to edit, extract, and manage camera metadata seamlessly, and analyze/visualize data, streamlining workflows.
 
 ## **Key Features:**
-   - ✏️🖥️ Edit metadata fields directly within R through [exiftool](https://exiftool.org/) or using the integrated Graphical User Interface (GUI) without requiring extensive coding knowledge.s
-   - 🗂️ Batch editing capabilities to modify metadata for multiple files simultaneously.  
-   - 🖼️ Extract metadata, including timestamps, GPS coordinates (if available), camera settings, and more from various image and video formats commonly used in camera traps.  
-   - etc.
-
-![Maimer App User Interface](https://github.com/stangandaho/maimer/blob/main/app_interface.jpg?raw=true)
+   - Edit metadata fields directly within R through [exiftool](https://exiftool.org/) or using the integrated Graphical User Interface (GUI).
+   - Batch editing capabilities to modify metadata for multiple files simultaneously.  
+   - Extract metadata, including timestamps, GPS coordinates (if available), camera settings, and more from various image and video formats commonly used in camera traps.  
+   - Check error or inconsistency in data.
+   - Process data like "tidy verbs".
+   - Explore data or Visualize analyses approaching [grammar of graphics](https://ggplot2-book.org/)
 
 
 The functions are designed to work well with other R packages such as 
@@ -22,18 +22,20 @@ You can install 'maimer' directly from GitHub using the following command:
 
 ```R
 # Install devtools package if you haven't already
-if(!'devtools' %in% rownames(installed.packages())){
+if(!'remotes' %in% rownames(installed.packages())){
   install.packages("devtools")
 }
 
 # Install maimer from GitHub
-devtools::install_github("stangandaho/maimer")
+remotes::install_github("stangandaho/maimer")
 ```
 
-Once installed, *'maimer'* can be loaded and used in R scripts or through the GUI. For consistency and understanbaility, the most package function name started by mm_* . Here’s a simple example to get started:
+Once installed, *'maimer'* can be loaded and used in R scripts. 
+For consistency and understanbaility, the most package function name started by mm_* . 
+Here’s a simple example to get started:
 
 ```R
-# Load the maimer package
+# Load the package
 library(maimer)
 
 # Example: Extract metadata from a camera trap image
