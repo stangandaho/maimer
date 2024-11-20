@@ -20,11 +20,10 @@
 #' # Get Hierarchical Subject from the image - Before use mm_create_hs()
 #' mm_get_hs(path = image_path) #==> "Species|Vulture"
 #'
-mm_create_hs <- function(path, value = c()) {
+mm_create_hs <- function(path, value = c(), intern = TRUE, quiet = TRUE, ...) {
 
-  #exiftoll_path <- paste0(base::system.file(package = "maimer"), "/app/exiftool.exe ")
   if (is.null(value)) {
-    stop("Value must be provided, e.g c('Species' = 'Vulture'")
+    stop("Value must be provided, e.g c('Species' = 'Vulture')")
   }
 
   havenot_name <- is.null(names(value)) | any(names(value) == "")
@@ -58,16 +57,22 @@ mm_create_hs <- function(path, value = c()) {
   }else{
 
     if (!is.null(existing)) {
-      parse_value <- unique(c(noquote(sprintf(" -HierarchicalSubject='%s|%s'", names(value), value)), existing))
+      parse_value <- unique(c(sprintf(" -HierarchicalSubject='%s|%s'", names(value), value), existing))
     }else{
-      parse_value <- unique(noquote(sprintf(" -HierarchicalSubject='%s|%s'", names(value), value)))
+      parse_value <- unique(sprintf(" -HierarchicalSubject='%s|%s'", names(value), value))
     }
   }
 
-  response <- suppressMessages(
-    exifr::exiftool_call(args = parse_value, fnames = path, intern = TRUE, quiet = TRUE)
-  )
+  response <- suppressMessages({
+    exifr::exiftool_call(args = noquote(parse_value),
+                         fnames = path,
+                         intern = intern,
+                         quiet = quiet,
+                         ...)
+  })
 
-  return(trimws(response))
+  return(trimws(noquote(response)))
 
 }
+
+

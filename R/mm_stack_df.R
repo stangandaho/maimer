@@ -38,6 +38,10 @@ mm_stack_df <- function(df_list) {
     rebuilded[[df]] <- do.call(cbind, interdf)
   }
 
-  return(data.frame(do.call(rbind, rebuilded), check.names = FALSE))
+  return(
+    dplyr::tibble(
+      data.frame(do.call(rbind, rebuilded), check.names = FALSE)
+    )
+  )
 
 }

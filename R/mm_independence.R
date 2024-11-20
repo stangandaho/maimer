@@ -42,74 +42,69 @@
 #'
 #' @export
 
-mm_is_independent <- function(data = NULL,
-                              datetime = "",
-                              format = "",
-                              deltatime = NULL,
-                              threshold = 30*60,
-                              only = TRUE) {
+mm_independence <- function(data = NULL,
+                           datetime,
+                           format,
+                           threshold = 30*60,
+                           only = FALSE) {
 
-  if (any(class(data) %in% c("data.frame", "tbl_df", "tbl"))) {
-
-    if (!hasArg(datetime)) {
-      stop("`datetime`, cannot be missed")
+  # Prevent all possible error
+  if (!is.null(data)) {
+    if (!any(class(data) %in% c("data.frame", "tbl_df", "tbl"))){
+      stop("Wrong data provided")
     }
 
-    if (!hasArg(format)) {
-      stop("`format` cannot be missed")
-    }
+    dt_str_ <- paste0(dplyr::ensym(datetime))
 
-    data <- data %>% dplyr::arrange(!!dplyr::sym(datetime))
-    deltatimes <- strptime(data[[datetime]], format = format)
-    sq <- data[[datetime]]
+    if (!any(dt_str_ %in% colnames(data))) {
+      stop(sprintf("%s not found in data", dt_str_))
+    }
+  }
+
+  if (!hasArg(datetime)) {
+    stop("datetime must be provided")
+  }
+
+  if (!hasArg(format)) {
+    stop("format cannot be missed")
+  }
+
+  ## Get datetime and build new data
+  if (hasArg(data)) {
+    dt_str_ <- paste0(dplyr::ensym(datetime))
+    data[[dt_str_]] <- strptime(data[[dplyr::ensym(datetime)]], format = format)
+    data <- data %>%
+      dplyr::arrange(!!dplyr::sym(dt_str_)) %>%
+      dplyr::rename(datetime = !!dplyr::sym(dt_str_)) %>%
+      dplyr::as_tibble()
 
   }else{
-    deltatimes <- deltatime
+    data <- dplyr::tibble('datetime' := strptime(datetime, format = format)) %>%
+      dplyr::arrange(datetime)
   }
 
   # Error for incorrect format
-  if (all(is.na(deltatimes))) {
+  if (all(is.na(data$datetime))) {
     stop(sprintf("%s is ambiguous format", format))
   }
+
   # warning for ambiguous datetime
-  if (!all(is.na(deltatimes))) {
-    if (any(is.na(deltatimes))) {
-      na_date <- sq[is.na(deltatimes)]
+  if (!all(is.na(data$datetime))) {
+    if (any(is.na(data$datetime))) {
+      na_date <- data$datetime[is.na(data$datetime)]
       warning(sprintf("The following datetime are ambiguous: %s", paste0(na_date, collapse = " ")))
     }
   }
 
-  # Use deltatime argument if provided instead
-  if (hasArg(deltatime) & !hasArg(data)) {
-    deltatime_th <- which(deltatime >= threshold)
-  } else{
-    deltatime_th <- which(c(0, diff(deltatimes)) >= threshold)
+  # Data with deltatime and event
+  data$deltatime <- c(0, diff(data$datetime))
+  data$event <- c(TRUE, diff(data$datetime) >= threshold)
+
+  if (only) {
+    data <- data %>%
+      dplyr::filter(event == TRUE) %>%
+      dplyr::select(-event)
   }
 
-  if (length(deltatime_th) > 0) {
-    index <- deltatime_th
-    index_moins <- deltatime_th - 1
-    all_index <- sort(c(index_moins, index))
-    event <- 1:length(deltatimes) %in% all_index
-
-    if (class(data) %in% c("data.frame", "tbl_df", "tbl")) {
-      data[["independent"]] <- event
-      data[["deltatime"]] <- c(0, diff(deltatimes))
-
-      if (only) {
-        dtr <- subset(data, independent == TRUE)
-        dtr <- dtr[, which(colnames(dtr) != "independent")]
-        return(dplyr::as_tibble(dtr))
-      }else{
-        return(dplyr::as_tibble(data))
-      }
-
-    }else{
-      return(dplyr::as_tibble(data.frame(deltatime = deltatime, independent = event)))
-    }
-
-  }else{
-    message(sprintf("Any independent event found with threshold of %s", threshold))
-  }
-
+  return(data)
 }

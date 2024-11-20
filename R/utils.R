@@ -94,3 +94,79 @@ update_list <- function(first_list, second_list) {
 }
 
 
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+#' @export
+magrittr::`%>%`
+
+#' Pipe operator
+#'
+#' @name %<>%
+#' @rdname pipe
+#' @keywords internal
+#' @importFrom magrittr %<>%
+#' @usage lhs \%<>\% rhs
+#' @export
+magrittr::`%<>%`
+
+
+#' Parse datetime
+#'
+#' @description
+#' Parses an input vector into POSIXct date-time object.
+#' @keywords internal
+#' @noRd
+#'
+parse_datetime <- function (datetime,
+                            format,
+                            time_zone,
+                            check_na = TRUE,
+                            check_empty = TRUE,
+                            check_na_out = TRUE,
+                            allow_empty_output = FALSE,
+                            quiet = FALSE) {
+
+  if (inherits(datetime, c("POSIXct", "POSIXlt"))) {
+    datetime <- format(datetime, format = "%Y-%m-%d %H:%M:%S")
+  }
+  else {
+    if (!inherits(datetime, "character"))
+      stop(paste("datetime must be a character:",
+                 deparse(substitute(datetime))), call. = FALSE)
+  }
+  if (check_na & any(is.na(datetime)))
+    stop(paste("there are NAs in", deparse(substitute(datetime))), call. = FALSE)
+  if (check_empty & any(datetime == ""))
+    stop(paste("there are blank values in", deparse(substitute(datetime))), call. = FALSE)
+  if (all(datetime == "") & allow_empty_output)
+    return(NA)
+  datetime_char <- as.character(datetime)
+  if (grepl(pattern = "%", x = format, fixed = TRUE)) {
+    out <- as.POSIXct(datetime_char, tz = time_zone, format = format)
+  }
+  else {
+    if (!requireNamespace("lubridate", quietly = TRUE))
+      stop(paste("package 'lubridate' is required for the specified format",
+                 format))
+    out <- lubridate::parse_date_time(datetime_char, orders = format,
+                                      tz = time_zone, quiet = quiet)
+  }
+  if (all(is.na(out)))
+    stop(paste0("Cannot read datetime format in ", deparse(substitute(datetime)),
+                ". Output is all NA.\n", "expected:  ", format,
+                "\nactual:    ", datetime[1]), call. = FALSE)
+  if (check_na_out & any(is.na(out)))
+    stop(paste(sum(is.na(out)), "out of", length(out), "records in",
+               deparse(substitute(datetime)), "cannot be interpreted using format:",
+               format, "\n", "rows", paste(which(is.na(out)),
+                                           collapse = ", ")), call. = FALSE)
+  if (inherits(datetime, c("POSIXct", "POSIXlt")))
+    stop("couldn't interpret datetime using specified format. Output is not POSIX object")
+  return(out)
+}
+

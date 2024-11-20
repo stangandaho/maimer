@@ -8,6 +8,9 @@
 #' @inheritParams mm_get_hs
 #' @param hierarchy A named character vector, e.g c("Species" = "Vulture") specifying the hierarchy to be removed.
 #' If NULL, the entire `Hierarchical Subject` field is removed.
+#' @param intern TRUE if output should be returned as a character vector.
+#' @param quiet Suppress output of the command itself.
+#' @param ... additional arguments to be passed to [system2()]
 #'
 #' @return message indicating image updated
 #'
@@ -23,18 +26,25 @@
 #'
 #' @export
 #'
-mm_remove_hs <- function(path, hierarchy = NULL) {
+mm_remove_hs <- function(path,
+                         hierarchy = NULL,
+                         intern = TRUE,
+                         quiet = TRUE,
+                         ...) {
 
   if (is.null(hierarchy)) {
-    response <- exifr::exiftool_call(args = " -HierarchicalSubject=", fnames = path, stdout = TRUE)
+    response <- exifr::exiftool_call(args = " -HierarchicalSubject=",
+                                     fnames = path,
+                                     stdout = FALSE,
+                                     invisible = TRUE)
     return(trimws(response))
   }
 
-  current_hs <- mm_get_hs(path = path)
+  current_hs <- suppressMessages(mm_get_hs(path = path))
   hierarchy <- paste0(names(hierarchy), "|", hierarchy)
 
   if (is.character(hierarchy) & !hierarchy %in% current_hs) {
-    return(message(sprintf("Hierarchy %s does not exist. No change applied to %s" ,
+    return(noquote(sprintf("Hierarchy %s does not exist. No change applied to %s" ,
                            hierarchy, basename(path = path))))
   }
 
@@ -45,8 +55,13 @@ mm_remove_hs <- function(path, hierarchy = NULL) {
     }
 
     cmd_update <- sprintf("-HierarchicalSubject='%s'", updated_hs)
-    response <- exifr::exiftool_call(args = cmd_update, fnames = path, stdout = TRUE)
+    response <- suppressMessages({
+      exifr::exiftool_call(args = noquote(cmd_update),
+                           fnames = path,
+                           stdout = TRUE)
+    })
   }
 
-  return(trimws(response))
+  return(trimws(noquote(response)))
 }
+

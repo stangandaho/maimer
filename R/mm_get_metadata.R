@@ -5,7 +5,7 @@ get_metadata <- function(path){
   if (!file.exists(path)) {
     stop("Path must be a directory path or file path")
   }else{
-    metadata_df <- exiftool_call(args = NULL, fnames = path, stdout = TRUE)
+    metadata_df <- suppressMessages(exifr::exiftool_call(args = NULL, fnames = path, stdout = TRUE))
   }
 
   out_df <- list(); idx <- 0

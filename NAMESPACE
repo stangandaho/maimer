@@ -6,6 +6,8 @@ export(mm_stack_df)
 export(mm_remove_hs)
 export(mm_get_hs)
 export(mm_app)
+export(mm_is_independent)
+export(mm_to_diel)
 
 
 # Import

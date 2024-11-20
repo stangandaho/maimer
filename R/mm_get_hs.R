@@ -21,9 +21,12 @@
 
 mm_get_hs <- function(path){
 
-  current_values <- suppressMessages(
-    exifr::exiftool_call(args = "-HierarchicalSubject", fnames = path, intern = TRUE, quiet = TRUE)
-  )
+  current_values <- suppressMessages({
+    exifr::exiftool_call(args = "-HierarchicalSubject",
+                         fnames = path,
+                         intern = TRUE,
+                         quiet = TRUE)
+  })
   hierar_exist <- "Hierarchical Subject" %in% colnames(get_metadata(path))
 
   if (hierar_exist) {
