@@ -1,13 +1,24 @@
 #exportPattern("^[[:alpha:]]+")
 
-export(mm_create_hs)
-export(mm_get_metadata)
-export(mm_stack_df)
-export(mm_remove_hs)
-export(mm_get_hs)
+## Prepare media file
 export(mm_app)
-export(mm_is_independent)
-export(mm_to_diel)
+export(mm_get_metadata) #ok
+export(mm_get_hs) #ok
+export(mm_create_hs)#ok
+export(mm_remove_hs) #ok
+## Prepare table
+export(mm_read) #ok
+export(mm_stack_df) #ok
+export(mm_check_location)#ok
+export(mm_independence) #ok
+export(mm_to_radian)
+export(mm_to_community) #ok
+## Analysis
+export(mm_overlap_plot)#ok
+export(mm_overlap_matrix)
+## General
+export(`%>%`)
+export(`%<>%`)
 
 
 # Import
@@ -22,9 +33,31 @@ importFrom("stats", "setNames")
 importFrom("utils", "write.csv")
 
 # dplyr
-importFrom(tibble, is_tibble)
+importFrom(dplyr, as_tibble)
 importFrom(dplyr, arrange)
+importFrom(dplyr, mutate)
+importFrom(dplyr, tibble)
+importFrom(dplyr, rename)
 
+#tidyr
+importFrom(tidyr, pivot_wider)
+
+# magrittr
+importFrom(magrittr, '%>%')
+importFrom(magrittr, '%<>%')
+
+# ggplot
+importFrom(ggplot2, ggplot)
+importFrom(ggplot2, geom_polygon)
+importFrom(ggplot2, labs)
+importFrom(ggplot2, theme_minimal)
+importFrom(ggplot2, theme)
+importFrom(ggplot2, element_line)
+importFrom(ggplot2, element_text)
+importFrom(ggplot2, geom_line)
+importFrom(ggplot2, geom_rug)
+importFrom(ggplot2, annotate)
+importFrom(ggplot2, scale_x_continuous)
 
 #shiny
 importFrom(shiny, shinyOptions)
