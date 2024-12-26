@@ -110,7 +110,7 @@ importFrom("bs4Dash", "dashboardSidebar")
 importFrom("leaflet", "leafletOutput")
 importFrom("leaflet", "renderLeaflet")
 
-
+#shinyFIles
 importFrom("shinyFiles", "getVolumes")
 importFrom("shinyFiles", "parseDirPath")
 importFrom("shinyFiles", "parseFilePaths")
@@ -123,5 +123,20 @@ importFrom("shinyFiles", "shinyFileSave")
 importFrom("shinyFiles", "shinyFilesButton")
 importFrom("shinyFiles", "shinySaveButton")
 
+#shinyTree
 importFrom("shinyTree", "renderTree")
 importFrom("shinyTree", "shinyTree")
+
+#overlap
+importFrom(overlap, bootCI)
+importFrom(overlap, bootCIlogit)
+importFrom(overlap, bootEst)
+importFrom(overlap, bootstrap)
+importFrom(overlap, densityFit)
+importFrom(overlap, densityPlot)
+importFrom(overlap, getBandWidth)
+importFrom(overlap, overlapEst)
+importFrom(overlap, overlapPlot)
+importFrom(overlap, overlapTrue)
+importFrom(overlap, resample)
+importFrom(overlap, sunTime)
