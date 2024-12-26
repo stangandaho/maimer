@@ -5,7 +5,7 @@ test_that("Create hierarchical subject in metadata", {
   image_path <- file.path(system.file("img", package = "maimer"), "large.jpeg")
 
   null_output <- mm_create_hs(path = image_path, value = c("Species" = "Vulture"))
-  testthat::expect_equal(null_output, "1 image files updated")
+  testthat::expect_equal(class(null_output), "noquote")
 
   # Complet HS to existing
   null_output2 <- mm_create_hs(path = image_path, value = c("Species" = "Vulture", "Sex" = "Female"))

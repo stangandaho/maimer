@@ -34,11 +34,8 @@
 #' df <- data.frame(datetime = as.POSIXct(c("2024-08-01 10:00:00", "2024-08-01 10:15:00",
 #'                                          "2024-08-01 10:45:00", "2024-08-01 11:00:00")),
 #'                  value = c(1, 2, 3, 4))
-#' result <- mm_is_independent(data = df, datetime = "datetime", format = "%Y-%m-%d %H:%M:%S")
-#'
-#' # Example with deltatime
-#' deltatime <- c(1800, 1800, 3600)
-#' result <- mm_is_independent(deltatime = deltatime)
+#' result <- mm_independence(data = df, datetime = "datetime", format = "%Y-%m-%d %H:%M:%S")
+#' result
 #'
 #' @export
 
@@ -54,7 +51,7 @@ mm_independence <- function(data = NULL,
       stop("Wrong data provided")
     }
 
-    dt_str_ <- paste0(dplyr::ensym(datetime))
+    dt_str_ <- ifelse(hasArg(datetime), paste0(dplyr::ensym(datetime)), "datetime")
 
     if (!any(dt_str_ %in% colnames(data))) {
       stop(sprintf("%s not found in data", dt_str_))
@@ -71,6 +68,7 @@ mm_independence <- function(data = NULL,
 
   ## Get datetime and build new data
   if (hasArg(data)) {
+    original_datetime <- data[[dt_str_]]
     dt_str_ <- paste0(dplyr::ensym(datetime))
     data[[dt_str_]] <- strptime(data[[dplyr::ensym(datetime)]], format = format)
     data <- data %>%
@@ -79,6 +77,7 @@ mm_independence <- function(data = NULL,
       dplyr::as_tibble()
 
   }else{
+    original_datetime <- datetime
     data <- dplyr::tibble('datetime' := strptime(datetime, format = format)) %>%
       dplyr::arrange(datetime)
   }
@@ -91,8 +90,9 @@ mm_independence <- function(data = NULL,
   # warning for ambiguous datetime
   if (!all(is.na(data$datetime))) {
     if (any(is.na(data$datetime))) {
-      na_date <- data$datetime[is.na(data$datetime)]
-      warning(sprintf("The following datetime are ambiguous: %s", paste0(na_date, collapse = " ")))
+      na_date <- original_datetime[is.na(data$datetime)]
+      warning(sprintf("The following datetime are ambiguous: %s", paste0(na_date, collapse = ", ")),
+              call. = FALSE)
     }
   }
 

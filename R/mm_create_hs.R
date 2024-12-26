@@ -20,7 +20,10 @@
 #' # Get Hierarchical Subject from the image - Before use mm_create_hs()
 #' mm_get_hs(path = image_path) #==> "Species|Vulture"
 #'
-mm_create_hs <- function(path, value = c(), intern = TRUE, quiet = TRUE, ...) {
+mm_create_hs <- function(path,
+                         value = c(),
+                         intern = TRUE,
+                         quiet = TRUE, ...) {
 
   if (is.null(value)) {
     stop("Value must be provided, e.g c('Species' = 'Vulture')")

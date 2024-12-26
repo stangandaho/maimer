@@ -55,10 +55,7 @@ if certain events in a dataset are independent of each other based on time inter
 df <- data.frame(datetime = as.POSIXct(c("2024-08-01 10:00:00", "2024-08-01 10:15:00",
                                          "2024-08-01 10:45:00", "2024-08-01 11:00:00")),
                  value = c(1, 2, 3, 4))
-result <- mm_is_independent(data = df, datetime = "datetime", format = "\%Y-\%m-\%d \%H:\%M:\%S")
-
-# Example with deltatime
-deltatime <- c(1800, 1800, 3600)
-result <- mm_is_independent(deltatime = deltatime)
+result <- mm_independence(data = df, datetime = "datetime", format = "\%Y-\%m-\%d \%H:\%M:\%S")
+result
 
 }
