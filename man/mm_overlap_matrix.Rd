@@ -23,18 +23,18 @@ mm_overlap_matrix(
 
 \item{convert_time}{Logical. If \code{TRUE}, the time data will be converted to radians using the \code{mm_to_radian} function.}
 
-\item{format}{A character string specifying the time format (e.g., \code{"\%H:\%M:\%S"}) if \code{convert_time} is \code{TRUE}. Defaults to \code{"\%H:\%M:\%S"}.}
+\item{format}{A character string specifying the time format (e.g., \code{"\%H:\%M:\%S"}) if \code{\link[=mm_to_radian]{mm_to_radian()}} is \code{TRUE}. Defaults to \code{"\%H:\%M:\%S"}.}
 
 \item{fill_na}{Optional. A numeric value used to fill \code{NA} values in the overlap coefficient matrix. Defaults to \code{NULL} (does not fill \code{NA} values).}
 
-\item{...}{Additional arguments passed to \code{overlap::overlapEst} for overlap estimation.}
+\item{...}{Additional arguments passed to \code{\link[overlap:overlapEst]{overlap::overlapEst()}}` for overlap estimation.}
 }
 \value{
 A square matrix of pairwise overlap coefficients, where rows and columns represent species.
 }
 \description{
 This function calculates pairwise overlap coefficients for activity patterns of multiple species
-using their time data. The results are returned in a matrix format.
+using their time data.
 }
 \details{
 The function calculates pairwise overlap coefficients for all species in the dataset.

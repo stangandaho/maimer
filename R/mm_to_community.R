@@ -72,7 +72,8 @@ mm_to_community <- function(data,
       tidyr::pivot_wider(id_cols = !!site_column,
         names_from = !!species_column,
         values_from = !!size_column,
-        values_fill = values_fill)
+        values_fill = values_fill,
+        values_fn = sum)
   }
 
   return(data)

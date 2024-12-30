@@ -46,38 +46,39 @@
 #'   species_B <- runif(100, 0, 2 * pi)
 #'
 #'   # Plot overlap with default settings
-#'   mm_overlap(A = species_A, B = species_B)
+#'   mm_plot_overlap(A = species_A, B = species_B)
 #'
 #'   # Customize plot with specific colors and line types
-#'   mm_overlap(A = species_A, B = species_B, overlap_color = "blue", linecol = c("red", "green"))
+#'   mm_plot_overlap(A = species_A, B = species_B, overlap_color = "blue", linecol = c("red", "green"))
 #'
 #'   # Include rug plots and change transparency
-#'   mm_overlap(A = species_A, B = species_B, rug = TRUE, overlap_alpha = 0.5)
+#'   mm_plot_overlap(A = species_A, B = species_B, rug = TRUE, overlap_alpha = 0.5)
 #' }
 #'
 #' @import ggplot2
 #' @import overlap
 #' @export
 
-mm_overlap_plot <- function(A,
-                        B,
-                        xscale = 24,
-                        xcenter = c("noon", "midnight"),
-                        n_grid = 128,
-                        kmax = 3,
-                        adjust = 1,
-                        rug = FALSE,
-                        overlap_color = "gray40",
-                        overlap_alpha = 0.8,
-                        linetype = c(1, 2),
-                        linecol = c("gray10", "gray0"),
-                        linewidth = c(1, 1),
-                        overlap_only = FALSE,
-                        rug_lentgh = 0.018,
-                        rug_color = "gray30",
-                        extend = "lightgrey",
-                        extend_alpha = 0.8,
-                        ...) {
+mm_plot_overlap <- function(A,
+                            B,
+                            xscale = 24,
+                            xcenter = c("noon", "midnight"),
+                            n_grid = 128,
+                            kmax = 3,
+                            adjust = 1,
+                            rug = FALSE,
+                            overlap_color = "gray40",
+                            overlap_alpha = 0.8,
+                            linetype = c(1, 2),
+                            linecol = c("gray10", "gray0"),
+                            linewidth = c(1, 1),
+                            overlap_only = FALSE,
+                            rug_lentgh = 0.018,
+                            rug_color = "gray30",
+                            extend = "lightgrey",
+                            extend_alpha = 0.8,
+                            ...
+                        ) {
 
   suppressWarnings({
 

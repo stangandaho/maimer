@@ -1,15 +1,15 @@
 #' Estimate Overlap Coefficients for Multiple Species
 #'
 #' This function calculates pairwise overlap coefficients for activity patterns of multiple species
-#' using their time data. The results are returned in a matrix format.
+#' using their time data.
 #'
 #' @param data A `data.frame` or `tibble` containing species and time information.
 #' @param species_column A column in `data` indicating species names.
 #' @param time_column A column in `data` containing time data (either as radians or in a time format to be converted).
 #' @param convert_time Logical. If `TRUE`, the time data will be converted to radians using the `mm_to_radian` function.
-#' @param format A character string specifying the time format (e.g., `"%H:%M:%S"`) if `convert_time` is `TRUE`. Defaults to `"%H:%M:%S"`.
+#' @param format A character string specifying the time format (e.g., `"%H:%M:%S"`) if [mm_to_radian()] is `TRUE`. Defaults to `"%H:%M:%S"`.
 #' @param fill_na Optional. A numeric value used to fill `NA` values in the overlap coefficient matrix. Defaults to `NULL` (does not fill `NA` values).
-#' @param ... Additional arguments passed to `overlap::overlapEst` for overlap estimation.
+#' @param ... Additional arguments passed to [overlap::overlapEst()]` for overlap estimation.
 #'
 #' @details
 #' The function calculates pairwise overlap coefficients for all species in the dataset.
