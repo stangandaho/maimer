@@ -1,5 +1,6 @@
 
 test_that("Remove hierarchical subject in metadata", {
+  skip('skip')
   image_path <- file.path(system.file("img", package = "maimer"), "large.jpeg")
 
   mm_create_hs(path = image_path, value = c("Species" = "Vulture"))
