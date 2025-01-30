@@ -58,7 +58,8 @@ mm_plot_overlap_coef <- function(data,
 
   # Reshape the matrix into a long format
   data_melt <- melt(data) %>%
-    dplyr::filter(!is.na(value))
+    dplyr::filter(!is.na(value)) %>%
+    dplyr::mutate(value = round(value, 2))
 
 
   if (!is.null(excludes)) {
@@ -77,12 +78,12 @@ mm_plot_overlap_coef <- function(data,
 
   # Add either circles or values
   if (show == "shape") {
-    p <- p + geom_point(aes(size = value, color = value),
+    p <- p + geom_point(aes(size = value),
                         shape = shape_type, stroke = shape_size) +
-      scale_size_continuous(range = c(1, 10), guide = "none") +
+      scale_size_continuous(range = c(1, 6)) +
       scale_color_gradientn(colors = color_scale)
   } else {
-    p <- p + geom_text(aes(label = round(value, 2), color = value),
+    p <- p + geom_text(aes(label = value, color = value),
                        size = text_size, family = text_font) +
       scale_color_gradientn(colors = color_scale)
   }

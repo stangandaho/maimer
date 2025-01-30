@@ -12,17 +12,19 @@ export(mm_stack_df) #ok
 export(mm_check_location)#ok
 export(mm_independence) #ok
 export(mm_to_radian)
+export(mm_to_time)
 export(mm_to_community) #ok
 ## Analysis
-export(mm_overlap_plot)#ok
+export(mm_plot_overlap)#ok
+export(mm_plot_overlap_coef)
 export(mm_overlap_matrix)
+export(mm_temporal_shift)
 ## General
 export(`%>%`)
 export(`%<>%`)
 
 
 # Import
-
 # exifr
 importFrom(exifr, exiftool_call)
 importFrom(exifr, read_exif)
@@ -38,6 +40,7 @@ importFrom(dplyr, arrange)
 importFrom(dplyr, mutate)
 importFrom(dplyr, tibble)
 importFrom(dplyr, rename)
+importFrom(dplyr, bind_rows)
 
 #tidyr
 importFrom(tidyr, pivot_wider)
@@ -48,16 +51,25 @@ importFrom(magrittr, '%<>%')
 
 # ggplot
 importFrom(ggplot2, ggplot)
+importFrom(ggplot2, aes)
 importFrom(ggplot2, geom_polygon)
+importFrom(ggplot2, geom_point)
+importFrom(ggplot2, geom_text)
 importFrom(ggplot2, labs)
 importFrom(ggplot2, theme_minimal)
 importFrom(ggplot2, theme)
 importFrom(ggplot2, element_line)
+importFrom(ggplot2, element_blank)
 importFrom(ggplot2, element_text)
 importFrom(ggplot2, geom_line)
 importFrom(ggplot2, geom_rug)
 importFrom(ggplot2, annotate)
 importFrom(ggplot2, scale_x_continuous)
+importFrom(ggplot2, scale_size_continuous)
+importFrom(ggplot2, scale_color_gradientn)
+importFrom(ggplot2, guides)
+importFrom(ggplot2, guide_colorbar)
+
 
 #shiny
 importFrom(shiny, shinyOptions)
@@ -140,5 +152,3 @@ importFrom(overlap, overlapPlot)
 importFrom(overlap, overlapTrue)
 importFrom(overlap, resample)
 importFrom(overlap, sunTime)
-
-
