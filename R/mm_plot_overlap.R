@@ -1,4 +1,4 @@
-#' Plot Overlap Between Two Species' Activity Patterns
+#' Plot overlap between two species' activity patterns
 #'
 #' This function visualizes the temporal overlap between two species' activity patterns based on time-of-day data.
 #' It uses kernel density estimation to estimate activity densities and highlights areas of overlap between the two species.
@@ -58,7 +58,6 @@
 #' @import ggplot2
 #' @import overlap
 #' @export
-
 mm_plot_overlap <- function(A,
                             B,
                             xscale = 24,

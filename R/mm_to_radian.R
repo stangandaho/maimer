@@ -34,7 +34,6 @@
 #' }
 #'
 #' @import dplyr
-#' @importFrom stats strptime
 #' @export
 
 mm_to_radian <- function(data,

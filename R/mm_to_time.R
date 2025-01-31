@@ -21,7 +21,6 @@
 #' @importFrom base floor ceiling
 #'
 #' @export
-
 mm_to_time <- function(radian) {
 
   if (!class(radian) %in% c("numeric", "integer")) {

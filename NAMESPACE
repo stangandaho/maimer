@@ -6,6 +6,7 @@ export(mm_get_metadata) #ok
 export(mm_get_hs) #ok
 export(mm_create_hs)#ok
 export(mm_remove_hs) #ok
+
 ## Prepare table
 export(mm_read) #ok
 export(mm_stack_df) #ok
@@ -16,6 +17,11 @@ export(mm_to_time)
 export(mm_to_community) #ok
 ## Analysis
 export(mm_plot_overlap)#ok
+export(mm_overlap_estimates)
+export(mm_bootstrap)
+export(mm_resample)
+export(mm_boot_estimates)
+export(mm_boot_CI)
 export(mm_plot_overlap_coef)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
