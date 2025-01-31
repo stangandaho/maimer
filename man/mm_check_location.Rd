@@ -17,29 +17,35 @@ mm_check_location(
 \arguments{
 \item{data}{A data frame containing the camera trap data to be processed.}
 
-\item{longitude}{A string representing the column name for longitude in the dataset.}
+\item{longitude}{A string representing the column name for longitude in the
+dataset.}
 
-\item{latitude}{A string representing the column name for latitude in the dataset.}
+\item{latitude}{A string representing the column name for latitude in
+the dataset.}
 
-\item{location_name}{A string representing the column name for the location name or unique identifier
-for each camera trap point.}
+\item{location_name}{A string representing the column name for the
+location name or unique identifier for each camera trap point.}
 
-\item{coord_system}{A string specifying the coordinate system of the input data.
-Choices are \code{"geographic"} for longitude and latitude, or \code{"projected"} for projected coordinates.}
+\item{coord_system}{A string specifying the coordinate system of
+the input data. Choices are \code{"geographic"} for longitude and latitude,
+or \code{"projected"} for projected coordinates.}
 
-\item{crs}{An integer representing the coordinate reference system (CRS) in EPSG format.
-Required when \code{coord_system = "projected"}.}
+\item{crs}{An integer representing the coordinate reference system (CRS)
+in EPSG format. Required when \code{coord_system = "projected"}.}
 
-\item{new_data_name}{A string specifying the name of the new dataset with updated coordinates to be created
-in the global environment.}
+\item{new_data_name}{A string specifying the name of the new dataset with
+updated coordinates to be created in the global environment.}
 }
 \value{
-A shiny application is launched to display the map and allow manual coordinate adjustments.
-The modified dataset is saved to the global environment under the name provided in \code{new_data_name}.
+A shiny application is launched to display the map and allow
+manual coordinate adjustments.
+The modified dataset is saved to the global environment under the name
+provided in \code{new_data_name}.
 }
 \description{
-This function launches a shiny application that allows users to visualize and manually adjust the geographic
-coordinates of camera trap locations. Users can drag points on an interactive map to update the positions
+This function launches a shiny application that allows users to visualize
+and manually adjust the geographic coordinates of camera trap locations.
+Users can drag points on an interactive map to update the positions
 of camera traps, and the updated dataset is saved to the global environment.
 }
 \examples{
@@ -61,7 +67,8 @@ of camera traps, and the updated dataset is saved to the global environment.
     coord_system = "geographic",
     new_data_name = "updated_camera_traps"
   )
-  # After adjustments, the updated dataset will be available in the global environment as `updated_camera_traps`.
+  # After adjustments, the updated dataset will be available in the global
+  environment as `updated_camera_traps`.
 }
 
 }

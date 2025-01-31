@@ -54,6 +54,7 @@ Visualizes an overlap coefficient matrix.
 \examples{
 # Example overlap coefficient matrix
 overlap_matrix <- matrix(c(1, 0.8, 0.7, 0.8, 1, 0.9, 0.7, 0.9, 1), ncol = 3)
+colnames(overlap_matrix) <- rownames(overlap_matrix) <- c("A", "B", "C")
 
 # Plot lower triangle with shapes
 mm_plot_overlap_coef(overlap_matrix, side = "lower", show = "shape")

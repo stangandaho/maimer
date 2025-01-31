@@ -30,16 +30,17 @@
 #'
 #'
 #' @examples
+#' library(ggplot2)
 #' # Example 1: Using radians as input
+#'
 #' first_period <- c(1.3, 2.3, 2.5, 5.2, 6.1, 2.3)  # Example timestamps for period 1
 #' second_period <- c(1.8, 2.2, 2.5)  # Example timestamps for period 2
-#' result <- mm_temporal_shift(first_period, second_period, plot = T,
-#'                             xcenter = "noon",
+#' result <- mm_temporal_shift(first_period, second_period, plot = TRUE, xcenter = "noon",
 #'                             linestyle_1 = list(color = "red", linetype = 1, linewidth = 1),
 #'                             linestyle_2 = list(color = "#004c2f", linetype = 5, linewidth = .5))
 #'
 #' result$plot+
-#'   ggplot2::labs(color = "PP")+
+#'   labs(color = "PP")+
 #'   theme(legend.position = "top")
 #'
 #' # Example 2: Using time strings as input

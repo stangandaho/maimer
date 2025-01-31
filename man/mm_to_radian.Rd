@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_to_radian.R
 \name{mm_to_radian}
 \alias{mm_to_radian}
-\title{Convert Time to Radians}
+\title{Convert time to radians}
 \usage{
 mm_to_radian(data, times, format = "\%H:\%M:\%S", time_zone = "UTC")
 }

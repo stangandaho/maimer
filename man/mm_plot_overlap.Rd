@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_plot_overlap.R
 \name{mm_plot_overlap}
 \alias{mm_plot_overlap}
-\title{Plot Overlap Between Two Species' Activity Patterns}
+\title{Plot overlap between two species' activity patterns}
 \usage{
 mm_plot_overlap(
   A,

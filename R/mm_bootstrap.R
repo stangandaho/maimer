@@ -50,8 +50,8 @@
 #' mm_boot_CI(est, boots)
 #'
 #' # alternatively:
-#' species_A_gen <- resample(species_A, 1000)
-#' species_B_gen <- resample(species_B, 1000)
+#' species_A_gen <- mm_resample(species_A, 1000)
+#' species_B_gen <- mm_resample(species_B, 1000)
 #' boots <- mm_boot_estimates(species_A_gen, species_B_gen, type="Dhat4", cores=1)
 #' mean(boots)
 #'

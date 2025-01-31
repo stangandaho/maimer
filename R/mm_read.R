@@ -20,7 +20,7 @@ mm_read <- function(file_path,
                     ...) {
 
   if (!hasArg(sep)) {
-    sep <- maimer:::check_sep(file_path = file_path)
+    sep <- check_sep(file_path = file_path)
   }
 
   data_read <- read.table(file = file_path,

@@ -1,4 +1,4 @@
-#' Convert Time to Radians
+#' Convert time to radians
 #'
 #' This function converts time values into radians, which is often used in circular statistics and time-of-day analyses.
 #'

@@ -3,17 +3,12 @@
 #' @inheritParams overlap::overlapEst
 #'
 #' @examples
-#'# Get example data:
-#' data(simulatedData)
 #'
-#' # Use defaults:
-#' mm_overlap_estimates(tigerObs, pigObs)
-#' #     Dhat1     Dhat4     Dhat5
-#' 0.2908618 0.2692011 0.2275000
-#'
-#' mm_overlap_estimates(tigerObs, pigObs, type="Dhat4")
-#' #    Dhat4
-#'#    0.2692011
+#'set.seed(42)
+#' species_A <- runif(100, 1.2, 2 * pi)
+#' species_B <- runif(100, 0.23, 2 * pi)
+#' mm_overlap_estimates(species_A, species_B)
+#' mm_overlap_estimates(species_A, species_B, type = "Dhat4")
 #'
 #'@export
 

@@ -21,8 +21,7 @@ instead of the \code{data} argument.}
 the datetime values. This argument is required if \code{data} is provided.}
 
 \item{format}{A \code{character} string defining the format used to parse the datetime values in
-the \code{datetime} column. This argument is required if \code{data} is provided and should be
-in the format recognized by \code{\link[=strptime]{strptime()}}.}
+the \code{datetime} column.}
 
 \item{threshold}{A \code{numeric} value representing the time difference threshold (in seconds) to
 determine whether events are independent. Events are considered independent if the time
@@ -33,9 +32,6 @@ difference between them is greater than or equal to this threshold. The default 
 identified as independent events. If \code{TRUE}, only independent events are returned. If \code{FALSE},
 the entire data frame is returned with an additional column indicating the independence status.
 The default is \code{TRUE}.}
-
-\item{deltatime}{A \code{numeric} vector of time differences between successive events. This argument
-is used if \code{data} is not provided. If \code{data} is provided, this argument is ignored.}
 }
 \value{
 \itemize{

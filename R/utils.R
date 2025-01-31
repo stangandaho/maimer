@@ -115,6 +115,8 @@ magrittr::`%>%`
 magrittr::`%<>%`
 
 
+
+################
 #' Parse datetime
 #'
 #' @description
@@ -146,16 +148,11 @@ parse_datetime <- function (datetime,
   if (all(datetime == "") & allow_empty_output)
     return(NA)
   datetime_char <- as.character(datetime)
+
   if (grepl(pattern = "%", x = format, fixed = TRUE)) {
     out <- as.POSIXct(datetime_char, tz = time_zone, format = format)
   }
-  else {
-    if (!requireNamespace("lubridate", quietly = TRUE))
-      stop(paste("package 'lubridate' is required for the specified format",
-                 format))
-    out <- lubridate::parse_date_time(datetime_char, orders = format,
-                                      tz = time_zone, quiet = quiet)
-  }
+
   if (all(is.na(out)))
     stop(paste0("Cannot read datetime format in ", deparse(substitute(datetime)),
                 ". Output is all NA.\n", "expected:  ", format,
@@ -170,6 +167,9 @@ parse_datetime <- function (datetime,
   return(out)
 }
 
+
+
+########################
 #' Select column
 #'
 #' @description

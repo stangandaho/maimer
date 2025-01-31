@@ -39,6 +39,9 @@ importFrom(exifr, read_exif)
 # base
 importFrom("stats", "setNames")
 importFrom("utils", "write.csv")
+importFrom("methods", "hasArg")
+importFrom("stats", "cov")
+importFrom("utils", "read.table")
 
 # dplyr
 importFrom(dplyr, as_tibble)
@@ -158,3 +161,9 @@ importFrom(overlap, overlapPlot)
 importFrom(overlap, overlapTrue)
 importFrom(overlap, resample)
 importFrom(overlap, sunTime)
+importFrom(overlap, sunTime)
+
+# sf
+importFrom(sf, st_as_sf)
+importFrom(sf, st_transform)
+importFrom(sf, st_coordinates)

@@ -10,10 +10,7 @@
 #' @param datetime A `character` string specifying the name of the column in `data` that contains
 #'   the datetime values. This argument is required if `data` is provided.
 #' @param format A `character` string defining the format used to parse the datetime values in
-#'   the `datetime` column. This argument is required if `data` is provided and should be
-#'   in the format recognized by [strptime()].
-#' @param deltatime A `numeric` vector of time differences between successive events. This argument
-#'   is used if `data` is not provided. If `data` is provided, this argument is ignored.
+#'   the `datetime` column.
 #' @param threshold A `numeric` value representing the time difference threshold (in seconds) to
 #'   determine whether events are independent. Events are considered independent if the time
 #'   difference between them is greater than or equal to this threshold. The default is 30 minutes
@@ -51,7 +48,7 @@ mm_independence <- function(data = NULL,
       stop("Wrong data provided")
     }
 
-    dt_str_ <- ifelse(hasArg(datetime), paste0(dplyr::ensym(datetime)), "datetime")
+    dt_str_ <- ifelse(methods::hasArg(datetime), paste0(dplyr::ensym(datetime)), "datetime")
 
     if (!any(dt_str_ %in% colnames(data))) {
       stop(sprintf("%s not found in data", dt_str_))
@@ -78,7 +75,7 @@ mm_independence <- function(data = NULL,
 
   }else{
     original_datetime <- datetime
-    data <- dplyr::tibble('datetime' := strptime(datetime, format = format)) %>%
+    data <- dplyr::tibble('{datetime}' := strptime(datetime, format = format)) %>%
       dplyr::arrange(datetime)
   }
 

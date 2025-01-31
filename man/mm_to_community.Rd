@@ -27,7 +27,7 @@ mm_to_community(
 A tibble where rows represent sites, columns represent species, and values represent the count or abundance of each species.
 }
 \description{
-The \code{to_community} function transforms input data into a community matrix where
+The function transforms input data into a community matrix where
 rows represent sites, columns represent species, and values indicate the count
 or abundance of each species at each site.
 }
@@ -39,19 +39,19 @@ measure for species abundance.
 }
 \examples{
 # Example data
-df <- tibble(
+df <- dplyr::tibble(
   site = c("A", "A", "B", "B", "C"),
   species = c("sp1", "sp2", "sp1", "sp3", "sp2"),
   abundance = c(5, 2, 3, 1, 4)
 )
 
 # Convert to community matrix with counts
-to_community(df, site_column = site, species_column = species)
+mm_to_community(df, site_column = site, species_column = species)
 
 # Convert to community matrix with abundance
-to_community(df, site_column = site, species_column = species, size_column = abundance)
+mm_to_community(df, site_column = site, species_column = species, size_column = abundance)
 
 # Fill missing cells with 0
-to_community(df, site_column = site, species_column = species, values_fill = 0)
+mm_to_community(df, site_column = site, species_column = species, values_fill = 0)
 
 }
