@@ -31,21 +31,23 @@
 #'
 #' @examples
 #' library(ggplot2)
-#' # Example 1: Using radians as input
+#' # Using radians as input
 #'
 #' first_period <- c(1.3, 2.3, 2.5, 5.2, 6.1, 2.3)  # Example timestamps for period 1
 #' second_period <- c(1.8, 2.2, 2.5)  # Example timestamps for period 2
 #' result <- mm_temporal_shift(first_period, second_period, plot = TRUE, xcenter = "noon",
-#'                             linestyle_1 = list(color = "red", linetype = 1, linewidth = 1),
-#'                             linestyle_2 = list(color = "#004c2f", linetype = 5, linewidth = .5))
+#'                             linestyle_1 = list(color = "gray10", linetype = 1, linewidth = 1),
+#'                             linestyle_2 = list(color = "#b70000", linetype = 5, linewidth = .5))
+#' result
 #'
+#' # customize the graph associated result
 #' result$plot+
-#'   labs(color = "PP")+
+#'   labs(color = "Periods")+
 #'   theme(legend.position = "top")
 #'
-#' # Example 2: Using time strings as input
-#' first_period <- c("12:03:00", "13:10:00", "14:08:00")
-#' second_period <- c("13:00:00", "14:20:00", "15:55:00")
+#' # Using time strings as input
+#' first_period <- c("12:03:05", "13:10:09", "14:08:10", "14:18:30", "18:22:11")
+#' second_period <- c("13:00:20", "14:20:10", "15:55:20", "16:03:01", "16:47:00")
 #' result <- mm_temporal_shift(first_period, second_period,
 #'                             convert_time = TRUE,
 #'                             format = "%H:%M:%S",

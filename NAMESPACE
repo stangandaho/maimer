@@ -15,6 +15,7 @@ export(mm_independence) #ok
 export(mm_to_radian)
 export(mm_to_time)
 export(mm_to_community) #ok
+export(mm_standardize)
 ## Analysis
 export(mm_plot_overlap)#ok
 export(mm_overlap_estimates)
@@ -25,6 +26,8 @@ export(mm_boot_CI)
 export(mm_plot_overlap_coef)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
+export(mm_alpha_diversity)
+
 ## General
 export(`%>%`)
 export(`%<>%`)

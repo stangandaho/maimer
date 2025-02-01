@@ -67,7 +67,7 @@ mm_to_community <- function(data,
                          values_fill = values_fill)
   } else {
     size_column <- dplyr::ensym(size_column)
-    print(size_column)
+
     data <- data %>%
       tidyr::pivot_wider(id_cols = !!site_column,
         names_from = !!species_column,

@@ -69,8 +69,8 @@ mm_check_location <- function(data,
 
   data <- data %>%
     dplyr::mutate("obs" = paste0(!!dplyr::ensym(lon_), !!dplyr::ensym(lat_))) %>%
-    dplyr::distinct("obs", .keep_all = TRUE) %>%
-    dplyr::select(-"obs") %>%
+    #dplyr::distinct("obs", .keep_all = TRUE) %>%
+    #dplyr::select(-"obs") %>%
     dplyr::filter(!is.na(!!dplyr::ensym(lon_)) & !is.na(!!dplyr::ensym(lat_)))
 
 
@@ -88,7 +88,6 @@ mm_check_location <- function(data,
   }
 
   coord <- coord %>% dplyr::select("X", "Y")
-  print(coord)
 
   # data to use
   if (paste0(dplyr::ensym(location_name)) == "") {

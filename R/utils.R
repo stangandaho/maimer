@@ -168,42 +168,6 @@ parse_datetime <- function (datetime,
 }
 
 
-
-########################
-#' Select column
-#'
-#' @description
-#' Select column from data
-#' @keywords internal
-#' @noRd
-#'
-select_col <- function(data, cols){
-  #select_type <- class(cols)
-
-  is_num <- tryCatch({
-    suppressWarnings(ifelse(class(cols) %in% c("numeric", "integer"), TRUE, FALSE))
-  }, error = function(e)FALSE)
-
-
-  if (any(is_num)) {
-
-    selected_col <- colnames(data)[cols]
-
-  }else{
-
-    qu <- paste0(rlang::quo_get_expr(dplyr::enquo(cols)))
-    qu <- qu[qu != ":"]
-
-    if(length(qu) == 2){
-      selected_col <- suppressWarnings(colnames(data %>% dplyr::select(qu[1]:qu[2])))
-    }else{
-      selected_col <- colnames(data %>% dplyr::select(all_of(qu)))
-    }
-  }
-
-  return(selected_col)
-}
-
 #' Melt data
 #'
 #' @description
