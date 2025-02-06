@@ -27,6 +27,8 @@ export(mm_plot_overlap_coef)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
 export(mm_alpha_diversity)
+#export(mm_beta_diversity)
+export(mm_dissimilarity)
 
 ## General
 export(`%>%`)

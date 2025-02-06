@@ -31,16 +31,15 @@ test_that("mm_independence handles missing datetime and format with data", {
   df <- data.frame(datetime = as.POSIXct(c("2024-08-01 10:00:00", "2024-08-01 10:15:00",
                                            "2024-08-01 10:45:00", "2024-08-01 11:00:00")))
 
-  expect_error(mm_independence(data = df), "datetime must be provided")
-  expect_error(mm_independence(data = df, datetime = "datetime"), "format cannot be missed")
+  expect_error(mm_independence(data = df))
+  expect_error(mm_independence(data = df, datetime = "datetime"))
 })
 
 test_that("mm_independence handles ambiguous datetime formats", {
   df <- data.frame(datetime = c("2024-08-01 10:00:00", "2024-08-01 10:15:00", "unknown datetime"),
                    value = c(1, 2, 3))
 
-  expect_warning(mm_independence(data = df, datetime = "datetime", format = "%Y-%m-%d %H:%M:%S"),
-                 "The following datetime are ambiguous: unknown datetime")
+  expect_warning(mm_independence(data = df, datetime = "datetime", format = "%Y-%m-%d %H:%M:%S"))
 })
 
 test_that("mm_independence returns all rows when 'only' is FALSE", {

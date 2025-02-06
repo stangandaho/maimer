@@ -1,6 +1,11 @@
 #'Estimates of coefficient of overlapping
 #' @inheritParams mm_plot_overlap
 #' @inheritParams overlap::overlapEst
+#' @param type the name of the estimator to use: Dhat4 is recommended if both
+#' samples are larger than 50, otherwise use Dhat1. See Details.
+#' The default is "all" for compatibility with older versions.
+#'
+#' @inherit overlap::overlapEst details
 #'
 #' @examples
 #'

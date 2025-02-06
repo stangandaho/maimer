@@ -127,10 +127,10 @@
 #' @export
 #'
 mm_alpha_diversity <- function(data,
-                             site_column,
-                             index = "shannon",
-                             species_column,
                              to_community = TRUE,
+                             index = "shannon",
+                             site_column,
+                             species_column,
                              size_column = NULL,
                              margin = 1) {
 
@@ -173,10 +173,10 @@ mm_alpha_diversity <- function(data,
     if (i == "simpson") {
       # simpson
       simpson = apply(data, margin, function(x){
-        round(sum((x/sum(x, na.rm = TRUE))**2), 3)
+        sum((x/sum(x, na.rm = TRUE))**2)
       })
       ind_value <- 1 - simpson
-      index_list[[i]] <- ind_value
+      index_list[[i]] <- round(ind_value, 3)
 
     }else if(i == "invsimpson"){
       # simpson inverse
@@ -184,7 +184,7 @@ mm_alpha_diversity <- function(data,
         round(sum((x/sum(x, na.rm = TRUE))**2), 3)
       })
       ind_value <- 1/simpson
-      index_list[[i]] <- ind_value
+      index_list[[i]] <- round(ind_value, 3)
 
     }else if (i == "shannon") {
       # shannon
@@ -192,7 +192,7 @@ mm_alpha_diversity <- function(data,
         pi <- (x/sum(x, na.rm = TRUE))
         -sum(pi*log(pi), na.rm = TRUE)
       })
-      index_list[[i]] <- ind_value
+      index_list[[i]] <- round(ind_value, 3)
 
     }else if (i %in% c("evenness", "pielou")) {
       shannon <- apply(data, margin, function(x){
@@ -200,7 +200,7 @@ mm_alpha_diversity <- function(data,
         -sum(pi*log(pi), na.rm = TRUE)
       })
       ind_value <- shannon/log(ncol(data))
-      index_list[[i]] <- ind_value
+      index_list[[i]] <- round(ind_value, 3)
     }
   }
 

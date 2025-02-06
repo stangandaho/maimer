@@ -24,12 +24,35 @@ mm_overlap_estimates(
 
 \item{n_grid}{An integer specifying the number of grid points for density estimation. Default is \code{128}.}
 
-\item{type}{
-the name of the estimator to use: \code{Dhat4} is recommended if both samples are larger then 50, otherwise use \code{Dhat1}. See Details. The default is "all" for compatibility with older versions.
-}
+\item{type}{the name of the estimator to use: Dhat4 is recommended if both
+samples are larger than 50, otherwise use Dhat1. See Details.
+The default is "all" for compatibility with older versions.}
 }
 \description{
 Estimates of coefficient of overlapping
+}
+\details{
+See \code{\link[overlap]{overlapTrue}} for the meaning of coefficient of overlapping, \eqn{\Delta}.
+
+These estimators of \eqn{\Delta} use kernel density estimates fitted to the data to approximate the true density functions \emph{f(t)} and \emph{g(t)}. Schmid & Schmidt (2006) propose five estimators of overlap:
+
+Dhat1 is calculated from vectors of densities estimated at \emph{T} equally-spaced times, \emph{t}, between 0 and \eqn{2\pi}:
+
+\figure{Dhat1.jpg}{Equation for Dhat1}
+
+For circular distributions, Dhat2 is equivalent to Dhat1, and Dhat3 is inapplicable.
+
+Dhat4 and Dhat5 use vectors of densities estimated at the times of the observations of the species, \emph{x} and \emph{y}:
+
+\figure{Dhat4.jpg}{Equation for Dhat4}\cr % Need to separate these!
+\cr
+\figure{Dhat5.jpg}{Equation for Dhat5}
+
+where \emph{n, m} are the sample sizes and \emph{I} is the indicator function (1 if the condition is true, 0 otherwise).
+
+Dhat5 simply checks which curve is higher at each point; even tiny changes in the data can result in large, discontinuous changes in Dhat5, and it can take values > 1. Don't use Dhat5.
+
+Comparing curves at times of actual observations works well if there are enough observations of each species. Simulations show that Dhat4 is best when the smallest sample has at least 50 observations. Dhat1 compares curves at \code{n.grid} equally spaced points, and is best for small samples.
 }
 \examples{
 

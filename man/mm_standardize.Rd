@@ -11,18 +11,13 @@ mm_standardize(
   range_global,
   logbase = 2,
   na.rm = FALSE,
-  make_matrix = FALSE,
-  site_column,
-  species_column,
-  values_from,
-  values_fill = 0,
   ...
 )
 }
 \arguments{
 \item{data}{A numeric matrix or data frame to be standardized.}
 
-\item{method}{A character string specifying the standardization method.
+\item{method}{A character string specifying the standardization method (see details).
 Available methods are:
 \itemize{
 \item \code{"total"}: Divides each entry by the total sum in the given margin.
@@ -54,18 +49,6 @@ Available methods are:
 \item{logbase}{The base for logarithmic transformation (default is 2).}
 
 \item{na.rm}{Logical. If \code{TRUE}, missing values (\code{NA}) are removed before calculations.}
-
-\item{make_matrix}{Logical. If \code{TRUE}, converts the input data into a matrix.}
-
-\item{site_column}{The column name that identifies site information
-(used for matrix conversion).}
-
-\item{species_column}{The column name that identifies species information
-(used for matrix conversion).}
-
-\item{values_from}{The column name containing values for transformation.}
-
-\item{values_fill}{The value to use for missing data (default is \code{0}).}
 
 \item{...}{Additional arguments passed to transformation functions.}
 }
@@ -161,7 +144,7 @@ cam_data <- cam_data \%>\%
   mm_to_community(site_column = camera, species_column = species,
                   size_column = number, values_fill = 0)
 
-standardized_data <- maimer::mm_standardize(data = cam_data[, 2:11], method = "total")
+standardized_data <- mm_standardize(data = cam_data[, 2:11], method = "total")
 standardized_data
 
 

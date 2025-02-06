@@ -6,6 +6,7 @@
 \usage{
 mm_independence(
   data = NULL,
+  species_column = NULL,
   datetime,
   format,
   threshold = 30 * 60,
@@ -16,6 +17,9 @@ mm_independence(
 \item{data}{A \code{data.frame}, \code{tbl_df}, or \code{tbl} containing the event data. This should include
 a column with datetime values. If \code{NULL}, the function will use the \code{deltatime} argument
 instead of the \code{data} argument.}
+
+\item{species_column}{An optional column name specifying the species grouping.
+If provided, independence will be assessed separately within each species group.}
 
 \item{datetime}{A \code{character} string specifying the name of the column in \code{data} that contains
 the datetime values. This argument is required if \code{data} is provided.}

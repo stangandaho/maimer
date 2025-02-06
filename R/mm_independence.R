@@ -7,6 +7,8 @@
 #' @param data A `data.frame`, `tbl_df`, or `tbl` containing the event data. This should include
 #'   a column with datetime values. If `NULL`, the function will use the `deltatime` argument
 #'   instead of the `data` argument.
+#' @param species_column An optional column name specifying the species grouping.
+#'   If provided, independence will be assessed separately within each species group.
 #' @param datetime A `character` string specifying the name of the column in `data` that contains
 #'   the datetime values. This argument is required if `data` is provided.
 #' @param format A `character` string defining the format used to parse the datetime values in
@@ -27,46 +29,65 @@
 #' - If `data` is not provided, a tibble of the `deltatime` values with `independent` status.
 #'
 #' @examples
-#' # Example with a data frame
-#' df <- data.frame(datetime = as.POSIXct(c("2024-08-01 10:00:00", "2024-08-01 10:15:00",
-#'                                          "2024-08-01 10:45:00", "2024-08-01 11:00:00")),
-#'                  value = c(1, 2, 3, 4))
-#' result <- mm_independence(data = df, datetime = "datetime", format = "%Y-%m-%d %H:%M:%S")
-#' result
+#'
+#' library(dplyr)
+#'
+#' # Load example dataset
+#' cam_data <- read.csv(system.file("penessoulou_season1.csv", package = "maimer"))
+#'
+#' # Independence without considering species occurrence
+#' indep1 <- cam_data %>%
+#'   mm_independence(data = ., datetime = datetimes, format = "%Y-%m-%d %H:%M:%S",
+#'                   only = TRUE)
+#'
+#' sprintf("Independent observations: %s", nrow(indep1))
+#'
+#' # Independence considering species occurrence
+#' indep2 <- cam_data %>%
+#'   mm_independence(data = ., datetime = datetimes, format = "%Y-%m-%d %H:%M:%S",
+#'                   only = TRUE, species_column = "species")
+#'
+#' sprintf("Independent observations: %s", nrow(indep2))
+#'
+#' # Use a standalone vector of datetime values
+#' dtime <- cam_data$datetimes
+#' mm_independence(datetime = dtime, format = "%Y-%m-%d %H:%M:%S", only = TRUE)
 #'
 #' @export
 
 mm_independence <- function(data = NULL,
-                           datetime,
-                           format,
-                           threshold = 30*60,
-                           only = FALSE) {
+                            species_column = NULL,
+                            datetime,
+                            format,
+                            threshold = 30*60,
+                            only = FALSE) {
 
   # Prevent all possible error
   if (!is.null(data)) {
     if (!any(class(data) %in% c("data.frame", "tbl_df", "tbl"))){
-      stop("Wrong data provided")
+      rlang::abort("Wrong data provided", call = NULL)
     }
 
-    dt_str_ <- ifelse(methods::hasArg(datetime), paste0(dplyr::ensym(datetime)), "datetime")
+    dt_str_ <- ifelse(methods::hasArg(datetime), as.character(dplyr::ensym(datetime)), "datetime")
 
     if (!any(dt_str_ %in% colnames(data))) {
-      stop(sprintf("%s not found in data", dt_str_))
+      rlang::abort(sprintf("%s not found in data", dt_str_), call = NULL)
     }
   }
 
   if (!hasArg(datetime)) {
-    stop("datetime must be provided")
+    rlang::abort("'datetime' must be provided")
   }
 
   if (!hasArg(format)) {
-    stop("format cannot be missed")
+    rlang::abort("'format' cannot be missed", call = NULL)
   }
 
   ## Get datetime and build new data
   if (hasArg(data)) {
-    original_datetime <- data[[dt_str_]]
-    dt_str_ <- paste0(dplyr::ensym(datetime))
+
+    dt_str_ <- as.character(dplyr::ensym(datetime))
+    data$original_datetime <- data[[dt_str_]] # original_datetime to handle warning
     data[[dt_str_]] <- strptime(data[[dplyr::ensym(datetime)]], format = format)
     data <- data %>%
       dplyr::arrange(!!dplyr::sym(dt_str_)) %>%
@@ -75,32 +96,54 @@ mm_independence <- function(data = NULL,
 
   }else{
     original_datetime <- datetime
-    data <- dplyr::tibble('{datetime}' := strptime(datetime, format = format)) %>%
+    data <- dplyr::tibble(original_datetime = datetime,
+                          datetime = strptime(datetime, format = format)) %>%
       dplyr::arrange(datetime)
   }
 
   # Error for incorrect format
   if (all(is.na(data$datetime))) {
-    stop(sprintf("%s is ambiguous format", format))
+    rlang::abort(sprintf("%s is ambiguous format", format))
   }
 
   # warning for ambiguous datetime
   if (!all(is.na(data$datetime))) {
     if (any(is.na(data$datetime))) {
-      na_date <- original_datetime[is.na(data$datetime)]
-      warning(sprintf("The following datetime are ambiguous: %s", paste0(na_date, collapse = ", ")),
-              call. = FALSE)
+      na_date <- data$original_datetime[is.na(data$datetime)]
+      is_are <- ifelse(length(na_date) >= 2, "are", "is")
+      rlang::warn(sprintf("The following datetime %s ambiguous: %s", is_are, paste0(na_date, collapse = ", ")))
     }
   }
 
-  # Data with deltatime and event
-  data$deltatime <- c(0, diff(data$datetime))
-  data$event <- c(TRUE, diff(data$datetime) >= threshold)
+
+  # Apply grouping by species if provided
+  species_column <- tryCatch(as.character(dplyr::ensym(species_column)), error = function(e)NULL)
+
+  if (!is.null(species_column)) {
+
+    if (! species_column %in% colnames(data)) {
+      rlang::abort(sprintf("Column `%s` is not found.", species_column), call = NULL)
+    }
+
+    data <- data %>%
+      dplyr::group_by(!!dplyr::sym(species_column)) %>%
+      dplyr::arrange(datetime, .by_group = TRUE) %>%
+      dplyr::mutate(deltatime = c(0, diff(datetime)),
+                    event = c(TRUE, diff(datetime) >= threshold)) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(-original_datetime)
+  } else {
+    data <- data %>%
+      dplyr::arrange(datetime) %>%
+      dplyr::mutate(deltatime = c(0, diff(datetime)),
+                    event = c(TRUE, diff(datetime) >= threshold)) %>%
+      dplyr::select(-original_datetime)
+  }
 
   if (only) {
     data <- data %>%
       dplyr::filter(event == TRUE) %>%
-      dplyr::select(-event)
+      dplyr::select(-c(event, deltatime))
   }
 
   return(data)

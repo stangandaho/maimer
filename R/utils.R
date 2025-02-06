@@ -60,7 +60,7 @@ check_sep <- function(file_path){
   names(separators_is_in) <- NULL
 
   if (all(separators_is_in == FALSE)) {
-    stop("Unknow seperator in file")
+    rlang::abort("Unknow seperator in file")
   }
 
   sep <- seps[separators_is_in][1L]

@@ -34,13 +34,6 @@
 #' (optional, used with `"range"` method).
 #' @param logbase The base for logarithmic transformation (default is 2).
 #' @param na.rm Logical. If `TRUE`, missing values (`NA`) are removed before calculations.
-#' @param make_matrix Logical. If `TRUE`, converts the input data into a matrix.
-#' @param site_column The column name that identifies site information
-#' (used for matrix conversion).
-#' @param species_column The column name that identifies species information
-#' (used for matrix conversion).
-#' @param values_from The column name containing values for transformation.
-#' @param values_fill The value to use for missing data (default is `0`).
 #' @param ... Additional arguments passed to transformation functions.
 #'
 #' @return A standardized matrix or tibble with attributes specifying the
@@ -167,28 +160,9 @@ mm_standardize <- function (data,
                             range_global,
                             logbase = 2,
                             na.rm = FALSE,
-                            make_matrix = FALSE,
-                            site_column,
-                            species_column,
-                            values_from,
-                            values_fill = 0,
                             ...) {
 
-  col_is_chr_list <- list()
-  for (column in colnames(data)) {
-    is_chr_ <- is.character(data[, which(colnames(data) == column)])
-    col_is_chr_list[[column]] <- is_chr_
-  }
-  col_is_chr_list <- unlist(col_is_chr_list)
-  if(any(col_is_chr_list)){
-    rlang::abort(sprintf("'%s' is not numeric column", colnames(data)[col_is_chr_list]))
-  }
 
-  if (make_matrix) {
-
-
-
-  }
   wasDataFrame <- is.data.frame(data)
   data <- as.matrix(data)
   METHODS <- c("total", "max", "frequency", "normalize", "range",

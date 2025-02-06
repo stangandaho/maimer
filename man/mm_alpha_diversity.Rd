@@ -6,10 +6,10 @@
 \usage{
 mm_alpha_diversity(
   data,
-  site_column,
-  index = "shannon",
-  species_column,
   to_community = TRUE,
+  index = "shannon",
+  site_column,
+  species_column,
   size_column = NULL,
   margin = 1
 )
@@ -17,19 +17,19 @@ mm_alpha_diversity(
 \arguments{
 \item{data}{A data frame containing species observation data.}
 
-\item{site_column}{The column name in \code{data} that represents the site or location where species were recorded.}
+\item{to_community}{Logical; if \code{TRUE}, the function first transforms \code{data}
+into a community matrix format where sites are rows and species are columns
+before computing indices. Default is \code{TRUE}.}
 
 \item{index}{A character vector specifying the diversity index to calculate.
 Accepted values are \code{"shannon"}, \code{"simpson"}, \code{"invsimpson"}, \code{"evenness"}, and \code{"pielou"}.
 Multiple indices can be computed simultaneously by providing a vector.}
 
+\item{site_column}{The column name in \code{data} that represents the site or location where species were recorded.}
+
 \item{species_column}{The column(s) in \code{data} representing species or taxa.
 This can be a single column name, a range of column indices (e.g., \code{2:5}),
 or a selection helper (e.g., \code{dplyr::starts_with("sp_")}).}
-
-\item{to_community}{Logical; if \code{TRUE}, the function first transforms \code{data}
-into a community matrix format where sites are rows and species are columns
-before computing indices. Default is \code{TRUE}.}
 
 \item{size_column}{(Optional) The column in \code{data} containing the count or abundance of individuals per species.
 If \code{NULL}, the function assumes each row represents one individual.}

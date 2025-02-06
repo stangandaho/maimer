@@ -69,9 +69,6 @@ mm_plot_overlap_coef <- function(data,
   data_melt$Var2 <- factor(data_melt$Var2, levels = unique(data_melt$Var2))
   data_melt$Var1 <- factor(data_melt$Var1, levels = unique(data_melt$Var1))
 
-
-  print(data_melt)
-
   # Base plot
   p <- ggplot(data_melt, aes(Var2, Var1)) +
     theme_minimal() +
