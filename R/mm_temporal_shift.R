@@ -86,15 +86,15 @@ mm_temporal_shift <- function(first_period,
   }
 
 
-  overlap:::checkInput(first_period)
-  overlap:::checkInput(second_period)
+  check_density_input(first_period)
+  check_density_input(second_period)
   xcenter <- match.arg(xcenter)
   isMidnt <- xcenter == "midnight"
 
   # Bandwidth calculation
   bwA <- overlap::getBandWidth(first_period, kmax = kmax) / adjust
   bwB <- overlap::getBandWidth(second_period, kmax = kmax) / adjust
-  if (is.na(bwA) || is.na(bwB)) stop("Bandwidth estimation failed.")
+  if (is.na(bwA) || is.na(bwB)) rlang::abort("Bandwidth estimation failed.", call = NULL)
 
   # Create a sequence of values for density estimation
   xsc <- if (is.na(xscale)) 1 else xscale / (2 * pi)
@@ -125,12 +125,14 @@ mm_temporal_shift <- function(first_period,
 
   # Compare the results
   fp = mm_to_time(abs(c(times_min1, times_max1))/xsc)
-  fp_formated <- strptime(fp, format = "%H:%M:%S")
+  fp_formated <- convert_to_hour(fp)
+
   sp = mm_to_time(abs(c(times_min2, times_max2))/xsc)
-  sp_formated <- strptime(sp, format = "%H:%M:%S")
+  sp_formated <- convert_to_hour(sp)
+
   temporal_shift <- list(
-    `First period range` = noquote(paste0(fp, collapse = " - ")),
-    `Second period range` = noquote(paste0(sp, collapse = " - ")),
+    `First period range` = paste0(fp, collapse = " - "),
+    `Second period range` = paste0(sp, collapse = " - "),
     `Shift size (in hour)` = round(
       as.numeric(
         abs((fp_formated[2] - fp_formated[1]) - (sp_formated[2] - sp_formated[1]))
@@ -184,13 +186,13 @@ mm_temporal_shift <- function(first_period,
                     linewidth = ifelse(!is.null(linestyle_2$linewidth), linestyle_2$linewidth, 1),
                     color = ifelse(!is.null(linestyle_2$color), linestyle_2$color, "gray10"))
 
-  posestyle_1 <- list(shape = ifelse(!is.null(posestyle_1$shape), posestyle_1$shape, 4),
-                      size = ifelse(!is.null(posestyle_1$size), posestyle_1$size, 1.5),
-                      color = ifelse(!is.null(posestyle_1$color), posestyle_1$color, "gray10"),
+  posestyle_1 <- list(shape = ifelse(!is.null(posestyle_1$shape), posestyle_1$shape, 19),
+                      size = ifelse(!is.null(posestyle_1$size), posestyle_1$size, 3),
+                      color = ifelse(!is.null(posestyle_1$color), posestyle_1$color, "#c90026"),
                       alpha = ifelse(!is.null(posestyle_1$alpha), posestyle_1$alpha, 1))
 
-  posestyle_2 <- list(shape = ifelse(!is.null(posestyle_2$shape), posestyle_2$shape, 4),
-                      size = ifelse(!is.null(posestyle_2$size), posestyle_2$size, 1.5),
+  posestyle_2 <- list(shape = ifelse(!is.null(posestyle_2$shape), posestyle_2$shape, 19),
+                      size = ifelse(!is.null(posestyle_2$size), posestyle_2$size, 3),
                       color = ifelse(!is.null(posestyle_2$color), posestyle_2$color, "gray10"),
                       alpha = ifelse(!is.null(posestyle_2$alpha), posestyle_2$alpha, 1))
 

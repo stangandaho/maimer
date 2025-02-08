@@ -178,15 +178,15 @@ parse_datetime <- function (datetime,
 
 melt <- function(data){
   if (any(!class(data) %in% c("matrix", "array"))) {
-    stop("Data must be a matrix", call. = FALSE)
+    rlang::abort("Data must be a matrix", call = NULL)
   }
 
   if (is.null(colnames(data))) {
-    stop("The data must have column names", call. = FALSE)
+    rlang::abort("The data must have column names", call = NULL)
   }
 
   if (is.null(rownames(data))) {
-    stop("The data must have row names",  call. = FALSE)
+    rlang::abort("The data must have row names",  call = NULL)
   }
 
   tbl_list <- list()
@@ -201,3 +201,75 @@ melt <- function(data){
 
   return(melt_data)
 }
+
+
+#' Check dnesity input
+#'
+#' @description
+#' Make sure the input data to fit kernel density is suitable
+#' @keywords internal
+#' @noRd
+#'
+check_density_input <- function (y)
+{
+  if (!is.vector(y) || !is.numeric(y))
+    rlang::abort("The times of observations must be in a numeric vector.")
+  if (length(unique(y)) < 2)
+    rlang::abort(paste0("At least 2 different observations are needed to fit a density. Not ", length(unique(y)), "!"))
+  if (any(is.na(y)))
+    rlang::abort("Your data have missing values.")
+  if (any(y < 0 | y > 2 * pi))
+    rlang::abort("You have times < 0 or > 2*pi; make sure you are using radians.")
+  return(NULL)
+}
+
+#' Time to hour
+#'
+#' @description
+#' Convert time to hour
+#' @keywords internal
+#' @noRd
+#'
+convert_to_hour <- function(time_str) {
+
+  h <- lapply(time_str, function(x){
+    parts <- as.numeric(unlist(strsplit(x, ":")))
+    return(parts[1] + parts[2]/60 + parts[3]/3600)
+  })
+
+  return(unlist(h))
+}
+
+
+#' Colored text
+#'
+#' @description
+#' Colored text in console
+#' @keywords internal
+#' @noRd
+#'
+custom_cli <- function(text, color = "red") {
+
+  if (!is.null(color) && color %in% c("red", "blue", "green")) {
+    if (color == "red") {
+      txt <- paste0("\033[31m", text, "\033[0m")
+    }else if(color == "green"){
+      txt <- faste0("\033[32m", text, "\033[0m")
+
+    }else if(color == "blue"){
+      txt <- paste0("\033[34m", text, "\033[0m")
+      }
+    }else{
+    color <- sample(as.character(1:4), size = 1)
+    txt <- switch (color,
+      "1" = paste0("\033[33m", text, "\033[0m"),
+      "2" = paste0("\033[35m", text, "\033[0m"),
+      "3" = paste0("\033[36m", text, "\033[0m"),
+      "4" = paste0("\033[37m", text, "\033[0m")
+    )
+  }
+
+  cat(txt)
+}
+
+

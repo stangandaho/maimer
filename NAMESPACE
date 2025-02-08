@@ -16,6 +16,8 @@ export(mm_to_radian)
 export(mm_to_time)
 export(mm_to_community) #ok
 export(mm_standardize)
+export(mm_check_name)
+export(mm_to_occupancy)
 ## Analysis
 export(mm_plot_overlap)#ok
 export(mm_overlap_estimates)

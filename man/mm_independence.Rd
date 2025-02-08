@@ -51,11 +51,28 @@ events are independent based on a given threshold. It is useful for checking
 if certain events in a dataset are independent of each other based on time intervals.
 }
 \examples{
-# Example with a data frame
-df <- data.frame(datetime = as.POSIXct(c("2024-08-01 10:00:00", "2024-08-01 10:15:00",
-                                         "2024-08-01 10:45:00", "2024-08-01 11:00:00")),
-                 value = c(1, 2, 3, 4))
-result <- mm_independence(data = df, datetime = "datetime", format = "\%Y-\%m-\%d \%H:\%M:\%S")
-result
+
+library(dplyr)
+
+# Load example dataset
+cam_data <- read.csv(system.file("penessoulou_season1.csv", package = "maimer"))
+
+# Independence without considering species occurrence
+indep1 <- cam_data \%>\%
+  mm_independence(data = ., datetime = datetimes, format = "\%Y-\%m-\%d \%H:\%M:\%S",
+                  only = TRUE)
+
+sprintf("Independent observations: \%s", nrow(indep1))
+
+# Independence considering species occurrence
+indep2 <- cam_data \%>\%
+  mm_independence(data = ., datetime = datetimes, format = "\%Y-\%m-\%d \%H:\%M:\%S",
+                  only = TRUE, species_column = "species")
+
+sprintf("Independent observations: \%s", nrow(indep2))
+
+# Use a standalone vector of datetime values
+dtime <- cam_data$datetimes
+mm_independence(datetime = dtime, format = "\%Y-\%m-\%d \%H:\%M:\%S", only = TRUE)
 
 }

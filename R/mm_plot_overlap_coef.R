@@ -24,6 +24,8 @@
 #' @return A `ggplot` object representing the overlap coefficient matrix visualization.
 #'
 #' @examples
+#'
+#' library(ggplot2)
 #' # Example overlap coefficient matrix
 #' overlap_matrix <- matrix(c(1, 0.8, 0.7, 0.8, 1, 0.9, 0.7, 0.9, 1), ncol = 3)
 #' colnames(overlap_matrix) <- rownames(overlap_matrix) <- c("A", "B", "C")
@@ -33,6 +35,8 @@
 #'
 #' # Plot upper triangle with values
 #' mm_plot_overlap_coef(overlap_matrix, side = "upper", show = "value")
+#'
+#' @import  ggplot2
 #'
 #' @export
 
@@ -70,25 +74,33 @@ mm_plot_overlap_coef <- function(data,
   data_melt$Var1 <- factor(data_melt$Var1, levels = unique(data_melt$Var1))
 
   # Base plot
-  p <- ggplot(data_melt, aes(Var2, Var1)) +
-    theme_minimal() +
-    theme(axis.title = element_blank())
+  p <- ggplot2::ggplot(data_melt, aes(Var2, Var1)) +
+    ggplot2::theme_minimal() +
+    theme(axis.title = ggplot2::element_blank())
 
   # Add either circles or values
   if (show == "shape") {
-    p <- p + geom_point(aes(size = value),
+    p <- p + geom_point(aes(size = value, color = value, fill = value),
                         shape = shape_type, stroke = shape_size) +
-      scale_size_continuous(range = c(1, 6)) +
-      scale_color_gradientn(colors = color_scale)
+      ggplot2::scale_size_continuous(range = c(1, 6)) +
+      ggplot2::scale_color_gradientn(colors = color_scale) +
+      ggplot2::scale_fill_gradientn(colors = color_scale) +
+      ggplot2::guides(
+        size = "none",
+        fill = "none",
+        color = ggplot2::guide_colorbar(title = "Value")  # Use colorbar to merge
+      )
+
   } else {
-    p <- p + geom_text(aes(label = value, color = value),
-                       size = text_size, family = text_font) +
-      scale_color_gradientn(colors = color_scale)
+    p <- p + ggplot2::geom_text(mapping = ggplot2::aes(label = value, color = value),
+                       size = text_size,
+                       family = text_font) +
+      ggplot2::scale_color_gradientn(colors = color_scale)
   }
 
   # Add a continuous color bar for visual reference
   p <- p +
-    guides(color = guide_colorbar( ... ))
+    ggplot2::guides(color = ggplot2::guide_colorbar( ... ))
 
   return(p)
 }

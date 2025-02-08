@@ -82,8 +82,8 @@ mm_plot_overlap <- function(A,
   suppressWarnings({
 
     # Input validation
-    overlap:::checkInput(A)
-    overlap:::checkInput(B)
+    check_density_input(A)
+    check_density_input(B)
     xcenter <- match.arg(xcenter)
     isMidnt <- xcenter == "midnight"
 
