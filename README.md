@@ -37,7 +37,7 @@ visualizations.
   - **Temporal Analysis**: Explore species activity shifts over time with 
   `mm_temporal_shift()`.
 
-The current complete list of functions is [here](#).
+The current complete list of functions is [here](https://stangandaho.github.io/maimer/reference/index.html).
 
 
 ## **Installation:**
