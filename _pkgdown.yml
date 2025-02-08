@@ -1,0 +1,97 @@
+url: https://stangandaho.github.io/maimer/
+template:
+  bootstrap: 5
+  light-switch: yes
+  bslib:
+    base_font:
+      google: Montserrat
+    heading_font:
+      google: Montserrat
+    code_font:
+      google: JetBrains Mono
+  math-rendering: mathjax
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    - news
+    right:
+    - search
+    - github
+    - linkedin
+    - lightswitch
+  components:
+    intro:
+      text: Home
+      icon: fa-home
+      href: index.html
+      aria-label: Home
+    reference:
+      text: Functions
+      icon: fa-code
+      href: reference/index.html
+    articles:
+      text: Articles
+      icon: fa-blog
+      menu:
+      - text: 1. Data preparation
+        href: articles/camtrap_data_preparation.html
+      - text: 2. Data analysis
+        href: articles/camtrap_data_analysis.html
+      - text: 3. Elegant visualizations
+        href: articles/camtrap_analysis_visualisation.html
+    news:
+      text: News
+      icon: fa-face-smile
+      href: news/index.html
+    github:
+      href: https://github.com/stangandaho/maimer
+      aria-label: GitHub
+      icon: fa-github
+    linkedin:
+      href: https://www.linkedin.com/in/stangandaho/
+      aria-label: LinkedIn
+      icon: fa-linkedin
+component:
+  home: ~
+reference:
+- title: Process media (images) file
+  desc: Functions reading and writing metadata
+  contents:
+  - mm_app
+  - mm_get_metadata
+  - mm_get_hs
+  - mm_create_hs
+  - mm_remove_hs
+- title: Data processing
+  desc: |
+    Functions for preparing and tansforming camera trap data
+  contents:
+  - mm_read
+  - mm_stack_df
+  - mm_check_location
+  - mm_independence
+  - mm_to_radian
+  - mm_to_time
+  - mm_to_community
+  - mm_standardize
+  - mm_check_name
+  - mm_to_occupancy
+- title: Data analysis
+  desc: |
+    Functions to run common camera trap data analysis
+  contents:
+  - mm_plot_overlap
+  - mm_overlap_estimates
+  - mm_bootstrap
+  - mm_resample
+  - mm_boot_estimates
+  - mm_boot_CI
+  - mm_plot_overlap_coef
+  - mm_overlap_matrix
+  - mm_temporal_shift
+  - mm_alpha_diversity
+  - mm_dissimilarity
+
