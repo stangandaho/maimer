@@ -16,6 +16,7 @@ Imports:
   shiny, 
   shinyFiles, 
   shinyTree,
+  terra,
   tidyr,
   rlang
 Authors@R: c(

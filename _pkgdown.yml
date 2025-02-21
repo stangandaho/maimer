@@ -94,4 +94,6 @@ reference:
   - mm_temporal_shift
   - mm_alpha_diversity
   - mm_dissimilarity
+  - mm_spatial_coverage
+  - mm_plot_density
 

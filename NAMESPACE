@@ -19,25 +19,27 @@ export(mm_standardize)
 export(mm_check_name)
 export(mm_to_occupancy)
 ## Analysis
+export(mm_plot_density)
 export(mm_plot_overlap)#ok
+export(mm_plot_overlap_coef)
 export(mm_overlap_estimates)
 export(mm_bootstrap)
 export(mm_resample)
 export(mm_boot_estimates)
 export(mm_boot_CI)
-export(mm_plot_overlap_coef)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
 export(mm_alpha_diversity)
 #export(mm_beta_diversity)
 export(mm_dissimilarity)
+export(mm_spatial_coverage)
 
 ## General
 export(`%>%`)
 export(`%<>%`)
 
 
-# Import
+########### Import ##############
 # exifr
 importFrom(exifr, exiftool_call)
 importFrom(exifr, read_exif)
@@ -174,3 +176,13 @@ importFrom(overlap, sunTime)
 importFrom(sf, st_as_sf)
 importFrom(sf, st_transform)
 importFrom(sf, st_coordinates)
+
+# terra
+importFrom(terra, rast)
+importFrom(terra, vect)
+importFrom(terra, values)
+importFrom(terra, as.polygons)
+importFrom(terra, extend)
+importFrom(terra, rasterize)
+importFrom(terra, global)
+importFrom(terra, mean)
