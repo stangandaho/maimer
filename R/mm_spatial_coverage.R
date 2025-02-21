@@ -3,14 +3,10 @@
 #' This function calculates the *Observed Spatial Coverage* of a species like *Home Range*,
 #' but based on camera trap data.
 #' The term home range is typically associated with dynamic movement data, such as
-#  those recorded by radio-tracking or GPS devices, which provide continuous or
-#  near-continuous tracking of an individual animal's movements. Since camera traps
-#  are static and only capture presence/absence or activity within their specific
-#  locations, the concept of home range might not fully apply.
-#' The function applies a half-normal kernel to model species abundance over space,
-#' using the scale rate to control the spread of the distribution.
-#' The function returns a raster representing the abundance and summary statistics
-#' of the spatial coverage.
+#' those recorded by radio-tracking or GPS devices, which provide continuous or
+#' near-continuous tracking of an individual animal's movements. Since camera traps
+#' are static and only capture presence/absence or activity within their specific
+#' locations, the concept of home range might not fully apply.
 #'
 #' @param data A data frame containing species occurrence records, including site, longitude, latitude, and optionally size (abundance).
 #' @param site_column Column name specifying the site identifier.
@@ -28,15 +24,15 @@
 #' Higher values create a more spread-out distribution, while lower values make
 #' it more concentrated. The value must be in ]0; 1]
 #'
-#' @details The function applies a half-normal decay kernel to spatial points, where the abundance at a location
-#' is weighted by:
+#' @details The function applies a half-normal kernel to model species abundance over space,
+#' using the scale rate to control the spread of the distribution:
 #'
 #' \deqn{\bar{K}(x) = \frac{\sum w * \text{e}^{(-0.5 * (\frac{x}{\sigma})^2)}}{N}}
 #'
 #' where:
 #' - \eqn{\bar{K}(x)} is the mean abundance kernel across all sites,
 #' - \eqn{w} is the species abundance at each site,
-#' - \eqn{\sigma} is the standard deviation of the spatial distance (scaled by decay_rate),
+#' - \eqn{\sigma} is the standard deviation of the spatial distance (scaled by spread_factor),
 #' - \eqn{N} is the total number of sites.
 #'
 #'

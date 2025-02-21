@@ -54,14 +54,14 @@ A list containing:
 This function calculates the \emph{Observed Spatial Coverage} of a species like \emph{Home Range},
 but based on camera trap data.
 The term home range is typically associated with dynamic movement data, such as
-The function applies a half-normal kernel to model species abundance over space,
-using the scale rate to control the spread of the distribution.
-The function returns a raster representing the abundance and summary statistics
-of the spatial coverage.
+those recorded by radio-tracking or GPS devices, which provide continuous or
+near-continuous tracking of an individual animal's movements. Since camera traps
+are static and only capture presence/absence or activity within their specific
+locations, the concept of home range might not fully apply.
 }
 \details{
-The function applies a half-normal decay kernel to spatial points, where the abundance at a location
-is weighted by:
+The function applies a half-normal kernel to model species abundance over space,
+using the scale rate to control the spread of the distribution:
 
 \deqn{\bar{K}(x) = \frac{\sum w * \text{e}^{(-0.5 * (\frac{x}{\sigma})^2)}}{N}}
 
@@ -69,7 +69,7 @@ where:
 \itemize{
 \item \eqn{\bar{K}(x)} is the mean abundance kernel across all sites,
 \item \eqn{w} is the species abundance at each site,
-\item \eqn{\sigma} is the standard deviation of the spatial distance (scaled by decay_rate),
+\item \eqn{\sigma} is the standard deviation of the spatial distance (scaled by spread_factor),
 \item \eqn{N} is the total number of sites.
 }
 }
