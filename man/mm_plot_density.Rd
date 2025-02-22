@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_plot_density.R
 \name{mm_plot_density}
 \alias{mm_plot_density}
-\title{Plot overlap between two species' activity patterns}
+\title{Plot species' activity patterns}
 \usage{
 mm_plot_density(
   time,
@@ -57,8 +57,8 @@ mm_plot_density(
 A ggplot object representing the activity density curves of the species.
 }
 \description{
-This function visualizes the temporal overlap between two species' activity patterns based on time-of-day data.
-It uses kernel density estimation to estimate activity densities and highlights areas of overlap between the two species.
+This function visualizes species' activity patterns based on time-of-day data.
+It uses kernel density estimation to estimate activity density.
 }
 \examples{
 \dontrun{

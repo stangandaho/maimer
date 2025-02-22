@@ -83,17 +83,17 @@ reference:
   desc: |
     Functions to run common camera trap data analysis
   contents:
+  - mm_plot_density
   - mm_plot_overlap
+  - mm_plot_overlap_coef
   - mm_overlap_estimates
   - mm_bootstrap
   - mm_resample
   - mm_boot_estimates
   - mm_boot_CI
-  - mm_plot_overlap_coef
   - mm_overlap_matrix
   - mm_temporal_shift
   - mm_alpha_diversity
   - mm_dissimilarity
   - mm_spatial_coverage
-  - mm_plot_density
 

@@ -1,7 +1,7 @@
-#' Plot overlap between two species' activity patterns
+#' Plot species' activity patterns
 #'
-#' This function visualizes the temporal overlap between two species' activity patterns based on time-of-day data.
-#' It uses kernel density estimation to estimate activity densities and highlights areas of overlap between the two species.
+#' This function visualizes species' activity patterns based on time-of-day data.
+#' It uses kernel density estimation to estimate activity density.
 #'
 #' @param time A numeric vector of time-of-day observations (in radians, 0 to \eqn{2\pi}).
 #' @param xscale A numeric value to scale the x-axis. Default is `24` for representing time in hours.
