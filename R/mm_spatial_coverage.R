@@ -135,14 +135,14 @@ mm_spatial_coverage <- function(data,
       rlang::abort("Area of study must be simple feature (sf) object")
     }
 
-    if (all(sf::st_geometry_type(study_area)) == "POLYGON") {
+    if (!all(sf::st_geometry_type(study_area) == "POLYGON")) {
       rlang::abort("Area of study must be a polygon")
     }
 
     study_area <- study_area %>%
       sf::st_transform(crs = crs)
 
-    bbox <- terra::vect(st_bbox(study_area))
+    bbox <- sf::st_bbox(study_area)
 
     ref_rast <- terra::extend(x = ref_rast, y = terra::ext(bbox))
   }
