@@ -1,4 +1,4 @@
-#' Pendjari National Park and Surrounding Areas
+#' Pendjari national park and surrounding areas
 #'
 #' A dataset containing spatial boundaries of Pendjari National Park and its surrounding hunting zones in Benin.
 #'
