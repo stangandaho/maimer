@@ -3,7 +3,7 @@
 \docType{data}
 \name{pendjari}
 \alias{pendjari}
-\title{Pendjari National Park and Surrounding Areas}
+\title{Pendjari national park and surrounding areas}
 \format{
 A tibble with 3 rows and 2 columns:
 \describe{
