@@ -1,4 +1,4 @@
-#' Remove Specific or All HierarchicalSubject Values from Image Metadata
+#' Remove specific or all hierarchical subject values from image metadata
 #'
 #'The mm_remove_hs function removes a specific hierarchy from the
 #'`Hierarchical Subject` field in an image's metadata, or it removes the entire

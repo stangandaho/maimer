@@ -1,4 +1,4 @@
-#' @title Plot Overlap Coefficient Matrix
+#' @title Plot overlap coefficient matrix
 #'
 #' @description
 #' Visualizes an overlap coefficient matrix.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_to_community.R
 \name{mm_to_community}
 \alias{mm_to_community}
-\title{Convert Data to a Community Matrix}
+\title{Convert data to a community matrix}
 \usage{
 mm_to_community(
   data,

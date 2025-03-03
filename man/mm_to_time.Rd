@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_to_time.R
 \name{mm_to_time}
 \alias{mm_to_time}
-\title{Convert Radian to Time}
+\title{Convert radian to time}
 \usage{
 mm_to_time(radian)
 }

@@ -1,5 +1,7 @@
 #exportPattern("^[[:alpha:]]+")
 
+## Before field
+export(mm_survey_design)
 ## Prepare media file
 export(mm_app)
 export(mm_get_metadata) #ok

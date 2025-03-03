@@ -1,4 +1,4 @@
-#' Convert Radian to Time
+#' Convert radian to time
 #'
 #' This function converts an angle in radians (representing a fraction of a full circle)
 #' into a time in the format '%H:%M:%S'. The conversion assumes that the radian value

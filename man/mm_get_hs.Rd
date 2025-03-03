@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_get_hs.R
 \name{mm_get_hs}
 \alias{mm_get_hs}
-\title{Retrieve Hierarchical Subject Values from Image Metadata}
+\title{Retrieve hierarchical subject values from image metadata}
 \usage{
 mm_get_hs(path)
 }

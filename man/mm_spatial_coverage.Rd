@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_spatial_coverage.R
 \name{mm_spatial_coverage}
 \alias{mm_spatial_coverage}
-\title{Calculate Observed Spatial Coverage of Species}
+\title{Calculate observed spatial coverage of species}
 \usage{
 mm_spatial_coverage(
   data,

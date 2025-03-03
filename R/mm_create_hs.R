@@ -1,4 +1,4 @@
-#' Create or Add Hierarchical Subject Values in Image Metadata
+#' Create or add hierarchical subject values in image metadata
 #'
 #' @inheritParams mm_get_hs
 #' @param value named character vector specifying the new hierarchical subjects to add.

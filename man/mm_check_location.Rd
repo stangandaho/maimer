@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_check_location.R
 \name{mm_check_location}
 \alias{mm_check_location}
-\title{Interactive Camera Trap Location Adjustment}
+\title{Interactive camera trap location adjustment}
 \usage{
 mm_check_location(
   data,

@@ -1,4 +1,4 @@
-#' Evaluate Event Independence
+#' Evaluate event independence
 #'
 #' This function calculates the difference between times and evaluates whether
 #' events are independent based on a given threshold. It is useful for checking

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_remove_hs.R
 \name{mm_remove_hs}
 \alias{mm_remove_hs}
-\title{Remove Specific or All HierarchicalSubject Values from Image Metadata}
+\title{Remove specific or all hierarchical subject values from image metadata}
 \usage{
 mm_remove_hs(path, hierarchy = NULL, intern = TRUE, quiet = TRUE, ...)
 }

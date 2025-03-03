@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_create_hs.R
 \name{mm_create_hs}
 \alias{mm_create_hs}
-\title{Create or Add Hierarchical Subject Values in Image Metadata}
+\title{Create or add hierarchical subject values in image metadata}
 \usage{
 mm_create_hs(path, value = c(), intern = TRUE, quiet = TRUE, ...)
 }
@@ -19,7 +19,7 @@ Each value must have a parent specified as the name, e.g c("Species" = "Vulture"
 \item{...}{additional arguments to be passed to \code{\link[=system2]{system2()}}}
 }
 \description{
-Create or Add Hierarchical Subject Values in Image Metadata
+Create or add hierarchical subject values in image metadata
 }
 \examples{
 

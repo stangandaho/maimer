@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_read.R
 \name{mm_read}
 \alias{mm_read}
-\title{Read a Delimited File into a Tibble}
+\title{Read a delimited file into a tibble}
 \usage{
 mm_read(file_path, header = TRUE, sep, ...)
 }

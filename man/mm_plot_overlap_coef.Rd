@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_plot_overlap_coef.R
 \name{mm_plot_overlap_coef}
 \alias{mm_plot_overlap_coef}
-\title{Plot Overlap Coefficient Matrix}
+\title{Plot overlap coefficient matrix}
 \usage{
 mm_plot_overlap_coef(
   data,

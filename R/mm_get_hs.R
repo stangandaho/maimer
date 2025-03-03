@@ -1,4 +1,4 @@
-#' Retrieve Hierarchical Subject Values from Image Metadata
+#' Retrieve hierarchical subject values from image metadata
 #'
 #'The function retrieves the values from the `Hierarchical Subject`
 #' field of an image's metadata. It uses exiftool to read the metadata and processes

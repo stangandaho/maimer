@@ -1,4 +1,4 @@
-#' Interactive Camera Trap Location Adjustment
+#' Interactive camera trap location adjustment
 #'
 #' This function launches a shiny application that allows users to visualize
 #' and manually adjust the geographic coordinates of camera trap locations.

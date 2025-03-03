@@ -57,8 +57,14 @@ navbar:
 component:
   home: ~
 reference:
+- title: Prepare field survey
+  desc: |
+    Set up field survey design for camera trap deployement
+  contents:
+  - mm_survey_design
 - title: Process media (images) file
-  desc: Functions reading and writing metadata
+  desc: |
+    Functions reading and writing metadata
   contents:
   - mm_app
   - mm_get_metadata

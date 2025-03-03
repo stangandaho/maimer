@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_independence.R
 \name{mm_independence}
 \alias{mm_independence}
-\title{Evaluate Event Independence}
+\title{Evaluate event independence}
 \usage{
 mm_independence(
   data = NULL,

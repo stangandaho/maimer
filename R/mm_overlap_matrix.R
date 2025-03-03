@@ -1,4 +1,4 @@
-#' Estimate Overlap Coefficients for Multiple Species
+#' Estimate overlap coefficients for multiple species
 #'
 #' This function calculates pairwise overlap coefficients for activity patterns of multiple species
 #' using their time data.

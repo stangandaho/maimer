@@ -247,7 +247,6 @@ convert_to_hour <- function(time_str) {
 #' Colored text in console
 #' @keywords internal
 #' @noRd
-#'
 custom_cli <- function(text, color = "red") {
 
   if (!is.null(color) && color %in% c("red", "blue", "green")) {
@@ -272,4 +271,41 @@ custom_cli <- function(text, color = "red") {
   cat(txt)
 }
 
+#' CRS
+#'
+#' @description
+#' Get CRS type
+#' @keywords internal
+#' @noRd
+#'
+crs_type <- function(sf_object) {
+  wkt <- sf::st_crs(sf_object)$wkt
+  if (is.na(wkt)) {
+    obj_name <- deparse(substitute(sf_object))
+    rlang::abort(sprintf("Coordinate Reference System (CRS) of `%s` cannot be NA. Assign a CRS.",
+                         obj_name), call = NULL)
+  }
 
+  if (grepl("PROJCRS", wkt)) {
+    cr_sys <- "Projected"
+  }else if(grepl("GEOGCRS", wkt)){
+    cr_sys <- "Geographic"
+  }
+  return(cr_sys)
+}
+
+#' Validate study area
+#'
+#' @description
+#' Make sure study area provided is sf object and represents a polygon
+#' @keywords internal
+#' @noRd
+valid_study_area <- function(sf_object) {
+  if (!any(c("sf", "sfc_POLYGON" ,"sfc") %in% class(sf_object))) {
+    rlang::abort("Area of study must be simple feature (sf) object", call = NULL)
+  }
+
+  if (!any(c("MULTIPOLYGON", "POLYGON") %in% sf::st_geometry_type(sf_object))) {
+    rlang::abort("Area of study must be a polygon", call = NULL)
+  }
+}

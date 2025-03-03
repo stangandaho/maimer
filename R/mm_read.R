@@ -1,4 +1,4 @@
-#' Read a Delimited File into a Tibble
+#' Read a delimited file into a tibble
 #'
 #' The `mm_read` function reads a delimited text file.
 #' It automatically detects the delimiter if not specified and provides an easy-to-use

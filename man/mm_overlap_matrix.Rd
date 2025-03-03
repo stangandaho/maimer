@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_overlap_matrix.R
 \name{mm_overlap_matrix}
 \alias{mm_overlap_matrix}
-\title{Estimate Overlap Coefficients for Multiple Species}
+\title{Estimate overlap coefficients for multiple species}
 \usage{
 mm_overlap_matrix(
   data,

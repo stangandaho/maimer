@@ -1,4 +1,4 @@
-#' Calculate Observed Spatial Coverage of Species
+#' Calculate observed spatial coverage of species
 #'
 #' This function calculates the *Observed Spatial Coverage* of a species like *Home Range*,
 #' but based on camera trap data.
@@ -131,13 +131,8 @@ mm_spatial_coverage <- function(data,
 
   # Extend a little bit the area
   if (!is.null(study_area)) {
-    if (!any("sf" %in% class(study_area))) {
-      rlang::abort("Area of study must be simple feature (sf) object")
-    }
 
-    if (!all(sf::st_geometry_type(study_area) == "POLYGON")) {
-      rlang::abort("Area of study must be a polygon")
-    }
+    valid_study_area(study_area)
 
     study_area <- study_area %>%
       sf::st_transform(crs = crs)

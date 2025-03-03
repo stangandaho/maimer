@@ -35,3 +35,5 @@ Roxygen: list(markdown = TRUE)
 Suggests: testthat (>= 3.0.0), vegan
 Config/testthat/edition: 3
 URL: https://stangandaho.github.io/maimer/
+Depends: 
+    R (>= 3.5)

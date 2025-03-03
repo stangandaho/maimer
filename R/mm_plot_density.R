@@ -22,20 +22,20 @@
 #' @return A ggplot object representing the activity density curves of the species.
 #'
 #' @examples
-#' \dontrun{
-#'   # Generate random data for two species
-#'   set.seed(42)
-#'   A <- runif(100, 0, 2 * pi)
 #'
-#'   # Plot overlap with default settings
-#'   mm_plot_density(A)
+#'  # Generate random data for two species
+#'  set.seed(42)
+#'  A <- runif(100, 0, 2 * pi)
 #'
-#'   # Customize plot with specific colors and line types
-#'    mm_plot_density(A, linecol = "gray10", linewidth = 0.8,
-#'                    xcenter = "midnight", rug = T,
-#'                    rug_color = 'red', extend_alpha = 0)
+#'  # Plot overlap with default settings
+#'  mm_plot_density(A)
+#
+#'  # Customize plot with specific colors and line types
+#'  mm_plot_density(A, linecol = "gray10", linewidth = 0.8,
+#'                  xcenter = "midnight", rug = TRUE,
+#'                  rug_color = 'red', extend_alpha = 0)
 #'
-#' }
+#'
 #'
 #' @import ggplot2
 #' @import overlap

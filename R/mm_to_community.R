@@ -1,4 +1,4 @@
-#' Convert Data to a Community Matrix
+#' Convert data to a community matrix
 #'
 #' The function transforms input data into a community matrix where
 #' rows represent sites, columns represent species, and values indicate the count
