@@ -62,6 +62,7 @@ reference:
     Set up field survey design for camera trap deployement
   contents:
   - mm_survey_design
+  - pendjari
 - title: Process media (images) file
   desc: |
     Functions reading and writing metadata
