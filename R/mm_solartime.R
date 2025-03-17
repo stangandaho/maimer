@@ -1,4 +1,4 @@
-#' Transform Time to Solar Time Anchored to Sunrise and Sunset
+#' Transform time to solar time anchored to sunrise and sunset
 #'
 #' This function converts local time to solar time based on the sunrise and sunset
 #' times for a given location. Solar time is a timekeeping system where the day
@@ -43,24 +43,20 @@
 #' @references
 #' Rowcliffe, M. (2023). activity: Animal Activity Statistics.
 #' R package version 1.3.4. https://CRAN.R-project.org/package=activity
-#' @examples
-#' # Example with direct input
-#' date <- c("2023-10-01 12:00:00", "2023-10-02 12:00:00")
-#' longitude <- -122.4194
-#' latitude <- 37.7749
-#' time_zone <- -8
-#' result <- mm_solartime(date = date, longitude = longitude, latitude = latitude,
-#' time_zone = time_zone)
 #'
-#' # Example with data frame
-#' data <- data.frame(
-#'   date_time = c("2023-10-01 12:00:00", "2023-10-02 12:00:00"),
-#'   lon = c(-122.4194, -122.4194),
-#'   lat = c(37.7749, 37.7749)
-#' )
-#' result <- mm_solartime(data = data, date = date_time, longitude = lon,
-#' latitude = lat, time_zone = -8)
-#' result
+#' @examples
+#' library(dplyr)
+#'
+#' read.csv(system.file("penessoulou_season1.csv", package = "maimer")) %>%
+#'  dplyr::filter(species == "Erythrocebus patas") %>%
+#'  # Select independent events based on a given threshold
+#'  maimer::mm_independence(species_column = species,
+#'                           datetime = datetimes, threshold = 60*5, # 5 minutes
+#'                           format = "%Y-%m-%d %H:%M:%S",
+#'                           only = TRUE) %>%
+#'  # Transform Time to Solar Time
+#'  mm_solartime(data = ., date = datetime, longitude = longitude, latitude = latitude,
+#'                crs = "EPSG:32631", time_zone = 1)
 #'
 #' @export
 

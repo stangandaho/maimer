@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_solartime.R
 \name{mm_solartime}
 \alias{mm_solartime}
-\title{Transform Time to Solar Time Anchored to Sunrise and Sunset}
+\title{Transform time to solar time anchored to sunrise and sunset}
 \usage{
 mm_solartime(
   data = NULL,
@@ -69,23 +69,18 @@ is \code{NULL}, the function will process the \code{date}, \code{longitude}, and
 parameters directly.
 }
 \examples{
-# Example with direct input
-date <- c("2023-10-01 12:00:00", "2023-10-02 12:00:00")
-longitude <- -122.4194
-latitude <- 37.7749
-time_zone <- -8
-result <- mm_solartime(date = date, longitude = longitude, latitude = latitude,
-time_zone = time_zone)
+library(dplyr)
 
-# Example with data frame
-data <- data.frame(
-  date_time = c("2023-10-01 12:00:00", "2023-10-02 12:00:00"),
-  lon = c(-122.4194, -122.4194),
-  lat = c(37.7749, 37.7749)
-)
-result <- mm_solartime(data = data, date = date_time, longitude = lon,
-latitude = lat, time_zone = -8)
-result
+read.csv(system.file("penessoulou_season1.csv", package = "maimer")) \%>\%
+ dplyr::filter(species == "Erythrocebus patas") \%>\%
+ # Select independent events based on a given threshold
+ maimer::mm_independence(species_column = species,
+                          datetime = datetimes, threshold = 60*5, # 5 minutes
+                          format = "\%Y-\%m-\%d \%H:\%M:\%S",
+                          only = TRUE) \%>\%
+ # Transform Time to Solar Time
+ mm_solartime(data = ., date = datetime, longitude = longitude, latitude = latitude,
+               crs = "EPSG:32631", time_zone = 1)
 
 }
 \references{
