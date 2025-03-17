@@ -81,6 +81,7 @@ reference:
   - mm_check_location
   - mm_independence
   - mm_to_radian
+  - mm_solartime
   - mm_to_time
   - mm_to_community
   - mm_standardize

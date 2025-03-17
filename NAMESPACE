@@ -15,6 +15,7 @@ export(mm_stack_df) #ok
 export(mm_check_location)#ok
 export(mm_independence) #ok
 export(mm_to_radian)
+export(mm_solartime)
 export(mm_to_time)
 export(mm_to_community) #ok
 export(mm_standardize)
