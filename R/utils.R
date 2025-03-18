@@ -309,3 +309,27 @@ valid_study_area <- function(sf_object) {
     rlang::abort("Area of study must be a polygon", call = NULL)
   }
 }
+
+#' Check column presence
+#'
+#' @description
+#' Make sure column(s) provided is/are present in the data
+#' @keywords internal
+#' @noRd
+#'
+missed_col_error <- function(data, ..., use_object = TRUE){
+
+  if (use_object) {
+    cols <- unlist(list(...))
+  }else{
+    cols <- sapply(rlang::ensyms(...), rlang::as_string)
+  }
+
+  if (any(!cols %in% colnames(data))) {
+    not_in <- cols[!cols %in% colnames(data)];
+    miss_col_error <- ifelse(length(not_in) > 1, paste0("Columns ", paste0(not_in, collapse = ", "), " are not in ", deparse(substitute(data))),
+                             paste0("Column ", paste0(not_in, collapse = ", ")," is not in ", deparse(substitute(data))))
+    rlang::abort(miss_col_error)
+  }
+}
+

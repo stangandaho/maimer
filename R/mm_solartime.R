@@ -76,6 +76,9 @@ mm_solartime <- function (data = NULL,
     date_str <- as.character(substitute(date))
     lon_str <- as.character(substitute(longitude))
     lat_str <- as.character(substitute(latitude))
+    cols <- c(date_str, lat_str, lon_str)
+    # Confirm column presence
+    missed_col_error(data = data, cols)
 
     if (!is.null(crs)) {
       data <- to_lon_lat(data = data, longitude = lon_str, latitude = lat_str, crs = crs)
@@ -85,13 +88,7 @@ mm_solartime <- function (data = NULL,
       dplyr::mutate(!!dplyr::sym(lon_str) := round(!!dplyr::sym(lon_str), 5),
                     !!dplyr::sym(lat_str) := round(!!dplyr::sym(lat_str), 5))
 
-    cols <- c(date_str, lat_str, lon_str)
-    if (any(!cols %in% colnames(data))) {
-      not_in <- cols[!cols %in% colnames(data)];
-      miss_col_error <- ifelse(length(not_in) > 1, paste0("Columns ", paste0(not_in, collapse = ", "), " are not in ", deparse(substitute(data))),
-                         paste0("Column ", paste0(not_in, collapse = ", ")," is not in ", deparse(substitute(data))))
-      rlang::abort(miss_col_error)
-    }
+
 
     longitude <- data[[lon_str]]; latitude <- data[[lat_str]]
     unique_location <- unique(paste(longitude, latitude))

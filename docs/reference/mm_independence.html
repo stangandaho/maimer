@@ -61,7 +61,8 @@ if certain events in a dataset are independent of each other based on time inter
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mm_independence</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  species_column <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">species_column</span>,</span>
+<span>  <span class="va">site_column</span>,</span>
 <span>  <span class="va">datetime</span>,</span>
 <span>  <span class="va">format</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="fl">30</span> <span class="op">*</span> <span class="fl">60</span>,</span>
@@ -82,6 +83,11 @@ instead of the <code>data</code> argument.</p></dd>
 <dt id="arg-species-column">species_column<a class="anchor" aria-label="anchor" href="#arg-species-column"></a></dt>
 <dd><p>An optional column name specifying the species grouping.
 If provided, independence will be assessed separately within each species group.</p></dd>
+
+
+<dt id="arg-site-column">site_column<a class="anchor" aria-label="anchor" href="#arg-site-column"></a></dt>
+<dd><p>An optional column name specifying the site/camera grouping.
+If provided, independence will be assessed separately within each site group.</p></dd>
 
 
 <dt id="arg-datetime">datetime<a class="anchor" aria-label="anchor" href="#arg-datetime"></a></dt>

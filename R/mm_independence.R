@@ -9,6 +9,8 @@
 #'   instead of the `data` argument.
 #' @param species_column An optional column name specifying the species grouping.
 #'   If provided, independence will be assessed separately within each species group.
+#' @param site_column An optional column name specifying the site/camera grouping.
+#'   If provided, independence will be assessed separately within each site group.
 #' @param datetime A `character` string specifying the name of the column in `data` that contains
 #'   the datetime values. This argument is required if `data` is provided.
 #' @param format A `character` string defining the format used to parse the datetime values in
@@ -56,7 +58,8 @@
 #' @export
 
 mm_independence <- function(data = NULL,
-                            species_column = NULL,
+                            species_column,
+                            site_column,
                             datetime,
                             format,
                             threshold = 30*60,
@@ -65,13 +68,13 @@ mm_independence <- function(data = NULL,
   # Prevent all possible error
   if (!is.null(data)) {
     if (!any(class(data) %in% c("data.frame", "tbl_df", "tbl"))){
-      rlang::abort("Wrong data provided", call = NULL)
+      rlang::abort("Wrong data provided")
     }
 
     dt_str_ <- ifelse(methods::hasArg(datetime), as.character(dplyr::ensym(datetime)), "datetime")
 
     if (!any(dt_str_ %in% colnames(data))) {
-      rlang::abort(sprintf("%s not found in data", dt_str_), call = NULL)
+      rlang::abort(sprintf("%s not found in data", dt_str_))
     }
   }
 
@@ -80,7 +83,7 @@ mm_independence <- function(data = NULL,
   }
 
   if (!hasArg(format)) {
-    rlang::abort("'format' cannot be missed", call = NULL)
+    rlang::abort("'format' cannot be missed")
   }
 
   ## Get datetime and build new data
@@ -116,17 +119,18 @@ mm_independence <- function(data = NULL,
   }
 
 
-  # Apply grouping by species if provided
+  # Apply grouping by site and species if provided
+  site_column <- tryCatch(as.character(dplyr::ensym(site_column)), error = function(e)NULL)
   species_column <- tryCatch(as.character(dplyr::ensym(species_column)), error = function(e)NULL)
+  grouped_by <- c(site_column, species_column)
+  grouped_by <- grouped_by[grouped_by != ""]
 
-  if (!is.null(species_column)) {
-
-    if (! species_column %in% colnames(data)) {
-      rlang::abort(sprintf("Column `%s` is not found.", species_column), call = NULL)
-    }
+  if (length(grouped_by) > 0) {
+    ## Confirm column presence
+    missed_col_error(data = data, grouped_by)
 
     data <- data %>%
-      dplyr::group_by(!!dplyr::sym(species_column)) %>%
+      dplyr::group_by(!!!rlang::syms(grouped_by)) %>%
       dplyr::arrange(datetime, .by_group = TRUE) %>%
       dplyr::mutate(deltatime = c(0, diff(datetime)),
                     event = c(TRUE, diff(datetime) >= threshold)) %>%
@@ -148,3 +152,4 @@ mm_independence <- function(data = NULL,
 
   return(data)
 }
+

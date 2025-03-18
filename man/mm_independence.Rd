@@ -6,7 +6,8 @@
 \usage{
 mm_independence(
   data = NULL,
-  species_column = NULL,
+  species_column,
+  site_column,
   datetime,
   format,
   threshold = 30 * 60,
@@ -20,6 +21,9 @@ instead of the \code{data} argument.}
 
 \item{species_column}{An optional column name specifying the species grouping.
 If provided, independence will be assessed separately within each species group.}
+
+\item{site_column}{An optional column name specifying the site/camera grouping.
+If provided, independence will be assessed separately within each site group.}
 
 \item{datetime}{A \code{character} string specifying the name of the column in \code{data} that contains
 the datetime values. This argument is required if \code{data} is provided.}
