@@ -94,6 +94,7 @@ reference:
   - mm_plot_density
   - mm_plot_overlap
   - mm_plot_overlap_coef
+  - mm_plot_rose_diagram
   - mm_overlap_estimates
   - mm_bootstrap
   - mm_resample

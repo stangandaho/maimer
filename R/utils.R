@@ -22,7 +22,7 @@ deep_list <- function(list_item){
 #' Pair to list
 #'
 #' @description
-#' unction that converts a vector into a list with pairs of elements (i.e., two-by-two)
+#' Convert a vector into a list with pairs of elements (i.e., two-by-two)
 #' @keywords internal
 #' @noRd
 #'
@@ -333,3 +333,45 @@ missed_col_error <- function(data, ..., use_object = TRUE){
   }
 }
 
+#' Confidence Interval
+#' @description
+#' Calculte Confidence Interval
+#' @keywords internal
+#' @noRd
+
+confidence_interval <- function(x, alpha = .05, side = 'all') {
+  #Step 1: Calculate the mean
+  sample_mean <- mean(x, na.rm = TRUE)
+
+  #Step 2: Calculate the standard error of the mean
+  sample_sd <- sd(x, na.rm = TRUE)
+  sample_lenght <- length(x[!is.na(x)])
+  se <- sample_sd/sqrt(sample_lenght)
+
+  #Step 3: Find the t-score that corresponds to the confidence level
+  degrees_freedom = sample_lenght - 1
+  t_score = qt(p = alpha/2, df = degrees_freedom,lower.tail = FALSE)
+
+  #Step 4. Calculate the margin of error and construct the confidence interval
+  margin_error <- t_score * se
+  lower_bound <- sample_mean - margin_error
+  upper_bound <- sample_mean + margin_error
+
+  ci <- switch (side,
+                'all' = c(lower_bound, upper_bound),
+                'left' = lower_bound,
+                'right' = upper_bound
+  )
+  return(ci)
+}
+
+#' Get column name
+#' @description
+#' Get column name
+#' @keywords internal
+#' @noRd
+get_column <- function(data, ...){
+  data %>%
+    dplyr::select(...) %>%
+    colnames()
+}

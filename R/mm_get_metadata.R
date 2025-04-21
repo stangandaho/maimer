@@ -81,7 +81,7 @@ mm_get_metadata <- function(path,
       rbind_list[[img]] <- exifr::read_exif(path = img_in_path[[img]])
     }
 
-    metadata_df <- mm_stack_df(rbind_list)
+    metadata_df <- dplyr::bind_rows(rbind_list)
 
   } else if (file.exists(path)) {
     metadata_df <- exifr::read_exif(path = path)
