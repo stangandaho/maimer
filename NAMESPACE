@@ -25,6 +25,7 @@ export(mm_to_occupancy)
 export(mm_plot_density)
 export(mm_plot_overlap)#ok
 export(mm_plot_overlap_coef)
+export(mm_plot_rose_diagram)
 export(mm_overlap_estimates)
 export(mm_bootstrap)
 export(mm_resample)
