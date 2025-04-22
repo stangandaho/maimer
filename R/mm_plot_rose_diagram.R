@@ -47,9 +47,9 @@
 #'                      mean_style = list(linetype = 1, linewidth = .5, color = 'red'),
 #'                      ci_style = list(linetype = 1, linewidth = .5, color = 'black')
 #' )
+#'
 #' @export
-
-
+#'
 mm_plot_rose_diagram <- function(data = NULL,
                                  times,
                                  frequencies = "absolute",
