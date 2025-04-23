@@ -66,7 +66,7 @@ mm_plot_rose_diagram <- function(data = NULL,
                                  mean_style = list(),
                                  start = -0.12,
                                  width = NULL
-                                 ) {
+) {
 
   # Be sure column exists and set times value
   if (!is.null(data)) {
@@ -98,8 +98,8 @@ mm_plot_rose_diagram <- function(data = NULL,
   aday <- data.frame(day_time = paste0(sprintf("%02d", seq(0, 23, by = time_range)), ":00:00")) %>%
     dplyr::left_join(y = ddtf, by = "day_time") %>%
     dplyr::mutate(ori_freq = if_else(is.na(ori_freq), 0, ori_freq),
-           radian = round(mm_to_radian(times = day_time), 3),
-           day_time = substr(day_time, 1, 5))
+                  radian = round(mm_to_radian(times = day_time), 3),
+                  day_time = substr(day_time, 1, 5))
 
   # Switch frequence
   if (frequencies != "absolute") {
@@ -125,8 +125,8 @@ mm_plot_rose_diagram <- function(data = NULL,
     linewidth <- ifelse(is.null(mean_style$linewidth), .6, mean_style$linewidth)
     p <- p+
       ggplot2::annotate(geom = 'segment', x = mean_time, xend = mean_time,
-               y = min(aday$ori_freq), yend = mean_yend,
-               color = color, linetype = linetype, linewidth = linewidth)
+                        y = min(aday$ori_freq), yend = mean_yend,
+                        color = color, linetype = linetype, linewidth = linewidth)
   }
   # if ci_segment
   if (ci_segment) {
@@ -137,13 +137,13 @@ mm_plot_rose_diagram <- function(data = NULL,
     linewidth <- ifelse(is.null(ci_style$linewidth), .6, ci_style$linewidth)
     p <- p+
       ggplot2::annotate(geom = 'segment', x = ci[1], xend = ci[2], y = ci_yend,
-               color = color, linetype = linetype, linewidth = linewidth)+
+                        color = color, linetype = linetype, linewidth = linewidth)+
       ggplot2::annotate(geom = 'segment', x = ci[1],
-               y = ci_yend - seg_len/2, yend = ci_yend + seg_len/2,
-               color = color, linetype = linetype, linewidth = linewidth)+
+                        y = ci_yend - seg_len/2, yend = ci_yend + seg_len/2,
+                        color = color, linetype = linetype, linewidth = linewidth)+
       ggplot2::annotate(geom = 'segment', x = ci[2],
-               y = ci_yend - seg_len/2, yend = ci_yend + seg_len/2,
-               color = color, linetype = linetype, linewidth = linewidth)
+                        y = ci_yend - seg_len/2, yend = ci_yend + seg_len/2,
+                        color = color, linetype = linetype, linewidth = linewidth)
   }
 
   # If text
@@ -155,7 +155,7 @@ mm_plot_rose_diagram <- function(data = NULL,
     family <- ifelse(is.null(label_style$family), NA, label_style$family)
     p <- p +
       ggplot2::geom_text(mapping = aes(y = lp, label = labels),
-                color = color, size = size, family = family)
+                         color = color, size = size, family = family)
   }
 
   # If an ring
@@ -187,6 +187,5 @@ mm_plot_rose_diagram <- function(data = NULL,
   return(fplot)
 
 }
-
 
 

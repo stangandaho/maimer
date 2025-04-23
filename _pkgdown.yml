@@ -91,6 +91,7 @@ reference:
   desc: |
     Functions to run common camera trap data analysis
   contents:
+  - mm_describe_df
   - mm_plot_density
   - mm_plot_overlap
   - mm_plot_overlap_coef

@@ -88,4 +88,5 @@ mm_plot_rose_diagram(data = NULL,
                      mean_style = list(linetype = 1, linewidth = .5, color = 'red'),
                      ci_style = list(linetype = 1, linewidth = .5, color = 'black')
 )
+
 }
