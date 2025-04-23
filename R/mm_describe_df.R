@@ -30,7 +30,7 @@
 #'
 #' @export
 
-mm_describe_df <- function(data, ..., fn) {
+mm_describe_df <- function(data, ..., fn = NULL) {
   if (...length() == 0) {
     col_oi <- colnames(data)
   }
@@ -80,7 +80,7 @@ mm_describe_df <- function(data, ..., fn) {
         dplyr::count() %>% dplyr::ungroup() %>%
         dplyr::mutate(Prop = round(n*100/sum(n), 1),
                       Variable = x) %>%
-        dplyr::rename(Group = x)
+        dplyr::rename(Group = x, N = n)
       acol
     }) %>% dplyr::bind_rows()
 

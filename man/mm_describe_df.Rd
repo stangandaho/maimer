@@ -4,7 +4,7 @@
 \alias{mm_describe_df}
 \title{Descriptive statistic on dataset}
 \usage{
-mm_describe_df(data, ..., fn)
+mm_describe_df(data, ..., fn = NULL)
 }
 \arguments{
 \item{data}{A data frame containing the dataset to be summarized.}
