@@ -9,8 +9,8 @@
 #' counts and proportions for each unique value.
 #'
 #' @param data A data frame containing the dataset to be summarized.
-#' @param ... (Optional) Column names to include in the summary. If no columns
-#' are specified, all columns in the dataset will be included.
+#' @param ... (Optional) Column to include in the summary. If no column
+#' is specifie, all columns in the data will be included.
 #' @param fn A named list of functions to apply to numeric variables. Each function
 #' must accept `x` as a vector of numeric values and return a single value or a
 #' named vector. Additional arguments for these functions can be specified as a list.
@@ -33,9 +33,10 @@
 mm_describe_df <- function(data, ..., fn = NULL) {
   if (...length() == 0) {
     col_oi <- colnames(data)
+  }else{
+    col_oi <- suppressWarnings(colnames(data %>% dplyr::select(...)))
   }
-  col_oi <- dplyr::ensyms(...)%>%
-    lapply(X = .,FUN = function(x){as.character(x)}) %>% unlist()
+
   if (any(!col_oi %in% colnames(data))) {
     missed <- col_oi[!col_oi %in% colnames(data)]
     rlang::abort(paste0("Some column missed: ", paste0(missed, collapse = ", ")))
@@ -52,15 +53,17 @@ mm_describe_df <- function(data, ..., fn = NULL) {
 
     for_num <- lapply(num_var, function(x){
       summ <- summary(data[[x]])
-      dit <- data.frame(Min = summ[[1]], Max = summ[[6]],
+      dit <- dplyr::tibble(Min = summ[[1]], Max = summ[[6]],
                         Median = summ[[3]], Mean = summ[[4]],
-                        N = length(data[[x]][!is.na(data[[x]])])) %>%
+                        N = length(data[[x]][!is.na(data[[x]])]),
+                        `CI Left` = maimer:::confidence_interval(data[[x]], side = "left"),
+                        `CI Right` = maimer:::confidence_interval(data[[x]], side = "right")) %>%
         dplyr::mutate(Variable = x) %>%
         dplyr::relocate(Variable, N, .before = 1)
 
       # Complete stat columns if necessary
       if (!is.null(fn)) {
-        dit <- dit %>% dplyr::bind_cols(parse_list_fn(fn = fn, data = data[[x]]))
+        dit <- dit %>% dplyr::bind_cols(maimer:::parse_list_fn(fn = fn, data = data[[x]]))
       }
       dit
     }) %>% dplyr::bind_rows()

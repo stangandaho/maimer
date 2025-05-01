@@ -9,8 +9,8 @@ mm_describe_df(data, ..., fn = NULL)
 \arguments{
 \item{data}{A data frame containing the dataset to be summarized.}
 
-\item{...}{(Optional) Column names to include in the summary. If no columns
-are specified, all columns in the dataset will be included.}
+\item{...}{(Optional) Column to include in the summary. If no column
+is specifie, all columns in the data will be included.}
 
 \item{fn}{A named list of functions to apply to numeric variables. Each function
 must accept \code{x} as a vector of numeric values and return a single value or a
