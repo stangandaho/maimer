@@ -27,7 +27,7 @@
 #' @return
 #' - If `data` is provided and `only` is `TRUE`, a tibble of events identified as independent.
 #' - If `data` is provided and `only` is `FALSE`, a tibble of the original data with additional columns
-#'   indicating the `independent` status and `deltatime` differences.
+#'   indicating the `independent` status and `deltatime` differences (in second).
 #' - If `data` is not provided, a tibble of the `deltatime` values with `independent` status.
 #'
 #' @examples
@@ -132,15 +132,15 @@ mm_independence <- function(data = NULL,
     data <- data %>%
       dplyr::group_by(!!!rlang::syms(grouped_by)) %>%
       dplyr::arrange(datetime, .by_group = TRUE) %>%
-      dplyr::mutate(deltatime = c(0, diff(datetime)),
-                    event = c(TRUE, diff(datetime) >= threshold)) %>%
+      dplyr::mutate(deltatime = c(0, as.numeric(diff(datetime), units = "secs")),
+                    event = c(TRUE, as.numeric(diff(datetime), units = "secs") >= threshold)) %>%
       dplyr::ungroup() %>%
       dplyr::select(-original_datetime)
   } else {
     data <- data %>%
       dplyr::arrange(datetime) %>%
-      dplyr::mutate(deltatime = c(0, diff(datetime)),
-                    event = c(TRUE, diff(datetime) >= threshold)) %>%
+      dplyr::mutate(deltatime = c(0, as.numeric(diff(datetime), units = "secs")),
+                    event = c(TRUE, as.numeric(diff(datetime), units = "secs") >= threshold)) %>%
       dplyr::select(-original_datetime)
   }
 
