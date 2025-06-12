@@ -208,7 +208,7 @@ result.</p>
   and sites (rows) \(j\) and \(k\). In binary versions \(A\) and
   \(B\) are the numbers of species on compared sites, and \(J\) is
   the number of species that occur on both compared sites similarly as
-  in <code><a href="https://rdrr.io/pkg/vegan/man/designdist.html" class="external-link">designdist</a></code> (many indices produce identical binary
+  in <code><a href="https://vegandevs.github.io/vegan/reference/designdist.html" class="external-link">designdist</a></code> (many indices produce identical binary
   versions):</p>
 <p></p><table class="table table"><tr><td><code>euclidean</code></td><td>\(d_{jk} = \sqrt{\sum_i (x_{ij}-x_{ik})^2}\)</td></tr><tr><td></td><td>binary: \(\sqrt{A+B-2J}\)</td></tr><tr><td><code>manhattan</code></td><td>\(d_{jk}=\sum_i |x_{ij}-x_{ik}|\)</td></tr><tr><td></td><td>binary: \(A+B-2J\)</td></tr><tr><td><code>gower</code></td><td>\(d_{jk} = (1/M) \sum_i \frac{|x_{ij}-x_{ik}|}{\max x_i-\min
 	x_i}\)</td></tr><tr><td></td><td>binary: \((A+B-2J)/M\)</td></tr><tr><td></td><td>where \(M\) is the number of columns (excluding missing
@@ -245,7 +245,7 @@ result.</p>
 <p>Mountford index is defined as \(M = 1/\alpha\) where \(\alpha\)
   is the parameter of Fisher's logseries assuming that the compared
   communities are samples from the same community
-  (cf. <code><a href="https://rdrr.io/pkg/vegan/man/fisherfit.html" class="external-link">fisherfit</a></code>, <code><a href="https://rdrr.io/pkg/vegan/man/diversity.html" class="external-link">fisher.alpha</a></code>). The index
+  (cf. <code><a href="https://vegandevs.github.io/vegan/reference/fisherfit.html" class="external-link">fisherfit</a></code>, <code><a href="https://vegandevs.github.io/vegan/reference/diversity.html" class="external-link">fisher.alpha</a></code>). The index
   \(M\) is found as the positive root of equation \(\exp(aM) +
   \exp(bM) = 1 + \exp[(a+b-j)M]\), where \(j\) is the number of species occurring in
   both communities, and \(a\) and \(b\) are the number of species
@@ -277,16 +277,16 @@ result.</p>
   and Crick originally suggested that sampling probabilities should be
   proportional to species frequencies (Chase et al. 2011). A simulation
   approach with unequal species sampling probabilities is implemented in
-  <code><a href="https://rdrr.io/pkg/vegan/man/raupcrick.html" class="external-link">raupcrick</a></code> function following Chase et al. (2011).  The
+  <code><a href="https://vegandevs.github.io/vegan/reference/raupcrick.html" class="external-link">raupcrick</a></code> function following Chase et al. (2011).  The
   index can be also used for transposed data to give a probabilistic
   dissimilarity index of species co-occurrence (identical to Veech
   2013).</p>
 <p>Chao index tries to take into account the number of unseen species
   pairs, similarly as in <code>method = "chao"</code> in
-  <code><a href="https://rdrr.io/pkg/vegan/man/specpool.html" class="external-link">specpool</a></code>. Function <code>vegdist</code> implements a
+  <code><a href="https://vegandevs.github.io/vegan/reference/specpool.html" class="external-link">specpool</a></code>. Function <code>vegdist</code> implements a
   Jaccard, index defined as
   \(1-\frac{U \times V}{U + V - U \times V}\);
-  other types can be defined with function <code><a href="https://rdrr.io/pkg/vegan/man/designdist.html" class="external-link">chaodist</a></code>. In Chao
+  other types can be defined with function <code><a href="https://vegandevs.github.io/vegan/reference/designdist.html" class="external-link">chaodist</a></code>. In Chao
   equation, \(U = C_j/N_j + (N_k - 1)/N_k \times a_1/(2 a_2) \times
   S_j/N_j\),
   and \(V\) is similar except for site index
@@ -314,28 +314,28 @@ result.</p>
   separation without proper standardization but are still included for
   comparison and special needs.</p>
 <p>Chi-square distances (<code>"chisq"</code>) are Euclidean distances of
-  Chi-square transformed data (see <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html" class="external-link">decostand</a></code>). This is
+  Chi-square transformed data (see <code><a href="https://vegandevs.github.io/vegan/reference/decostand.html" class="external-link">decostand</a></code>). This is
   the internal standardization used in correspondence analysis
-  (<code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">cca</a></code>, <code><a href="https://rdrr.io/pkg/vegan/man/decorana.html" class="external-link">decorana</a></code>). Weighted principal
+  (<code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></code>, <code><a href="https://vegandevs.github.io/vegan/reference/decorana.html" class="external-link">decorana</a></code>). Weighted principal
   coordinates analysis of these distances with row sums as weights is
   equal to correspondence analysis (see the Example in
-  <code><a href="https://rdrr.io/pkg/vegan/man/wcmdscale.html" class="external-link">wcmdscale</a></code>). Chi-square distance is intended for
+  <code><a href="https://vegandevs.github.io/vegan/reference/wcmdscale.html" class="external-link">wcmdscale</a></code>). Chi-square distance is intended for
   non-negative data, such as typical community data. However, it can
   be calculated as long as all margin sums are positive, but warning
   is issued on negative data entries.</p>
 <p>Chord distances (<code>"chord"</code>) are Euclidean distance of a matrix
   where rows are standardized to unit norm (their sums of squares are 1)
-  using <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html" class="external-link">decostand</a></code>. Geometrically this standardization
+  using <code><a href="https://vegandevs.github.io/vegan/reference/decostand.html" class="external-link">decostand</a></code>. Geometrically this standardization
   moves row points to a surface of multidimensional unit sphere, and
   distances are the chords across the hypersphere. Hellinger distances
   (<code>"hellinger"</code>) are related to Chord distances, but data are
   standardized to unit total (row sums are 1) using
-  <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html" class="external-link">decostand</a></code>, and then square root transformed. These
+  <code><a href="https://vegandevs.github.io/vegan/reference/decostand.html" class="external-link">decostand</a></code>, and then square root transformed. These
   distances have upper limit of \(\sqrt{2}\).</p>
 <p>Bray–Curtis and Jaccard indices are rank-order similar, and some
   other indices become identical or rank-order similar after some
   standardizations, especially with presence/absence transformation of
-  equalizing site totals with <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html" class="external-link">decostand</a></code>. Jaccard index is
+  equalizing site totals with <code><a href="https://vegandevs.github.io/vegan/reference/decostand.html" class="external-link">decostand</a></code>. Jaccard index is
   metric, and probably should be preferred instead of the default
   Bray-Curtis which is semimetric.</p>
 <p>Aitchison distance (1986) and robust Aitchison distance
@@ -374,7 +374,7 @@ result.</p>
   number of observations (rows) and scales each column to unit range,
   but <code>"altGower"</code> omits double-zeros and divides by the number of
   pairs with at least one above-zero value, and does not scale columns
-  (Anderson et al. 2006).  You can use <code><a href="https://rdrr.io/pkg/vegan/man/decostand.html" class="external-link">decostand</a></code> to add
+  (Anderson et al. 2006).  You can use <code><a href="https://vegandevs.github.io/vegan/reference/decostand.html" class="external-link">decostand</a></code> to add
   range standardization to <code>"altGower"</code> (see Examples). Gower
   (1971) suggested omitting double zeros for presences, but it is often
   taken as the general feature of the Gower distances. See Examples for
@@ -456,7 +456,7 @@ result.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
