@@ -21,6 +21,7 @@ export(mm_to_community) #ok
 export(mm_standardize)
 export(mm_check_name)
 export(mm_to_occupancy)
+export(mm_find_break)
 ## Analysis
 export(mm_describe_df)
 export(mm_plot_density)
@@ -31,7 +32,9 @@ export(mm_overlap_estimates)
 export(mm_bootstrap)
 export(mm_resample)
 export(mm_boot_estimates)
-export(mm_boot_CI)
+export(mm_boot_ci)
+export(mm_ci)
+export(mm_lognorm_ci)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
 export(mm_alpha_diversity)
@@ -56,6 +59,8 @@ importFrom("utils", "write.csv")
 importFrom("methods", "hasArg")
 importFrom("stats", "cov")
 importFrom("utils", "read.table")
+importFrom("stats", "aggregate", "as.formula", "qt", "sd", "window")
+importFrom("utils", "install.packages", "installed.packages")
 
 # dplyr
 importFrom(dplyr, as_tibble)
@@ -74,6 +79,9 @@ importFrom(dplyr, sym)
 importFrom(dplyr, syms)
 importFrom(dplyr, ensym)
 importFrom(dplyr, ensyms)
+
+#rlang
+importFrom(rlang, ":=")
 
 #tidyr
 importFrom(tidyr, pivot_wider)
