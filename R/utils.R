@@ -1,3 +1,11 @@
+#' Path list
+#' @keywords internal
+#' @noRd
+table_files <- function(){
+  c(system.file("penessoulou_season1.csv", package = "maimer"),
+       system.file("penessoulou_season2.csv", package = "maimer"))
+}
+
 #' Deep list
 #'
 #' @description
@@ -203,7 +211,7 @@ melt <- function(data){
 }
 
 
-#' Check dnesity input
+#' Check density input
 #'
 #' @description
 #' Make sure the input data to fit kernel density is suitable
@@ -253,7 +261,7 @@ custom_cli <- function(text, color = "red") {
     if (color == "red") {
       txt <- paste0("\033[31m", text, "\033[0m")
     }else if(color == "green"){
-      txt <- faste0("\033[32m", text, "\033[0m")
+      txt <- paste0("\033[32m", text, "\033[0m")
 
     }else if(color == "blue"){
       txt <- paste0("\033[34m", text, "\033[0m")
@@ -333,13 +341,33 @@ missed_col_error <- function(data, ..., use_object = TRUE){
   }
 }
 
-#' Confidence Interval
-#' @description
-#' Calculte Confidence Interval
-#' @keywords internal
-#' @noRd
-
-confidence_interval <- function(x, alpha = .05, side = 'all') {
+#' Calculate confidence interval
+#'
+#' Calculates the confidence interval for the mean of a numeric vector using the t-distribution.
+#'
+#' @param x A numeric vector of data values.
+#' @param alpha Significance level for the confidence interval. Default is 0.05 (for 95% confidence).
+#' @param side A character string indicating the type of interval:
+#'   \describe{
+#'     \item{"all"}{Two-sided confidence interval (default).}
+#'     \item{"left"}{One-sided lower bound.}
+#'     \item{"right"}{One-sided upper bound.}
+#'   }
+#'
+#' @return A numeric vector containing the confidence interval bounds:
+#'   \itemize{
+#'     \item If \code{side = "all"}, returns a vector of length 2: \code{c(lower, upper)}.
+#'     \item If \code{side = "left"} or \code{"right"}, returns a single numeric value.
+#'   }
+#'
+#' @examples
+#' x <- c(10, 12, 11, 14, 13, 15)
+#' mm_ci(x)
+#' mm_ci(x, alpha = 0.01)
+#' mm_ci(x, side = "left")
+#'
+#' @export
+mm_ci <- function(x, alpha = .05, side = 'all') {
   #Step 1: Calculate the mean
   sample_mean <- mean(x, na.rm = TRUE)
 
@@ -363,6 +391,29 @@ confidence_interval <- function(x, alpha = .05, side = 'all') {
                 'right' = upper_bound
   )
   return(ci)
+}
+
+
+#' Log-normal confidence interval
+#'
+#' Calculates approximate log-normal confidence intervals given estimates
+#' and their standard errors.
+#'
+#' @param estimate Numeric estimate value(s)
+#' @param se Standard error(s) of the estimate
+#' @param percent Percentage confidence level
+#' @return A dataframe with a row per estimate input, and columns \code{lcl}
+#'   and \code{ucl} (lower and upper confidence limits).
+#' @examples
+#'   mm_lognorm_ci(10.13, 3.57)
+#' @export
+#'
+mm_lognorm_ci <- function(estimate, se, percent = 95){
+  if(length(estimate) != length(se))
+    rlang::abort("estimate and se must have the same number of values")
+  z <- qt((1 - percent/100) / 2, Inf, lower.tail = FALSE)
+  w <- exp(z * sqrt(log(1 + (se/estimate)^2)))
+  data.frame(lower_bound = estimate/w, upper_bound = estimate*w)
 }
 
 #' Get column name

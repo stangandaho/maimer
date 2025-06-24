@@ -15,7 +15,6 @@
 #' must accept `x` as a vector of numeric values and return a single value or a
 #' named vector. Additional arguments for these functions can be specified as a list.
 #' For example: `fn = list('sum' = list(na.rm = TRUE), 'sd')`.
-
 #' @return A tibble
 #'
 #' @examples
@@ -29,7 +28,6 @@
 #' @seealso parse_list_fn
 #'
 #' @export
-
 mm_describe_df <- function(data, ..., fn = NULL) {
   if (...length() == 0) {
     col_oi <- colnames(data)
@@ -52,18 +50,20 @@ mm_describe_df <- function(data, ..., fn = NULL) {
     num_var <- col_oi[has_numeric]
 
     for_num <- lapply(num_var, function(x){
-      summ <- summary(data[[x]])
-      dit <- dplyr::tibble(Min = summ[[1]], Max = summ[[6]],
-                        Median = summ[[3]], Mean = summ[[4]],
-                        N = length(data[[x]][!is.na(data[[x]])]),
-                        `CI Left` = maimer:::confidence_interval(data[[x]], side = "left"),
-                        `CI Right` = maimer:::confidence_interval(data[[x]], side = "right")) %>%
-        dplyr::mutate(Variable = x) %>%
-        dplyr::relocate(Variable, N, .before = 1)
+      vec <- data[[x]]
+      summ <- summary(vec)
+      dit <- dplyr::tibble(Variable = x,
+                           N = length(vec[!is.na(vec)]),
+                           Min = summ[[1]],
+                           Max = summ[[6]],
+                           Median = summ[[3]],
+                           Mean = summ[[4]],
+                           `CI Left` = mm_ci(vec, side = "left"),
+                           `CI Right` = mm_ci(vec, side = "right"))
 
       # Complete stat columns if necessary
       if (!is.null(fn)) {
-        dit <- dit %>% dplyr::bind_cols(maimer:::parse_list_fn(fn = fn, data = data[[x]]))
+        dit <- dit %>% dplyr::bind_cols(parse_list_fn(fn = fn, data = vec))
       }
       dit
     }) %>% dplyr::bind_rows()
@@ -78,13 +78,14 @@ mm_describe_df <- function(data, ..., fn = NULL) {
   if (length(nonnum_var) > 0) {
     for_char <- lapply(nonnum_var, function(x){
       acol <- data %>%
-        dplyr::select(dplyr::all_of(x)) %>%
-        dplyr::group_by(!!dplyr::sym(x)) %>%
-        dplyr::count() %>% dplyr::ungroup() %>%
-        dplyr::mutate(Prop = round(n*100/sum(n), 1),
-                      Variable = x) %>%
-        dplyr::rename(Group = x, N = n)
-      acol
+        dplyr::filter(!is.na(.data[[x]])) %>%
+        dplyr::count(.data[[x]], name = "N") %>%
+        dplyr::mutate(
+          Prop = round(100 * .data$N / sum(.data$N), 1),
+          Variable = x,
+          Group = .data[[x]]
+        ) %>%
+        dplyr::select(Variable, Group, Prop, N)
     }) %>% dplyr::bind_rows()
 
     if (length(alltab) != 0) {
@@ -95,6 +96,7 @@ mm_describe_df <- function(data, ..., fn = NULL) {
 
   }
 
+  # Stack and return result
   if (length(alltab) == 2) {
     toreturn <- mm_stack_df(df_list = alltab)
   }else{

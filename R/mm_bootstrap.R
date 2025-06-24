@@ -8,7 +8,7 @@
 #' matrices to [mm_boot_estimates()] to obtain the bootstrap estimates.
 #'
 #' A vector of bootstrap estimates can then be used to produce confidence intervals
-#' with [mm_boot_CI()].
+#' with [mm_boot_ci()].
 #'
 #' @return
 #' The function [mm_bootstrap()] returns a vector of bootstrap estimates.
@@ -28,7 +28,7 @@
 #' from camera trap data. Journal of Agricultural, Biological, and Environmental
 #' Statistics 14:322-337
 #'
-#' @seealso [mm_boot_CI()]
+#' @seealso [mm_boot_ci()]
 #'
 #' @rdname bootstrap
 #' @inheritParams mm_plot_overlap
@@ -47,7 +47,7 @@
 #' boots <- mm_bootstrap(species_A, species_B, 1000, type="Dhat4", cores=1)
 #' mean(boots)
 #' hist(boots)
-#' mm_boot_CI(est, boots)
+#' mm_boot_ci(est, boots)
 #'
 #' # alternatively:
 #' species_A_gen <- mm_resample(species_A, 1000)

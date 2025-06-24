@@ -87,7 +87,8 @@ with options for minimum distance constraints and padding around the study area.
 <li><p>"regular": Creates a regularly spaced grid of sites.</p></li>
 <li><p>"regular_cluster": Generates regularly spaced clusters within which sites are sampled..</p></li>
 <li><p>"random_cluster": Creates randomly clusters within which sites are sampled.</p></li>
-<li><p>"mask":  Uses existing features in the <code>study_area</code> object to define sampling areas, with user-defined site allocation.</p></li>
+<li><p>"mask":  Uses existing features in the <code>study_area</code> object to define
+sampling areas, with user-defined site allocation.</p></li>
 </ul></dd>
 
 
@@ -115,12 +116,14 @@ between sampled sites (applied only for the random methods).</p></dd>
 
 
 <dt id="arg-distance">distance<a class="anchor" aria-label="anchor" href="#arg-distance"></a></dt>
-<dd><p>A numeric vector specifying the distance (x and y spacing) between grid cells
-for regular sampling methods. If a single value is provided, it is used for both dimensions.</p></dd>
+<dd><p>A numeric vector specifying the distance (x and y spacing)
+between grid cells for regular sampling methods. If a single value is provided,
+it is used for both dimensions.</p></dd>
 
 
 <dt id="arg-padding">padding<a class="anchor" aria-label="anchor" href="#arg-padding"></a></dt>
-<dd><p>A numeric value defining the buffer distance to exclude areas near the edge of the study area.</p></dd>
+<dd><p>A numeric value defining the buffer distance to exclude areas
+near the edge of the study area.</p></dd>
 
 
 <dt id="arg-nest-padding">nest_padding<a class="anchor" aria-label="anchor" href="#arg-nest-padding"></a></dt>
@@ -142,7 +145,8 @@ within each cluster or mask feature to avoid placing sites near the edges of tho
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>The function ensures that the study area has a projected coordinate reference system (CRS) before proceeding.
+    <p>The function ensures that the study area has a projected coordinate reference
+system (CRS) before proceeding.
 If a geographic CRS is detected, an error is raised.</p>
     </div>
 
@@ -165,22 +169,26 @@ If a geographic CRS is detected, an error is raised.</p>
 <span class="r-in"><span><span class="va">regular_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>, method <span class="op">=</span> <span class="st">"regular"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                                 distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4000</span>, <span class="fl">6000</span><span class="op">)</span>, padding <span class="op">=</span> <span class="fl">2500</span>, set_seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a minimum site distance of 2000 meters</span></span></span>
+<span class="r-in"><span><span class="co"># Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a</span></span></span>
+<span class="r-in"><span><span class="co"># minimum site distance of 2000 meters</span></span></span>
 <span class="r-in"><span><span class="va">rand_c_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>
 <span class="r-in"><span>                                method <span class="op">=</span> <span class="st">"random_cluster"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                                total_cluster <span class="op">=</span> <span class="fl">8</span>, total_site <span class="op">=</span> <span class="fl">5</span>,</span></span>
 <span class="r-in"><span>                                distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7000</span>, <span class="fl">3000</span><span class="op">)</span>, min_distance <span class="op">=</span> <span class="fl">2000</span>,</span></span>
 <span class="r-in"><span>                                padding <span class="op">=</span> <span class="fl">2000</span>, nest_padding <span class="op">=</span> <span class="fl">500</span>, set_seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 5 sites per cluster. Try to adjust distance and min_distance</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 5 sites per</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>                                 cluster. Try to adjust distance and min_distance</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Random-cluster sampling with regularly distributed sites: 22 clusters, each with 8 regularly spaced sites</span></span></span>
+<span class="r-in"><span><span class="co"># Random-cluster sampling with regularly distributed sites: 22 clusters, each</span></span></span>
+<span class="r-in"><span><span class="co"># with 8 regularly spaced sites</span></span></span>
 <span class="r-in"><span><span class="va">rand_c_reg_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>
 <span class="r-in"><span>                                    method <span class="op">=</span> <span class="st">"random_cluster"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                                    total_cluster <span class="op">=</span> <span class="fl">22</span>, total_site <span class="op">=</span> <span class="fl">8</span>, type_in <span class="op">=</span> <span class="st">"regular"</span>,</span></span>
 <span class="r-in"><span>                                    distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6000</span>, <span class="fl">3000</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                                    padding <span class="op">=</span> <span class="fl">1000</span>, nest_padding <span class="op">=</span> <span class="fl">0</span>, set_seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum distance of 2000 meters between sites</span></span></span>
+<span class="r-in"><span><span class="co"># Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum</span></span></span>
+<span class="r-in"><span><span class="co"># distance of 2000 meters between sites</span></span></span>
 <span class="r-in"><span><span class="va">reg_c_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>
 <span class="r-in"><span>                               method <span class="op">=</span> <span class="st">"regular_cluster"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                               total_site <span class="op">=</span> <span class="fl">3</span>, distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7000</span>, <span class="fl">6000</span><span class="op">)</span>,</span></span>
@@ -202,7 +210,8 @@ If a geographic CRS is detected, an error is raised.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  cluster_4 POINT (370870.3 1250255)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  cluster_5 POINT (314593.9 1238168)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 cluster_5 POINT (319216.6 1238048)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 3 sites per cluster. Try to adjust distance and min_distance</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 3 sites</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>                                 per cluster. Try to adjust distance and min_distance</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Regular-cluster sampling with regularly distributed sites within clusters</span></span></span>
 <span class="r-in"><span><span class="va">reg_c_reg_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>
@@ -220,7 +229,8 @@ If a geographic CRS is detected, an error is raised.</p>
 <span class="r-in"><span>                              method <span class="op">=</span> <span class="st">"mask"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                              total_site <span class="op">=</span> <span class="fl">13</span>, distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7000</span>, <span class="fl">6000</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                              min_distance <span class="op">=</span> <span class="fl">2000</span>, nest_padding <span class="op">=</span> <span class="fl">2000</span>, set_seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Maximum number of points could not exced 11 with minimum distance of 2000.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Maximum number of points could not exced 11 with</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>                             minimum distance of 2000.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Mask-based sampling with regularly spaced sites per feature</span></span></span>
 <span class="r-in"><span><span class="va">mask_regular_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>

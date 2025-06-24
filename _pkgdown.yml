@@ -87,6 +87,7 @@ reference:
   - mm_standardize
   - mm_check_name
   - mm_to_occupancy
+  - mm_find_break
 - title: Data analysis
   desc: |
     Functions to run common camera trap data analysis
@@ -100,7 +101,9 @@ reference:
   - mm_bootstrap
   - mm_resample
   - mm_boot_estimates
-  - mm_boot_CI
+  - mm_boot_ci
+  - mm_ci
+  - mm_lognorm_ci
   - mm_overlap_matrix
   - mm_temporal_shift
   - mm_alpha_diversity

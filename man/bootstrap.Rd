@@ -84,7 +84,7 @@ bootstrap samples for each data set, using \code{\link[=mm_resample]{mm_resample
 matrices to \code{\link[=mm_boot_estimates]{mm_boot_estimates()}} to obtain the bootstrap estimates.
 
 A vector of bootstrap estimates can then be used to produce confidence intervals
-with \code{\link[=mm_boot_CI]{mm_boot_CI()}}.
+with \code{\link[=mm_boot_ci]{mm_boot_ci()}}.
 }
 \examples{
 
@@ -98,7 +98,7 @@ est <- mm_overlap_estimates(species_A, species_B, type="Dhat4")
 boots <- mm_bootstrap(species_A, species_B, 1000, type="Dhat4", cores=1)
 mean(boots)
 hist(boots)
-mm_boot_CI(est, boots)
+mm_boot_ci(est, boots)
 
 # alternatively:
 species_A_gen <- mm_resample(species_A, 1000)
@@ -113,7 +113,7 @@ from camera trap data. Journal of Agricultural, Biological, and Environmental
 Statistics 14:322-337
 }
 \seealso{
-\code{\link[=mm_boot_CI]{mm_boot_CI()}}
+\code{\link[=mm_boot_ci]{mm_boot_ci()}}
 }
 \author{
 Mike Meredith, Martin Ridout.

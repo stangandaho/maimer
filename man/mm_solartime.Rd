@@ -10,11 +10,9 @@ mm_solartime(
   longitude,
   latitude,
   crs = NULL,
+  format,
   time_zone,
-  ...,
-  try_formats = c("\%Y-\%m-\%d \%H:\%M:\%OS", "\%Y/\%m/\%d \%H:\%M:\%OS",
-    "\%Y:\%m:\%d \%H:\%M:\%OS", "\%Y-\%m-\%d \%H:\%M", "\%Y/\%m/\%d \%H:\%M",
-    "\%Y:\%m:\%d \%H:\%M", "\%Y-\%m-\%d", "\%Y/\%m/\%d", "\%Y:\%m:\%d")
+  ...
 )
 }
 \arguments{
@@ -37,13 +35,13 @@ current CRS of the input coordinates. If provided, the function will transform
 the coordinates to longitude and latitude (WGS84). This is useful when the input
 coordinates are in a projected system (e.g., UTM). Default is \code{NULL}.}
 
+\item{format}{character string giving a date-time format as used by \code{\link[=strptime]{strptime()}}.}
+
 \item{time_zone}{A numeric vector representing the time zone offset(s) from UTC
 (in hours). If \code{data} is provided, this should match the number of unique
 locations in the data.}
 
 \item{...}{Additional arguments passed to \code{as.POSIXlt} for date parsing.}
-
-\item{try_formats}{A vector of date-time formats to try when parsing the \code{date} parameter. Default includes common date-time formats.}
 }
 \value{
 A tibble with the following columns:

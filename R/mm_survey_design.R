@@ -11,7 +11,8 @@
 #'   - "regular": Creates a regularly spaced grid of sites.
 #'   - "regular_cluster": Generates regularly spaced clusters within which sites are sampled..
 #'   - "random_cluster": Creates randomly clusters within which sites are sampled.
-#'   - "mask":  Uses existing features in the `study_area` object to define sampling areas, with user-defined site allocation.
+#'   - "mask":  Uses existing features in the `study_area` object to define
+#'   sampling areas, with user-defined site allocation.
 #' @param total_site An integer specifying the number of sites to be sampled per
 #' cluster (for "regular_cluster" and "random_cluster") or the total number of
 #' sites (for "random" and "regular" methods). For the "mask" method, this can
@@ -23,9 +24,11 @@
 #'   - "random": Distributes sites randomly within each cluster or feature (for "mask" method).
 #' @param min_distance A numeric value specifying the minimum allowed distance
 #' between sampled sites (applied only for the random methods).
-#' @param distance A numeric vector specifying the distance (x and y spacing) between grid cells
-#' for regular sampling methods. If a single value is provided, it is used for both dimensions.
-#' @param padding A numeric value defining the buffer distance to exclude areas near the edge of the study area.
+#' @param distance A numeric vector specifying the distance (x and y spacing)
+#' between grid cells for regular sampling methods. If a single value is provided,
+#' it is used for both dimensions.
+#' @param padding A numeric value defining the buffer distance to exclude areas
+#' near the edge of the study area.
 #' @param nest_padding A numeric value defining an additional buffer applied
 #' within each cluster or mask feature to avoid placing sites near the edges of those units.
 #' @param set_seed An optional integer for setting the random seed to ensure reproducibility.
@@ -34,7 +37,8 @@
 #' @return An `sf` object containing the sampled points within the study area.
 #'
 #' @note
-#' The function ensures that the study area has a projected coordinate reference system (CRS) before proceeding.
+#' The function ensures that the study area has a projected coordinate reference
+#' system (CRS) before proceeding.
 #' If a geographic CRS is detected, an error is raised.
 #'
 #' @examples
@@ -55,21 +59,24 @@
 #' regular_sdes <- mm_survey_design(study_area = pendjari_trans, method = "regular", verbose = TRUE,
 #'                                  distance = c(4000, 6000), padding = 2500, set_seed = 123)
 #'
-#' # Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a minimum site distance of 2000 meters
+#' # Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a
+#' # minimum site distance of 2000 meters
 #' rand_c_sdes <- mm_survey_design(study_area = pendjari_trans,
 #'                                 method = "random_cluster", verbose = TRUE,
 #'                                 total_cluster = 8, total_site = 5,
 #'                                 distance = c(7000, 3000), min_distance = 2000,
 #'                                 padding = 2000, nest_padding = 500, set_seed = 123)
 #'
-#' # Random-cluster sampling with regularly distributed sites: 22 clusters, each with 8 regularly spaced sites
+#' # Random-cluster sampling with regularly distributed sites: 22 clusters, each
+#' # with 8 regularly spaced sites
 #' rand_c_reg_sdes <- mm_survey_design(study_area = pendjari_trans,
 #'                                     method = "random_cluster", verbose = TRUE,
 #'                                     total_cluster = 22, total_site = 8, type_in = "regular",
 #'                                     distance = c(6000, 3000),
 #'                                     padding = 1000, nest_padding = 0, set_seed = 123)
 #'
-#' # Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum distance of 2000 meters between sites
+#' # Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum
+#' # distance of 2000 meters between sites
 #' reg_c_sdes <- mm_survey_design(study_area = pendjari_trans,
 #'                                method = "regular_cluster", verbose = TRUE,
 #'                                total_site = 3, distance = c(7000, 6000),
@@ -119,7 +126,10 @@ mm_survey_design <- function(study_area,
   # Valid CRS
   if (crs_type(study_area) == "Geographic") {
     sa_name <- deparse(substitute(study_area))
-    msg <- paste0("Transform data from longitude/latitude (geographic) to projected system. Eg. ", sa_name, " %>% st_transform(crs = 'EPSG:32631'). You can use https://epsg.io/ to find the suitable crs.")
+    msg <- paste0("Transform data from longitude/latitude (geographic) to projected system. Eg. ",
+                  sa_name, " %>% st_transform(crs = 'EPSG:32631'). You can use https://epsg.io/ to
+                  find the suitable crs. If the area of interest spans several
+                  UTM zones, consider to use `EPSG:6933`")
     rlang::abort(msg)
   }
   # Set distance
@@ -131,10 +141,16 @@ mm_survey_design <- function(study_area,
   padding_study_area <- study_area %>% sf::st_buffer(dist = - padding)
   # Ensure methods
   avail_method <- c("random", "regular", "regular_cluster","random_cluster", "mask")
-  if (!method %in% avail_method) {rlang::abort(sprintf("Method `%s` is not accepted. It must be one of: %s.", method, paste0(avail_method, collapse = ", ")))}
+  if (!method %in% avail_method) {rlang::abort(sprintf("Method `%s` is not accepted.
+                                                       It must be one of: %s.",
+                                                       method, paste0(avail_method,
+                                                                      collapse = ", ")))}
   # Ensure type in
   avail_type <- c("random", "regular")
-  if (!type_in %in% avail_type) {rlang::abort(sprintf("Type `%s` is not accepted. It must be one of: %s.", type_in, paste0(avail_type, collapse = ", ")))}
+  if (!type_in %in% avail_type) {rlang::abort(sprintf("Type `%s` is not accepted.
+                                                      It must be one of: %s.",
+                                                      type_in, paste0(avail_type,
+                                                                      collapse = ", ")))}
   # Total site
   if (method != "mask" & hasArg(total_site)) {
     total_site <- total_site[1]
@@ -194,7 +210,9 @@ mm_survey_design <- function(study_area,
 
         if (verbose) {
           if (any(unlist(cl[[2]]))) {
-            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites per cluster. Try to adjust distance and min_distance", total_site))
+            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites
+                                per cluster. Try to adjust distance and min_distance",
+                                total_site))
           }
         }
       }else{
@@ -217,7 +235,8 @@ mm_survey_design <- function(study_area,
         dplyr::select(-grid_area)
 
       if (total_cluster > nrow(cluster_grid)) {
-        rlang::abort(sprintf("Not possible to sample %s clusters in %s available. Try to reduce distance dimension.", total_cluster, nrow(cluster_grid)))
+        rlang::abort(sprintf("Not possible to sample %s clusters in %s available.
+                             Try to reduce distance dimension.", total_cluster, nrow(cluster_grid)))
       }
       cluster_grid <- cluster_grid[sample(1:nrow(cluster_grid), size = total_cluster), ]
 
@@ -229,7 +248,9 @@ mm_survey_design <- function(study_area,
 
         if (verbose) {
           if (any(unlist(cl[[2]]))) {
-            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites per cluster. Try to adjust distance and min_distance", total_site))
+            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites per
+                                cluster. Try to adjust distance and min_distance",
+                                total_site))
           }
         }
       }else{
@@ -277,7 +298,8 @@ mm_survey_design <- function(study_area,
       pts_on <- sf::st_point_on_surface(designed) %>%
         sf::st_as_sf()
       if (hasArg(total_site) && nrow(pts_on) < total_site) {
-        rlang::warn(sprintf("Sampling size (%s) differ from the requested size (%s).", nrow(pts_on), total_site))
+        rlang::warn(sprintf("Sampling size (%s) differ from the requested size
+                            (%s).", nrow(pts_on), total_site))
       }
     }
   }
@@ -314,7 +336,8 @@ random_sampling <- function(study_area,
     }
   }
 
-  if (!hasArg(total_site) | is.null(total_site)) { rlang::abort("Provide `total_site`", call = NULL)}
+  if (!hasArg(total_site) | is.null(total_site)) {
+    rlang::abort("Provide `total_site`", call = NULL)}
   total_site <- round(total_site)
 
   if (is.null(min_distance)) {
@@ -325,9 +348,11 @@ random_sampling <- function(study_area,
         sf::st_as_sf()
     })
   }else{
-    sa_grid_vec <- regular_grid(study_area = study_area, distance = min_distance, padding = padding)
+    sa_grid_vec <- regular_grid(study_area = study_area, distance = min_distance,
+                                padding = padding)
     if (nrow(sa_grid_vec) == 0) {
-      rlang::abort("`min_distance` provided cannot produce a suitable space for sampling.", call = NULL)
+      rlang::abort("`min_distance` provided cannot produce a suitable space for
+                   sampling.", call = NULL)
     }
 
     single_random_point <- sample(x = 1:total_site, size = 1)
@@ -347,12 +372,15 @@ random_sampling <- function(study_area,
     if (total_site > nrow(sample_in_cell)) {
       total_site <- nrow(sample_in_cell)
       if (verbose) {
-        rlang::warn(sprintf("Maximum number of points could not exced %s with minimum distance of %s.",
+        rlang::warn(sprintf("Maximum number of points could not exced %s with
+                            minimum distance of %s.",
                             nrow(sample_in_cell), min_distance))
       }
-      sampled_points <- sample_in_cell[sample(x = 1:nrow(sample_in_cell), size = total_site), ]
+      sampled_points <- sample_in_cell[sample(x = 1:nrow(sample_in_cell),
+                                              size = total_site), ]
     }else{
-      sampled_points <- sample_in_cell[sample(x = 1:nrow(sample_in_cell), size = total_site), ]
+      sampled_points <- sample_in_cell[sample(x = 1:nrow(sample_in_cell),
+                                              size = total_site), ]
     }
 
     return(sampled_points)

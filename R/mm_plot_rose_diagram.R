@@ -78,7 +78,7 @@ mm_plot_rose_diagram <- function(data = NULL,
 
   # Calculate time average and Confidence intervals
   mean_time <- round(mean(times, na.rm = TRUE), 3)
-  ci <- confidence_interval(x = times)
+  ci <- mm_ci(x = times)
 
   # Pass time to POSIXct
   timed <- strptime(times %>% mm_to_time(), format = "%H:%M:%S") %>%

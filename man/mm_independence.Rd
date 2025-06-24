@@ -45,7 +45,7 @@ The default is \code{TRUE}.}
 \itemize{
 \item If \code{data} is provided and \code{only} is \code{TRUE}, a tibble of events identified as independent.
 \item If \code{data} is provided and \code{only} is \code{FALSE}, a tibble of the original data with additional columns
-indicating the \code{independent} status and \code{deltatime} differences.
+indicating the \code{independent} status and \code{deltatime} differences (in second).
 \item If \code{data} is not provided, a tibble of the \code{deltatime} values with \code{independent} status.
 }
 }

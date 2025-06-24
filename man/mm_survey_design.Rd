@@ -27,7 +27,8 @@ mm_survey_design(
 \item "regular": Creates a regularly spaced grid of sites.
 \item "regular_cluster": Generates regularly spaced clusters within which sites are sampled..
 \item "random_cluster": Creates randomly clusters within which sites are sampled.
-\item "mask":  Uses existing features in the \code{study_area} object to define sampling areas, with user-defined site allocation.
+\item "mask":  Uses existing features in the \code{study_area} object to define
+sampling areas, with user-defined site allocation.
 }}
 
 \item{total_site}{An integer specifying the number of sites to be sampled per
@@ -47,10 +48,12 @@ of sites per feature in \code{study_area}.}
 \item{min_distance}{A numeric value specifying the minimum allowed distance
 between sampled sites (applied only for the random methods).}
 
-\item{distance}{A numeric vector specifying the distance (x and y spacing) between grid cells
-for regular sampling methods. If a single value is provided, it is used for both dimensions.}
+\item{distance}{A numeric vector specifying the distance (x and y spacing)
+between grid cells for regular sampling methods. If a single value is provided,
+it is used for both dimensions.}
 
-\item{padding}{A numeric value defining the buffer distance to exclude areas near the edge of the study area.}
+\item{padding}{A numeric value defining the buffer distance to exclude areas
+near the edge of the study area.}
 
 \item{nest_padding}{A numeric value defining an additional buffer applied
 within each cluster or mask feature to avoid placing sites near the edges of those units.}
@@ -68,7 +71,8 @@ It supports various sampling methods, including random, regular, and clustered s
 with options for minimum distance constraints and padding around the study area.
 }
 \note{
-The function ensures that the study area has a projected coordinate reference system (CRS) before proceeding.
+The function ensures that the study area has a projected coordinate reference
+system (CRS) before proceeding.
 If a geographic CRS is detected, an error is raised.
 }
 \examples{
@@ -89,21 +93,24 @@ random_sdes <- mm_survey_design(study_area = pendjari_trans, method = "random", 
 regular_sdes <- mm_survey_design(study_area = pendjari_trans, method = "regular", verbose = TRUE,
                                  distance = c(4000, 6000), padding = 2500, set_seed = 123)
 
-# Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a minimum site distance of 2000 meters
+# Random-cluster sampling: 8 clusters, each containing 5 sites, ensuring a
+# minimum site distance of 2000 meters
 rand_c_sdes <- mm_survey_design(study_area = pendjari_trans,
                                 method = "random_cluster", verbose = TRUE,
                                 total_cluster = 8, total_site = 5,
                                 distance = c(7000, 3000), min_distance = 2000,
                                 padding = 2000, nest_padding = 500, set_seed = 123)
 
-# Random-cluster sampling with regularly distributed sites: 22 clusters, each with 8 regularly spaced sites
+# Random-cluster sampling with regularly distributed sites: 22 clusters, each
+# with 8 regularly spaced sites
 rand_c_reg_sdes <- mm_survey_design(study_area = pendjari_trans,
                                     method = "random_cluster", verbose = TRUE,
                                     total_cluster = 22, total_site = 8, type_in = "regular",
                                     distance = c(6000, 3000),
                                     padding = 1000, nest_padding = 0, set_seed = 123)
 
-# Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum distance of 2000 meters between sites
+# Regular-cluster sampling: Grid with 3 sites per cluster, ensuring a minimum
+# distance of 2000 meters between sites
 reg_c_sdes <- mm_survey_design(study_area = pendjari_trans,
                                method = "regular_cluster", verbose = TRUE,
                                total_site = 3, distance = c(7000, 6000),

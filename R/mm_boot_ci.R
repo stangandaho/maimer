@@ -8,7 +8,7 @@
 #'
 #' @export
 
-mm_boot_CI <- function(t0,
+mm_boot_ci <- function(t0,
                        bt,
                        conf = 0.95
                        ) {

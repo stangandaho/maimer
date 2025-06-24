@@ -22,8 +22,8 @@
 #' @param time_zone A numeric vector representing the time zone offset(s) from UTC
 #' (in hours). If `data` is provided, this should match the number of unique
 #' locations in the data.
+#' @param format character string giving a date-time format as used by [strptime()].
 #' @param ... Additional arguments passed to `as.POSIXlt` for date parsing.
-#' @param try_formats A vector of date-time formats to try when parsing the `date` parameter. Default includes common date-time formats.
 #'
 #' @return A tibble with the following columns:
 #' \itemize{
@@ -65,12 +65,15 @@ mm_solartime <- function (data = NULL,
                           longitude,
                           latitude,
                           crs = NULL,
-                          time_zone, ...,
-                          try_formats = c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
-                                         "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
-                                         "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
-                                         "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")){
+                          format,
+                          time_zone,
+                          ...){
 
+
+  try_format = c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
+                 "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
+                 "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
+                 "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")
 
   if (!is.null(data)) {
     date_str <- as.character(substitute(date))

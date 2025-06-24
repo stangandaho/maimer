@@ -5,13 +5,13 @@ estimates can be calculated in a 2-stage process: (1) create a matrix of
 bootstrap samples for each data set, using mm_resample(); (2) pass these
 matrices to mm_boot_estimates() to obtain the bootstrap estimates.
 A vector of bootstrap estimates can then be used to produce confidence intervals
-with mm_boot_CI()."><meta property="og:description" content="bootstrap takes two sets of times of observations and calculates bootstrap
+with mm_boot_ci()."><meta property="og:description" content="bootstrap takes two sets of times of observations and calculates bootstrap
 estimates of the chosen estimator of overlap. Alternatively, bootstrap
 estimates can be calculated in a 2-stage process: (1) create a matrix of
 bootstrap samples for each data set, using mm_resample(); (2) pass these
 matrices to mm_boot_estimates() to obtain the bootstrap estimates.
 A vector of bootstrap estimates can then be used to produce confidence intervals
-with mm_boot_CI()."></head><body>
+with mm_boot_ci()."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -66,7 +66,7 @@ estimates can be calculated in a 2-stage process: (1) create a matrix of
 bootstrap samples for each data set, using <code>mm_resample()</code>; (2) pass these
 matrices to <code>mm_boot_estimates()</code> to obtain the bootstrap estimates.</p>
 <p>A vector of bootstrap estimates can then be used to produce confidence intervals
-with <code><a href="mm_boot_CI.html">mm_boot_CI()</a></code>.</p>
+with <code><a href="mm_boot_ci.html">mm_boot_ci()</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -164,7 +164,7 @@ Statistics 14:322-337</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="mm_boot_CI.html">mm_boot_CI()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="mm_boot_ci.html">mm_boot_ci()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -186,7 +186,7 @@ Statistics 14:322-337</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8304592</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">boots</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="bootstrap-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="mm_boot_CI.html">mm_boot_CI</a></span><span class="op">(</span><span class="va">est</span>, <span class="va">boots</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="mm_boot_ci.html">mm_boot_ci</a></span><span class="op">(</span><span class="va">est</span>, <span class="va">boots</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            lower     upper</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> norm   0.7975707 0.9708611</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> norm0  0.7706923 0.9439828</span>
