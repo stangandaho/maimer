@@ -74,11 +74,9 @@ of the day and sunset marking the end.</p>
 <span>  <span class="va">longitude</span>,</span>
 <span>  <span class="va">latitude</span>,</span>
 <span>  crs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">format</span>,</span>
 <span>  <span class="va">time_zone</span>,</span>
-<span>  <span class="va">...</span>,</span>
-<span>  try_formats <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"%Y-%m-%d %H:%M:%OS"</span>, <span class="st">"%Y/%m/%d %H:%M:%OS"</span>,</span>
-<span>    <span class="st">"%Y:%m:%d %H:%M:%OS"</span>, <span class="st">"%Y-%m-%d %H:%M"</span>, <span class="st">"%Y/%m/%d %H:%M"</span>,</span>
-<span>    <span class="st">"%Y:%m:%d %H:%M"</span>, <span class="st">"%Y-%m-%d"</span>, <span class="st">"%Y/%m/%d"</span>, <span class="st">"%Y:%m:%d"</span><span class="op">)</span></span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -115,6 +113,10 @@ the coordinates to longitude and latitude (WGS84). This is useful when the input
 coordinates are in a projected system (e.g., UTM). Default is <code>NULL</code>.</p></dd>
 
 
+<dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
+<dd><p>character string giving a date-time format as used by <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>.</p></dd>
+
+
 <dt id="arg-time-zone">time_zone<a class="anchor" aria-label="anchor" href="#arg-time-zone"></a></dt>
 <dd><p>A numeric vector representing the time zone offset(s) from UTC
 (in hours). If <code>data</code> is provided, this should match the number of unique
@@ -123,10 +125,6 @@ locations in the data.</p></dd>
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to <code>as.POSIXlt</code> for date parsing.</p></dd>
-
-
-<dt id="arg-try-formats">try_formats<a class="anchor" aria-label="anchor" href="#arg-try-formats"></a></dt>
-<dd><p>A vector of date-time formats to try when parsing the <code>date</code> parameter. Default includes common date-time formats.</p></dd>
 
 </dl></div>
     <div class="section level2">

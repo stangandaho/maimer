@@ -1,6 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://stangandaho.github.io/maimer/404.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/LICENSE-text.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/LICENSE.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/authors.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/news/index.html</loc></url>
@@ -8,15 +9,18 @@
 <url><loc>https://stangandaho.github.io/maimer/reference/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_alpha_diversity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_app.html</loc></url>
-<url><loc>https://stangandaho.github.io/maimer/reference/mm_boot_CI.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_boot_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_check_location.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_check_name.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_create_hs.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_describe_df.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_dissimilarity.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_find_break.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_get_hs.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_get_metadata.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_independence.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_lognorm_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_estimates.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_matrix.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_density.html</loc></url>
