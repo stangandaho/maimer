@@ -65,6 +65,8 @@ jobs:
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "24.04"))')
           sudo apt-get update
           sudo apt-get install -y libicu-dev
+          sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+          install.packages('terra', repos = c('https://rspatial.r-universe.dev', 'https://cloud.r-project.org'))
 
       - name: Install dependencies
         run: |

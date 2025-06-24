@@ -2,7 +2,7 @@ Package: maimer
 Type: Package
 Title: Handle Camera Trap Data
 Version: 0.2.0
-Date: 2024-08-18
+Date: 2025-06-24
 Imports: 
   bs4Dash, 
   dplyr,
