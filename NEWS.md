@@ -1,8 +1,6 @@
 # maimer 0.2.0
 
 ## 2025-06-24
-
-### Added
 - `mm_plot_camtrap_activity()` function to visualize camera trap deployment 
 activity with optional gap indicators.
 - `mm_summarise_camtrap_activity()` function to compute summary statistics for camera 
