@@ -97,6 +97,7 @@ reference:
   - mm_plot_overlap
   - mm_plot_overlap_coef
   - mm_plot_rose_diagram
+  - mm_plot_camtrap_activity
   - mm_overlap_estimates
   - mm_bootstrap
   - mm_resample
@@ -109,4 +110,5 @@ reference:
   - mm_alpha_diversity
   - mm_dissimilarity
   - mm_spatial_coverage
+  - mm_summarise_camtrap_activity
 

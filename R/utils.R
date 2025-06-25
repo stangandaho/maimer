@@ -335,9 +335,7 @@ missed_col_error <- function(data, ..., use_object = TRUE){
 
   if (any(!cols %in% colnames(data))) {
     not_in <- cols[!cols %in% colnames(data)];
-    miss_col_error <- ifelse(length(not_in) > 1, paste0("Columns ", paste0(not_in, collapse = ", "), " are not in ", deparse(substitute(data))),
-                             paste0("Column ", paste0(not_in, collapse = ", ")," is not in ", deparse(substitute(data))))
-    rlang::abort(miss_col_error)
+    rlang::abort(cli::format_error("Column {not_in} not found in {deparse(substitute(data))}"), call = NULL)
   }
 }
 

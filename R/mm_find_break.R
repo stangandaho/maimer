@@ -65,11 +65,8 @@ mm_find_break <- function(data,
 
   # Create a data frame of breaks
   if (length(breaks_idx) == 0) {
-    return(data.frame(
-      break_start = as.POSIXct(character(0)),
-      break_end = as.POSIXct(character(0)),
-      gap_duration_secs = numeric(0)
-    ))
+    cli::cli_warn("No deployment met this {.emph {threshold}} {time_unit} threshold")
+    return(invisible())
   }
 
   break_starts <- datetime_series[breaks_idx]

@@ -32,6 +32,7 @@ set_cam <- pene \%>\%
   dplyr::mutate(datetimes = as.POSIXlt(datetimes, format = "\%Y-\%m-\%d \%H:\%M:\%OS")) \%>\%
   dplyr::arrange(datetimes)
 
-drtn <- mm_find_break(data = pene, datetime = "datetimes", threshold = 5, time_unit = "days")
-drtn
+mm_find_break(data = pene, datetime = "datetimes",
+threshold = 5, time_unit = "days")
+
 }

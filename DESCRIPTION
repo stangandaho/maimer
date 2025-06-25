@@ -6,6 +6,7 @@ Date: 2025-06-24
 Imports: 
   bs4Dash, 
   dplyr,
+  cli,
   exifr,
   ggplot2,
   leaflet,
