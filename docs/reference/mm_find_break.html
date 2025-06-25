@@ -95,14 +95,15 @@ showing the start and end of each break and its length.</p>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>datetimes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXlt</a></span><span class="op">(</span><span class="va">datetimes</span>, format <span class="op">=</span> <span class="st">"%Y-%m-%d %H:%M:%OS"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">datetimes</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">drtn</span> <span class="op">&lt;-</span> <span class="fu">mm_find_break</span><span class="op">(</span>data <span class="op">=</span> <span class="va">pene</span>, datetime <span class="op">=</span> <span class="st">"datetimes"</span>, threshold <span class="op">=</span> <span class="fl">5</span>, time_unit <span class="op">=</span> <span class="st">"days"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">drtn</span></span></span>
+<span class="r-in"><span><span class="fu">mm_find_break</span><span class="op">(</span>data <span class="op">=</span> <span class="va">pene</span>, datetime <span class="op">=</span> <span class="st">"datetimes"</span>,</span></span>
+<span class="r-in"><span>threshold <span class="op">=</span> <span class="fl">5</span>, time_unit <span class="op">=</span> <span class="st">"days"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   start               end                 duration        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2019-01-24 <span style="color: #949494;">06:05:52</span> 2023-09-20 <span style="color: #949494;">16:15:28</span> 1700.423333 days</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2023-09-21 <span style="color: #949494;">13:33:27</span> 2024-03-02 <span style="color: #949494;">22:32:10</span>  163.374109 days</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2024-03-02 <span style="color: #949494;">22:33:06</span> 2024-03-10 <span style="color: #949494;">10:21:56</span>    7.492245 days</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -6,10 +6,10 @@
 <url><loc>https://stangandaho.github.io/maimer/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/news/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/bootstrap.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/calc_active_periods.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_alpha_diversity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_app.html</loc></url>
-<url><loc>https://stangandaho.github.io/maimer/reference/mm_boot_CI.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_boot_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_check_location.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_check_name.html</loc></url>
@@ -24,6 +24,7 @@
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_lognorm_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_estimates.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_matrix.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_camtrap_activity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_density.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_overlap.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_overlap_coef.html</loc></url>
@@ -34,6 +35,7 @@
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_spatial_coverage.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_stack_df.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_standardize.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_summarise_camtrap_activity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_survey_design.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_temporal_shift.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_to_community.html</loc></url>
