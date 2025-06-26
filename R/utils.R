@@ -424,3 +424,15 @@ get_column <- function(data, ...){
     dplyr::select(...) %>%
     colnames()
 }
+
+#' Common datetime formats for parsing
+#'
+#' A vector of common datetime formats used in parsing operations.
+#'
+#' @format A character vector
+#' @keywords internal
+#' @noRd
+try_formats <- c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
+                 "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
+                 "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
+                 "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")

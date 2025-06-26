@@ -1,13 +1,18 @@
 # maimer 0.2.0
 
-## 2025-06-24
+## 2025-06-26
+- `mm_correct_datetime()` to correct datetime stamps in camera trap datasets 
+using a deployment-specific correction table. Supports multiple datetime formats, 
+offset directions.
+
+## 2025-06-25
 - `mm_plot_camtrap_activity()` function to visualize camera trap deployment 
 activity with optional gap indicators.
 - `mm_summarise_camtrap_activity()` function to compute summary statistics for camera 
 trap deployment activity, including active durations, gaps, and activity rates, etc.
 
 
-## 25-06-24
+## 2025-06-24
 - Improved handling of non-numeric variables in `mm_describe_df()`.
 - Added support for detecting sampling breaks using `mm_find_break()`.
 - Added function to compute confidence intervals (`mm_ci()` and `mm_lognorm_ci()`)

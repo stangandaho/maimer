@@ -74,10 +74,6 @@ mm_plot_camtrap_activity <- function(data,
       plot_data$datetime <- as.POSIXct(plot_data$datetime, format = format)
     } else {
       # Try common formats
-      try_formats <- c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
-                       "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
-                       "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
-                       "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")
       plot_data$datetime <- as.POSIXct(plot_data$datetime, tryFormats = try_formats)
     }
   }
@@ -276,10 +272,6 @@ mm_summarise_camtrap_activity <- function(data,
     if (!is.null(format)) {
       plot_data$datetime <- as.POSIXct(plot_data$datetime, format = format)
     } else {
-      try_formats <- c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
-                       "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
-                       "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
-                       "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")
       plot_data$datetime <- as.POSIXct(plot_data$datetime, tryFormats = try_formats)
     }
   }

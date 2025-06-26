@@ -22,6 +22,8 @@ export(mm_standardize)
 export(mm_check_name)
 export(mm_to_occupancy)
 export(mm_find_break)
+export(mm_correct_datetime)
+
 ## Analysis
 export(mm_describe_df)
 export(mm_plot_density)

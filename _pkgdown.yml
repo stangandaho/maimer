@@ -88,6 +88,7 @@ reference:
   - mm_check_name
   - mm_to_occupancy
   - mm_find_break
+  - mm_correct_datetime
 - title: Data analysis
   desc: |
     Functions to run common camera trap data analysis
