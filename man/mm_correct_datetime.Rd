@@ -66,6 +66,10 @@ mm_correct_datetime(
   datetime = datetimes,
   deployment = camera,
   corrector = crtor
-)
+) \%>\%
+  dplyr::select(datetimes,
+                corrected_datetime,
+                time_offset_seconds) \%>\%
+  dplyr::slice_head(n = 10)
 
 }
