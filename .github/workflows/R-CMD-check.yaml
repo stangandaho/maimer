@@ -43,7 +43,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          install.packages('pak')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -68,6 +68,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install.packages('pak')
           pak::pkg_install("rcmdcheck")
           pak::pkg_install("stringi")
         shell: Rscript {0}
