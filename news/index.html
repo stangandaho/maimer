@@ -55,22 +55,26 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="maimer-020">maimer 0.2.0<a class="anchor" aria-label="anchor" href="#maimer-020"></a></h2>
 <div class="section level3">
-<h3 id="id_2025-0-2-0">2025-06-26<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0"></a></h3>
+<h3 id="id_2025-0-2-0">2025-07-10<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0"></a></h3>
+<p>Added new functions to support trap rate and REM-based density estimation workflows: <code><a href="../reference/mm_traprate_estimate.html">mm_traprate_estimate()</a></code> estimates trap rates from detection data; <code><a href="../reference/mm_fit_activity.html">mm_fit_activity()</a></code> models diel activity patterns; <code><a href="../reference/mm_fit_speedmodel.html">mm_fit_speedmodel()</a></code> fits animal movement speed models; <code><a href="../reference/mm_fit_detmodel.html">mm_fit_detmodel()</a></code> estimates detection probability functions; <code><a href="../reference/mm_fit_rem.html">mm_fit_rem()</a></code> applies the Random Encounter Model (REM) to estimate animal density; <code><a href="../reference/mm_get_effort.html">mm_get_effort()</a></code> calculates sampling effort metrics such as camera-days; and <code><a href="../reference/mm_traprate_data.html">mm_traprate_data()</a></code> prepares detection and effort data for further analysis.</p>
+</div>
+<div class="section level3">
+<h3 id="id_2025-0-2-0-1">2025-06-26<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0-1"></a></h3>
 <ul><li>
 <code><a href="../reference/mm_correct_datetime.html">mm_correct_datetime()</a></code> to correct datetime stamps in camera trap datasets using a deployment-specific correction table. Supports multiple datetime formats, offset directions.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="id_2025-0-2-0-1">2025-06-25<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0-1"></a></h3>
+<h3 id="id_2025-0-2-0-2">2025-06-25<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0-2"></a></h3>
 <ul><li>
 <code><a href="../reference/mm_plot_camtrap_activity.html">mm_plot_camtrap_activity()</a></code> function to visualize camera trap deployment activity with optional gap indicators.</li>
 <li>
 <code><a href="../reference/mm_summarise_camtrap_activity.html">mm_summarise_camtrap_activity()</a></code> function to compute summary statistics for camera trap deployment activity, including active durations, gaps, and activity rates, etc.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="id_2025-0-2-0-2">2025-06-24<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0-2"></a></h3>
+<h3 id="id_2025-0-2-0-3">2025-06-24<a class="anchor" aria-label="anchor" href="#id_2025-0-2-0-3"></a></h3>
 <ul><li>Improved handling of non-numeric variables in <code><a href="../reference/mm_describe_df.html">mm_describe_df()</a></code>.</li>
 <li>Added support for detecting sampling breaks using <code><a href="../reference/mm_find_break.html">mm_find_break()</a></code>.</li>
-<li>Added function to compute confidence intervals (<code><a href="../reference/mm_ci.html">mm_ci()</a></code> and <code><a href="../reference/mm_lognorm_ci.html">mm_lognorm_ci()</a></code>)</li>
+<li>Added function to compute confidence intervals (<code><a href="../reference/mm_ci.html">mm_ci()</a></code> and <code>mm_lognorm_ci()</code>)</li>
 <li>Fixed NSE-related warnings</li>
 </ul></div>
 <div class="section level3">

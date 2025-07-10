@@ -7,7 +7,9 @@
 <url><loc>https://stangandaho.github.io/maimer/news/index.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/bootstrap.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/calc_active_periods.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/camtrapdp.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/index.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/lnorm_confint.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_alpha_diversity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_app.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_boot_ci.html</loc></url>
@@ -19,10 +21,14 @@
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_describe_df.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_dissimilarity.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_find_break.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_fit_activity.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_fit_detmodel.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_fit_rem.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_fit_speedmodel.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_get_effort.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_get_hs.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_get_metadata.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_independence.html</loc></url>
-<url><loc>https://stangandaho.github.io/maimer/reference/mm_lognorm_ci.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_estimates.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_overlap_matrix.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_plot_camtrap_activity.html</loc></url>
@@ -43,6 +49,8 @@
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_to_occupancy.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_to_radian.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/mm_to_time.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_traprate_data.html</loc></url>
+<url><loc>https://stangandaho.github.io/maimer/reference/mm_traprate_estimate.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/pendjari.html</loc></url>
 <url><loc>https://stangandaho.github.io/maimer/reference/pipe.html</loc></url>
 </urlset>
