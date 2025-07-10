@@ -6,8 +6,8 @@
 \usage{
 mm_summarise_camtrap_activity(
   data,
-  deployment,
-  datetime,
+  deployment_column,
+  datetime_column,
   threshold = 5,
   time_unit = "days",
   format = NULL
@@ -16,9 +16,9 @@ mm_summarise_camtrap_activity(
 \arguments{
 \item{data}{A data frame containing the datetime column.}
 
-\item{deployment}{Character. Column name for deployment identifiers.}
+\item{deployment_column}{Character. Column name for deployment identifiers.}
 
-\item{datetime}{The datetime column.}
+\item{datetime_column}{The datetime column.}
 
 \item{threshold}{A numeric value indicating the minimum gap to be considered a break (default is 10).}
 
@@ -38,8 +38,8 @@ camtrap_data <- read.csv(maimer:::table_files()[1]) \%>\%
 dplyr::filter(project == "Last")
 
   mm_summarise_camtrap_activity(data = camtrap_data,
-                                deployment = "camera",
-                                datetime = datetimes,
+                                deployment_column = "camera",
+                                datetime_column = datetimes,
                                 threshold = 15,
                                 time_unit = "days")
 

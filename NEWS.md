@@ -1,5 +1,14 @@
 # maimer 0.2.0
 
+## 2025-07-10
+Added new functions to support trap rate and REM-based density estimation workflows: 
+`mm_traprate_estimate()` estimates trap rates from detection data; `mm_fit_activity()` 
+models diel activity patterns; `mm_fit_speedmodel()` fits animal movement speed 
+models; `mm_fit_detmodel()` estimates detection probability functions; `mm_fit_rem()` 
+applies the Random Encounter Model (REM) to estimate animal density; `mm_get_effort()` 
+calculates sampling effort metrics such as camera-days; and `mm_traprate_data()` 
+prepares detection and effort data for further analysis.
+
 ## 2025-06-26
 - `mm_correct_datetime()` to correct datetime stamps in camera trap datasets 
 using a deployment-specific correction table. Supports multiple datetime formats, 

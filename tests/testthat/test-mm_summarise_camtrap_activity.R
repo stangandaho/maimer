@@ -10,17 +10,20 @@ test_that("returns expected summary tibble", {
     ))
   )
 
-  result <- mm_summarise_camtrap_activity(
-    data = test_data,
-    deployment = camera,
-    datetime = datetimes,
-    threshold = 3,
-    time_unit = "days"
-  )
+  result <- suppressWarnings({
+    mm_summarise_camtrap_activity(
+      data = test_data,
+      deployment_column = camera,
+      datetime_column = datetimes,
+      threshold = 3,
+      time_unit = "days"
+    )
+  })
 
   expect_s3_class(result, "tbl_df")
-  expect_true(all(c("deployment", "n_records", "activity_rate") %in% names(result)))
+  expect_true(all(c("n_records", "activity_rate") %in% names(result)))
   expect_equal(nrow(result), 1)
+
 })
 
 
@@ -55,11 +58,13 @@ test_that("handles multiple deployments correctly", {
     datetimes = rep(seq(Sys.time(), by = "1 day", length.out = 5), 2)
   )
 
-  result <- mm_summarise_camtrap_activity(
-    data = test_data,
-    deployment = camera,
-    datetime = datetimes
-  )
+  result <- suppressWarnings({
+    mm_summarise_camtrap_activity(
+      data = test_data,
+      deployment = camera,
+      datetime = datetimes
+    )
+  })
 
   expect_equal(nrow(result), 2)
 })
@@ -71,12 +76,14 @@ test_that("works with datetime as character and custom format", {
     datetimes = c("2024-06-01 12:00:00", "2024-06-02 12:00:00", "2024-06-03 12:00:00")
   )
 
-  result <- mm_summarise_camtrap_activity(
-    data = test_data,
-    deployment = camera,
-    datetime = datetimes,
-    format = "%Y-%m-%d %H:%M:%S"
-  )
+  result <- suppressWarnings({
+    mm_summarise_camtrap_activity(
+      data = test_data,
+      deployment = camera,
+      datetime = datetimes,
+      format = "%Y-%m-%d %H:%M:%S"
+    )
+  })
 
   expect_s3_class(result, "tbl_df")
   expect_equal(result$n_records, 3)

@@ -1,11 +1,11 @@
-#' Evaluate event independence
+#' Evaluate independent detections
 #'
-#' This function calculates the difference between times and evaluates whether
-#' events are independent based on a given threshold. It is useful for checking
-#' if certain events in a dataset are independent of each other based on time intervals.
+#' Filters camera trap data to ensure temporal independence between detections,
+#' removing consecutive entry of the same species at the same location within a
+#' specified time window.
 #'
 #' @param data A `data.frame`, `tbl_df`, or `tbl` containing the event data. This should include
-#'   a column with datetime values. If `NULL`, the function will use the `deltatime` argument
+#'   a column with datetime values. If `NULL`, the function will use the `datetime` argument
 #'   instead of the `data` argument.
 #' @param species_column An optional column name specifying the species grouping.
 #'   If provided, independence will be assessed separately within each species group.
@@ -29,6 +29,34 @@
 #' - If `data` is provided and `only` is `FALSE`, a tibble of the original data with additional columns
 #'   indicating the `independent` status and `deltatime` differences (in second).
 #' - If `data` is not provided, a tibble of the `deltatime` values with `independent` status.
+#'
+#' @details
+#' Following Ridout & Linkie (2009), consecutive photos
+#' of the same species at the same location within 30 minutes are considered non-independent and removed.
+#'
+#' The approach mirrors the methodology applied by Linkie & Ridout (2011)
+#' for Sumatran tiger-prey interactions study and Ahmad et al. (2024) to calculate
+#' activity levels where such filtering is essential for:
+#' - Avoiding autocorrelation in activity pattern data
+#' - Ensuring each record represents an independent observation
+#' - Creating a random sample from the underlying activity distribution
+#'
+#' The filtered data can then be used to estimate probability density functions of daily activity patterns,
+#' assuming animals are equally detectable during their active periods.
+#'
+#' @references
+#' Ridout, M.S., & Linkie, M. (2009). Estimating overlap of daily activity patterns
+#' from camera trap data. Journal of Agricultural, Biological, and Environmental
+#' Statistics, 14(3), 322-337. [https://doi.org/10.1198/jabes.2009.08038](https://doi.org/10.1198/jabes.2009.08038)
+#'
+#' Linkie, M., & Ridout, M.S. (2011). Assessing tiger-prey interactions in Sumatran
+#' rainforests. Journal of Zoology, 284(3), 224-229.
+#' [https://doi.org/10.1111/j.1469-7998.2011.00801.x](https://doi.org/10.1111/j.1469-7998.2011.00801.x)
+#'
+#' Ahmad, F., Mori, T., Rehan, M., Bosso, L., & Kabir, M. (2024). Applying a Random
+#' Encounter Model to Estimate the Asiatic Black Bear (Ursus thibetanus) Density from
+#' Camera Traps in the Hindu Raj Mountains, Pakistan. Biology, 13(5), 341.
+#' [https://doi.org/10.3390/biology13050341](https://doi.org/10.3390/biology13050341)
 #'
 #' @examples
 #'

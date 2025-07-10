@@ -2,7 +2,7 @@
 % Please edit documentation in R/mm_independence.R
 \name{mm_independence}
 \alias{mm_independence}
-\title{Evaluate event independence}
+\title{Evaluate independent detections}
 \usage{
 mm_independence(
   data = NULL,
@@ -16,7 +16,7 @@ mm_independence(
 }
 \arguments{
 \item{data}{A \code{data.frame}, \code{tbl_df}, or \code{tbl} containing the event data. This should include
-a column with datetime values. If \code{NULL}, the function will use the \code{deltatime} argument
+a column with datetime values. If \code{NULL}, the function will use the \code{datetime} argument
 instead of the \code{data} argument.}
 
 \item{species_column}{An optional column name specifying the species grouping.
@@ -50,9 +50,25 @@ indicating the \code{independent} status and \code{deltatime} differences (in se
 }
 }
 \description{
-This function calculates the difference between times and evaluates whether
-events are independent based on a given threshold. It is useful for checking
-if certain events in a dataset are independent of each other based on time intervals.
+Filters camera trap data to ensure temporal independence between detections,
+removing consecutive entry of the same species at the same location within a
+specified time window.
+}
+\details{
+Following Ridout & Linkie (2009), consecutive photos
+of the same species at the same location within 30 minutes are considered non-independent and removed.
+
+The approach mirrors the methodology applied by Linkie & Ridout (2011)
+for Sumatran tiger-prey interactions study and Ahmad et al. (2024) to calculate
+activity levels where such filtering is essential for:
+\itemize{
+\item Avoiding autocorrelation in activity pattern data
+\item Ensuring each record represents an independent observation
+\item Creating a random sample from the underlying activity distribution
+}
+
+The filtered data can then be used to estimate probability density functions of daily activity patterns,
+assuming animals are equally detectable during their active periods.
 }
 \examples{
 
@@ -79,4 +95,18 @@ sprintf("Independent observations: \%s", nrow(indep2))
 dtime <- cam_data$datetimes
 mm_independence(datetime = dtime, format = "\%Y-\%m-\%d \%H:\%M:\%S", only = TRUE)
 
+}
+\references{
+Ridout, M.S., & Linkie, M. (2009). Estimating overlap of daily activity patterns
+from camera trap data. Journal of Agricultural, Biological, and Environmental
+Statistics, 14(3), 322-337. \url{https://doi.org/10.1198/jabes.2009.08038}
+
+Linkie, M., & Ridout, M.S. (2011). Assessing tiger-prey interactions in Sumatran
+rainforests. Journal of Zoology, 284(3), 224-229.
+\url{https://doi.org/10.1111/j.1469-7998.2011.00801.x}
+
+Ahmad, F., Mori, T., Rehan, M., Bosso, L., & Kabir, M. (2024). Applying a Random
+Encounter Model to Estimate the Asiatic Black Bear (Ursus thibetanus) Density from
+Camera Traps in the Hindu Raj Mountains, Pakistan. Biology, 13(5), 341.
+\url{https://doi.org/10.3390/biology13050341}
 }

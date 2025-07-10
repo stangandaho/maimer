@@ -64,7 +64,7 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04"))')
            sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
-           sudo apt-get install -y libgdal-dev libproj-dev libgeos-dev libudunits2-dev
+           sudo apt-get update && sudo apt-get install -y libicu-dev
 
       - name: Install dependencies
         run: |

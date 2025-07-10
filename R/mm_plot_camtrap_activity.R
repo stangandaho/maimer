@@ -4,15 +4,17 @@
 #' It also optionally highlights periods of inactivity (break/gap).
 #'
 #' @inheritParams mm_find_break
-#' @param deployment Column name (unquoted) that identifies the deployment or camera ID.
+#' @param deployment_column Column name (unquoted) that identifies the deployment or camera ID.
 #' @param activity_style A list controlling the appearance of active periods. Can include:
-#'   - `width`: Line width (default 0.8)
+#'   - `linewidth`: Line width (default 0.8)
 #'   - `color`: Color of activity bars (default `"steelblue"`)
 #'   - `alpha`: Transparency (default 0.7)
+#'   - `linetype`: Line type (default 1)
 #' @param break_style A list controlling the appearance of gaps/inactive periods. Can include:
-#'   - `width`: Line width (default 0.8)
+#'   - `linewidth`: Line width (default 0.8)
 #'   - `color`: Color of gap bars (default `"#c90026"`)
 #'   - `alpha`: Transparency (default 0.9)
+#'   - `linetype`: Line type (default 1)
 #' @param show_gaps Logical. If `TRUE` (default), shows vertical bars for detected gaps in deployment activity.
 #' @param ylabel_format Character. Format for y-axis date-time labels. Default is `"%Y-%m-%d"`.
 #' @param ybreak Character. Spacing for y-axis breaks, e.g., `"1 days"` or `"12 hours"`. Default is based on `time_unit`.
@@ -27,8 +29,8 @@
 #' # Plot with default styles
 #' mm_plot_camtrap_activity(
 #'   data = camtrap_data,
-#'   deployment = camera,
-#'   datetime = datetimes,
+#'   deployment_column = camera,
+#'   datetime_column = datetimes,
 #'   threshold = 7,
 #'   time_unit = "days"
 #' )
@@ -36,8 +38,8 @@
 #' #' # Customize plot appearance
 #' mm_plot_camtrap_activity(
 #'   data = camtrap_data,
-#'   deployment = camera,
-#'   datetime = "datetimes",
+#'   deployment_column = camera,
+#'   datetime_column = "datetimes",
 #'   threshold = 15,
 #'   time_unit = "days",
 #'   ybreak = "3 days",
@@ -47,13 +49,13 @@
 #' #'
 #' @export
 mm_plot_camtrap_activity <- function(data,
-                                     deployment,
-                                     datetime,
+                                     deployment_column,
+                                     datetime_column,
                                      threshold = 5,
                                      time_unit = "days",
                                      format = NULL,
-                                     activity_style = list(width = 0.8, color = "steelblue", alpha = 0.7),
-                                     break_style = list(width = 0.8, color = "#c90026", alpha = 0.9),
+                                     activity_style = list(width = 0.8, color = "steelblue", alpha = 0.7, linetype = 1),
+                                     break_style = list(width = 0.8, color = "#c90026", alpha = 0.9, linetype = 1),
                                      show_gaps = TRUE,
                                      ylabel_format = "%Y-%m-%d",
                                      ybreak = paste(1, time_unit)
@@ -64,7 +66,7 @@ mm_plot_camtrap_activity <- function(data,
 
   # Prepare data
   plot_data <- data %>%
-    dplyr::select({{deployment}}, {{datetime}}) %>%
+    dplyr::select({{deployment_column}}, {{datetime_column}}) %>%
     dplyr::rename(deployment = 1, datetime = 2) %>%
     dplyr::filter(!is.na(deployment), !is.na(datetime))
 
@@ -82,8 +84,7 @@ mm_plot_camtrap_activity <- function(data,
   plot_data <- plot_data %>% dplyr::filter(!is.na(datetime))
 
   if (nrow(plot_data) == 0) {
-    rlang::abort("No valid datetime data found after parsing.",
-                 use_cli_format = TRUE)
+    cli::cli_abort("No valid datetime data found after parsing.")
   }
 
   # Calculate activity periods for each deployment
@@ -100,7 +101,7 @@ mm_plot_camtrap_activity <- function(data,
   # Find gaps for each deployment
   gap_data <- lapply(unique(plot_data$deployment), function(x){
     fb <- maimer::mm_find_break(data = plot_data %>% dplyr::filter(deployment == x),
-                  datetime = datetime,
+                  datetime_column = datetime,
                   threshold = threshold,
                   time_unit = time_unit)
     if (!is.null(fb)) {
@@ -136,9 +137,10 @@ mm_plot_camtrap_activity <- function(data,
     ggplot2::geom_linerange(
       data = active_periods,
       mapping = ggplot2::aes(x = deployment, ymin = period_start, ymax = period_end),
-      size = ifelse(is.null(activity_style$width), 0.8, activity_style$width),
+      linewidth = ifelse(is.null(activity_style$linewidth), 0.8, activity_style$linewidth),
       alpha = ifelse(is.null(activity_style$alpha), 0.7, activity_style$alpha),
-      color = ifelse(is.null(activity_style$color), "steelblue", activity_style$color)
+      color = ifelse(is.null(activity_style$color), "steelblue", activity_style$color),
+      linetype = ifelse(is.null(break_style$linetype), 1, break_style$linetype)
     ) +
     ggplot2::scale_y_datetime(
       name = "Period",
@@ -157,9 +159,10 @@ mm_plot_camtrap_activity <- function(data,
       ggplot2::geom_linerange(
         data = gap_data,
         mapping = ggplot2::aes(x = deployment, ymin = start, ymax = end),
-        size = ifelse(is.null(break_style$width), 0.8, break_style$width),
+        linewidth = ifelse(is.null(break_style$linewidth), 0.8, break_style$linewidth),
         alpha = ifelse(is.null(break_style$alpha), 0.9, break_style$alpha),
-        color = ifelse(is.null(break_style$color), "#c90026", break_style$color)
+        color = ifelse(is.null(break_style$color), "#c90026", break_style$color),
+        linetype = ifelse(is.null(break_style$linetype), 2, break_style$linetype)
       )
 
   }
@@ -237,7 +240,7 @@ calc_active_periods <- function(data, threshold, time_unit) {
 #' Calculates summary statistics for camera trap activity periods.
 #'
 #' @inheritParams mm_find_break
-#' @param deployment Character. Column name for deployment identifiers.
+#' @param deployment_column Character. Column name for deployment identifiers.
 #'
 #' @return A tibble with activity summary statistics for each deployment.
 #'
@@ -247,23 +250,23 @@ calc_active_periods <- function(data, threshold, time_unit) {
 #' dplyr::filter(project == "Last")
 #'
 #'   mm_summarise_camtrap_activity(data = camtrap_data,
-#'                                 deployment = "camera",
-#'                                 datetime = datetimes,
+#'                                 deployment_column = "camera",
+#'                                 datetime_column = datetimes,
 #'                                 threshold = 15,
 #'                                 time_unit = "days")
 #'
 #' @export
 mm_summarise_camtrap_activity <- function(data,
-                                       deployment,
-                                       datetime,
-                                       threshold = 5,
-                                       time_unit = "days",
-                                       format = NULL) {
+                                          deployment_column,
+                                          datetime_column,
+                                          threshold = 5,
+                                          time_unit = "days",
+                                          format = NULL) {
 
 
   # Prepare data
   plot_data <- data %>%
-    dplyr::select({{deployment}}, {{datetime}}) %>%
+    dplyr::select({{deployment_column}}, {{datetime_column}}) %>%
     dplyr::rename(deployment = 1, datetime = 2) %>%
     dplyr::filter(!is.na(deployment), !is.na(datetime))
 
@@ -281,15 +284,14 @@ mm_summarise_camtrap_activity <- function(data,
     sm_df <- plot_data %>%
       dplyr::filter(deployment == x)
 
+
       gaps <- mm_find_break(
         data = sm_df,
-        datetime = datetime,
+        datetime_column = datetime,
         threshold = threshold,
         time_unit = time_unit
       )
-
       active_periods <- calc_active_periods(sm_df, threshold, time_unit)
-
       total_duration <- as.numeric(
         max(sm_df$datetime, na.rm = TRUE) - min(sm_df$datetime, na.rm = TRUE),
         units = "days"
@@ -303,7 +305,7 @@ mm_summarise_camtrap_activity <- function(data,
       gap_duration <- total_duration - active_duration
 
       dplyr::tibble(
-        deployment = x,
+        {{deployment_column}} := x,
         n_records = nrow(sm_df),
         first_record = min(sm_df$datetime, na.rm = TRUE),
         last_record = max(sm_df$datetime, na.rm = TRUE),

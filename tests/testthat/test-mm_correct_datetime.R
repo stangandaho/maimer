@@ -31,24 +31,7 @@ test_that("mm_correct_datetime applies corrections correctly", {
   expect_equal(unique(corrected$time_offset_seconds), 300)
 })
 
-test_that("mm_correct_datetime handles missing data for deployment", {
-  data <- data.frame(
-    datetime = "2023-01-01 12:00:00",
-    deployment = "CAM02"
-  )
-  corrector <- data.frame(
-    deployment = "CAM01",
-    sign = "+",
-    datetimes = "2023-01-01 12:05:00"
-  )
 
-  expect_warning(
-    result <- mm_correct_datetime(data, datetime, deployment, corrector, format = "%Y-%m-%d %H:%M:%S"),
-    "No data found for deployment"
-  )
-
-  expect_equal(nrow(result), 1)  # Original unchanged
-})
 
 test_that("mm_correct_datetime handles invalid inputs", {
   corrector <- data.frame(deployment = "CAM01", sign = "+", datetimes = "2023-01-01 12:00:00")

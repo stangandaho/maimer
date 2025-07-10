@@ -23,6 +23,8 @@ export(mm_check_name)
 export(mm_to_occupancy)
 export(mm_find_break)
 export(mm_correct_datetime)
+export(mm_get_effort) #no
+export(mm_traprate_data) # no
 
 ## Analysis
 export(mm_describe_df)
@@ -37,7 +39,6 @@ export(mm_resample)
 export(mm_boot_estimates)
 export(mm_boot_ci)
 export(mm_ci)
-export(mm_lognorm_ci)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
 export(mm_alpha_diversity)
@@ -45,6 +46,12 @@ export(mm_summarise_camtrap_activity)
 #export(mm_beta_diversity)
 export(mm_dissimilarity)
 export(mm_spatial_coverage)
+export(mm_traprate_estimate) ## no
+export(mm_fit_activity) #no
+export(mm_fit_speedmodel) #no
+export(mm_fit_detmodel) #no
+export(mm_fit_rem) # no
+
 
 ## General
 export(`%>%`)
@@ -59,13 +66,12 @@ importFrom(exifr, read_exif)
 
 
 # base
-importFrom("stats", "setNames")
-importFrom("utils", "write.csv")
 importFrom("methods", "hasArg")
-importFrom("stats", "cov")
-importFrom("utils", "read.table")
-importFrom("stats", "aggregate", "as.formula", "qt", "sd", "window")
-importFrom("utils", "install.packages", "installed.packages")
+importFrom("stats", "aggregate", "as.formula", "qt", "sd", "window",
+           "end", "predict", "quantile", "start", "setNames",
+           "cov")
+importFrom("utils", "install.packages", "installed.packages", "read.table",
+           "write.csv", "head")
 
 # dplyr
 importFrom(dplyr, as_tibble)
@@ -222,3 +228,9 @@ importFrom(cli, cli_alert_success)
 importFrom(cli, cli_alert_warning)
 importFrom(cli, cli_format)
 importFrom(cli, cli_text)
+
+# Distance
+importFrom(Distance, ds)
+
+# Distance
+importFrom(sbd, sbm)

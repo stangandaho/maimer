@@ -6,9 +6,9 @@
 \title{Pendjari national park and surrounding areas}
 \format{
 A tibble with 3 rows and 2 columns:
-\describe{
-\item{NOM}{The name of the protected area or hunting zone.}
-\item{geometry}{The spatial geometry of the area, stored in decimal degrees (EPSG:4326).}
+\itemize{
+\item \code{NOM}: The name of the protected area or hunting zone.
+\item \code{geometry}: The spatial geometry of the area, stored in decimal degrees (EPSG:4326).
 }
 }
 \usage{
@@ -16,14 +16,6 @@ pendjari
 }
 \description{
 A dataset containing spatial boundaries of Pendjari National Park and its surrounding hunting zones in Benin.
-}
-\details{
-The dataset includes the following areas:
-\itemize{
-\item{Pendjari Hunting Zone}
-\item{Konkombri Hunting Zone}
-\item{Pendjari National Park}
-}
 }
 \examples{
 # Load the dataset

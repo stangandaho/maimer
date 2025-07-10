@@ -63,6 +63,7 @@ reference:
   contents:
   - mm_survey_design
   - pendjari
+  - camtrapdp
 - title: Process media (images) file
   desc: |
     Functions reading and writing metadata
@@ -89,6 +90,8 @@ reference:
   - mm_to_occupancy
   - mm_find_break
   - mm_correct_datetime
+  - mm_get_effort
+  - mm_traprate_data
 - title: Data analysis
   desc: |
     Functions to run common camera trap data analysis
@@ -105,11 +108,15 @@ reference:
   - mm_boot_estimates
   - mm_boot_ci
   - mm_ci
-  - mm_lognorm_ci
   - mm_overlap_matrix
   - mm_temporal_shift
   - mm_alpha_diversity
   - mm_dissimilarity
   - mm_spatial_coverage
   - mm_summarise_camtrap_activity
+  - mm_traprate_estimate
+  - mm_fit_activity
+  - mm_fit_speedmodel
+  - mm_fit_detmodel
+  - mm_fit_rem
 

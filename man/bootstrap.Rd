@@ -72,7 +72,7 @@ The function \code{\link[=mm_resample]{mm_resample()}} returns a numeric matrix 
 to a bootstrap sample. Times are in \code{radians}. It may return a matrix of NAs if
 \code{smooth = TRUE} and bandwidth estimation fails.
 
-The Function \link{mm_boot_estimates} with \code{type = "all"} returns a numeric matrix
+The Function \code{\link[=mm_boot_estimates]{mm_boot_estimates()}} with \code{type = "all"} returns a numeric matrix
 with three columns, one for each estimator of overlap, otherwise a vector of
 bootstrap estimates.
 }

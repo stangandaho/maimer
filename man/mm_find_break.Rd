@@ -4,12 +4,18 @@
 \alias{mm_find_break}
 \title{Detect time gaps in a datetime series}
 \usage{
-mm_find_break(data, datetime, format, threshold = 10, time_unit = "hours")
+mm_find_break(
+  data,
+  datetime_column,
+  format,
+  threshold = 10,
+  time_unit = "hours"
+)
 }
 \arguments{
 \item{data}{A data frame containing the datetime column.}
 
-\item{datetime}{The datetime column.}
+\item{datetime_column}{The datetime column.}
 
 \item{format}{Optional. A character string specifying the datetime format, passed to \code{as.POSIXlt}.}
 
@@ -25,14 +31,13 @@ showing the start and end of each break and its length.
 Identifies breaks in a sequence of datetime observations based on a specified time threshold.
 }
 \examples{
+library(dplyr)
 pene <- read.csv(maimer:::table_files()[1])
 
 set_cam <- pene \%>\%
-  dplyr::filter(camera == "CAMERA 3") \%>\%
-  dplyr::mutate(datetimes = as.POSIXlt(datetimes, format = "\%Y-\%m-\%d \%H:\%M:\%OS")) \%>\%
-  dplyr::arrange(datetimes)
+  dplyr::filter(camera == "CAMERA 3")
 
-mm_find_break(data = pene, datetime = "datetimes",
+mm_find_break(data = pene, datetime_column = "datetimes",
 threshold = 5, time_unit = "days")
 
 }

@@ -6,13 +6,13 @@
 \usage{
 mm_plot_camtrap_activity(
   data,
-  deployment,
-  datetime,
+  deployment_column,
+  datetime_column,
   threshold = 5,
   time_unit = "days",
   format = NULL,
-  activity_style = list(width = 0.8, color = "steelblue", alpha = 0.7),
-  break_style = list(width = 0.8, color = "#c90026", alpha = 0.9),
+  activity_style = list(width = 0.8, color = "steelblue", alpha = 0.7, linetype = 1),
+  break_style = list(width = 0.8, color = "#c90026", alpha = 0.9, linetype = 1),
   show_gaps = TRUE,
   ylabel_format = "\%Y-\%m-\%d",
   ybreak = paste(1, time_unit)
@@ -21,9 +21,9 @@ mm_plot_camtrap_activity(
 \arguments{
 \item{data}{A data frame containing the datetime column.}
 
-\item{deployment}{Column name (unquoted) that identifies the deployment or camera ID.}
+\item{deployment_column}{Column name (unquoted) that identifies the deployment or camera ID.}
 
-\item{datetime}{The datetime column.}
+\item{datetime_column}{The datetime column.}
 
 \item{threshold}{A numeric value indicating the minimum gap to be considered a break (default is 10).}
 
@@ -33,16 +33,18 @@ mm_plot_camtrap_activity(
 
 \item{activity_style}{A list controlling the appearance of active periods. Can include:
 \itemize{
-\item \code{width}: Line width (default 0.8)
+\item \code{linewidth}: Line width (default 0.8)
 \item \code{color}: Color of activity bars (default \code{"steelblue"})
 \item \code{alpha}: Transparency (default 0.7)
+\item \code{linetype}: Line type (default 1)
 }}
 
 \item{break_style}{A list controlling the appearance of gaps/inactive periods. Can include:
 \itemize{
-\item \code{width}: Line width (default 0.8)
+\item \code{linewidth}: Line width (default 0.8)
 \item \code{color}: Color of gap bars (default \code{"#c90026"})
 \item \code{alpha}: Transparency (default 0.9)
+\item \code{linetype}: Line type (default 1)
 }}
 
 \item{show_gaps}{Logical. If \code{TRUE} (default), shows vertical bars for detected gaps in deployment activity.}
@@ -66,8 +68,8 @@ camtrap_data <- read.csv(maimer:::table_files()[1]) \%>\%
 # Plot with default styles
 mm_plot_camtrap_activity(
   data = camtrap_data,
-  deployment = camera,
-  datetime = datetimes,
+  deployment_column = camera,
+  datetime_column = datetimes,
   threshold = 7,
   time_unit = "days"
 )
@@ -75,8 +77,8 @@ mm_plot_camtrap_activity(
 #' # Customize plot appearance
 mm_plot_camtrap_activity(
   data = camtrap_data,
-  deployment = camera,
-  datetime = "datetimes",
+  deployment_column = camera,
+  datetime_column = "datetimes",
   threshold = 15,
   time_unit = "days",
   ybreak = "3 days",

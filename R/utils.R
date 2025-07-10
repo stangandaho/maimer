@@ -402,11 +402,10 @@ mm_ci <- function(x, alpha = .05, side = 'all') {
 #' @param percent Percentage confidence level
 #' @return A dataframe with a row per estimate input, and columns \code{lcl}
 #'   and \code{ucl} (lower and upper confidence limits).
-#' @examples
-#'   mm_lognorm_ci(10.13, 3.57)
-#' @export
 #'
-mm_lognorm_ci <- function(estimate, se, percent = 95){
+#' @keywords internal
+#'
+lnorm_confint <- function(estimate, se, percent = 95){
   if(length(estimate) != length(se))
     rlang::abort("estimate and se must have the same number of values")
   z <- qt((1 - percent/100) / 2, Inf, lower.tail = FALSE)
@@ -436,3 +435,14 @@ try_formats <- c("%Y-%m-%d %H:%M:%OS", "%Y/%m/%d %H:%M:%OS",
                  "%Y:%m:%d %H:%M:%OS", "%Y-%m-%d %H:%M",
                  "%Y/%m/%d %H:%M", "%Y:%m:%d %H:%M",
                  "%Y-%m-%d", "%Y/%m/%d", "%Y:%m:%d")
+
+
+as_colname <- function(arg) {
+  if (rlang::is_symbol(arg) || rlang::is_quosure(arg)) {
+    rlang::as_name(rlang::get_expr(arg))
+  } else if (is.character(arg)) {
+    rlang::enquo(arg)
+  } else {
+    cli::cli_abort("Column name must be a string or unquoted symbol.")
+  }
+}

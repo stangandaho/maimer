@@ -198,13 +198,6 @@ mm_get_time <- function (x, scale = c("radian", "hour", "proportion"), ...,
 }
 
 #' @noRd
-cmean <- function(x, ...){
-  X <- mean(cos(x), ...)
-  Y <- mean(sin(x), ...)
-  mm_wrap(atan(Y/X) + ifelse(X<0,pi,0))
-}
-
-#' @noRd
 mm_transtime <- function (date, anchor,
                           mnanchor = NULL,
                           type = c("average", "equinoctial","single")){
@@ -224,7 +217,7 @@ mm_transtime <- function (date, anchor,
   type <- match.arg(type)
   nc <- ncol(anchor)
   if (is.null(mnanchor))
-    mnanchor <- apply(anchor, 2, cmean, na.rm = TRUE)
+    mnanchor <- apply(anchor, 2, activity::cmean, na.rm = TRUE)
   if (type == "single") {
     if (nc > 1)
       warning("only one column needed for anchor; additional columns ignored")

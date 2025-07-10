@@ -18,7 +18,7 @@
 #' to a bootstrap sample. Times are in `radians`. It may return a matrix of NAs if
 #' `smooth = TRUE` and bandwidth estimation fails.
 #'
-#' The Function [mm_boot_estimates] with `type = "all"` returns a numeric matrix
+#' The Function [mm_boot_estimates()] with `type = "all"` returns a numeric matrix
 #' with three columns, one for each estimator of overlap, otherwise a vector of
 #' bootstrap estimates.
 #'
