@@ -48,12 +48,7 @@
 #'   environment as `updated_camera_traps`.
 #' }
 #'
-#' @import shiny
-#' @import leaflet
-#' @import dplyr
-#' @import sf
 #' @export
-
 mm_check_location <- function(data,
                               longitude,
                               latitude,
@@ -68,9 +63,6 @@ mm_check_location <- function(data,
   lat_ <- paste0(dplyr::ensym(latitude))
 
   data <- data %>%
-    dplyr::mutate("obs" = paste0(!!dplyr::ensym(lon_), !!dplyr::ensym(lat_))) %>%
-    #dplyr::distinct("obs", .keep_all = TRUE) %>%
-    #dplyr::select(-"obs") %>%
     dplyr::filter(!is.na(!!dplyr::ensym(lon_)) & !is.na(!!dplyr::ensym(lat_)))
 
 
@@ -91,7 +83,7 @@ mm_check_location <- function(data,
 
   # data to use
   if (paste0(dplyr::ensym(location_name)) == "") {
-    stop("location_name can not be empty")
+    cli::cli_abort("location_name can not be empty")
   }
   plc_ <- paste0(dplyr::ensym(location_name))
   data <- data %>%
@@ -100,6 +92,9 @@ mm_check_location <- function(data,
     # add location_name column
     dplyr::rename("location_name" = plc_)
 
+  if (!hasArg(new_data_name)) {
+    new_data_name <- paste0("data_updated_", gsub("\\.|\\-|\\:|\\s", "", paste0(Sys.time())))
+  }
 
   # shiny
   ui <- leafletOutput("map", width = "100%", height = "100vh")#,  # The map output
@@ -127,6 +122,7 @@ mm_check_location <- function(data,
     # Capture the updated coordinates after marker drag event
     shiny::observeEvent(input$map_marker_dragend, {
       new_coords <- input$map_marker_dragend  # Get the coordinates from the input object
+
       # Update the coordinates in the reactive variable
       updated_coords <- dplyr::tibble(X = new_coords$lng,
                                       Y = new_coords$lat,

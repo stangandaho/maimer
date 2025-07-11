@@ -42,10 +42,9 @@ export(mm_ci)
 export(mm_overlap_matrix)
 export(mm_temporal_shift)
 export(mm_alpha_diversity)
-export(mm_summarise_camtrap_activity)
-#export(mm_beta_diversity)
 export(mm_dissimilarity)
 export(mm_spatial_coverage)
+export(mm_summarise_camtrap_activity)
 export(mm_traprate_estimate) ## no
 export(mm_fit_activity) #no
 export(mm_fit_speedmodel) #no

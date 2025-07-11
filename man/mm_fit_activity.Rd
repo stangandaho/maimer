@@ -58,3 +58,18 @@ It's generally better to sample from the data, but sampling from
 the fitted distribution can sometimes provide more sensible confidence intervals when
 the number of observations is very small.
 }
+\examples{
+data("camtrapdp")
+observations <- camtrapdp$data$observations \%>\%
+  dplyr::filter(scientificName == "Vulpes vulpes") \%>\%
+  # Add time of day
+  mm_to_radian(times = timestamp)
+
+
+fit_act <- mm_fit_activity(time_of_day = observations$time_radian,
+                           sample = "model", n_boostrap = 100)
+
+# Access activity level estimation
+fit_act$activity
+
+}

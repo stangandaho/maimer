@@ -38,6 +38,12 @@
 #'                               start = start, end = 'end'
 #' )
 #'
+#'
+#' # Fit REM
+#' mm_fit_rem(data = observations,
+#'            traprate_data = trap_rate,
+#'            time_of_day = time_of_day)
+#'
 #' @seealso [mm_fit_speedmodel()], [mm_fit_detmodel()], [mm_fit_activity()]
 #'
 #' @export

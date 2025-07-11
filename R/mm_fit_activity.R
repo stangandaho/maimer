@@ -13,6 +13,21 @@
 #' @inherit activity::fitact details
 #'
 #' @return A list
+#'
+#' @examples
+#' data("camtrapdp")
+#' observations <- camtrapdp$data$observations %>%
+#'   dplyr::filter(scientificName == "Vulpes vulpes") %>%
+#'   # Add time of day
+#'   mm_to_radian(times = timestamp)
+#'
+#'
+#' fit_act <- mm_fit_activity(time_of_day = observations$time_radian,
+#'                            sample = "model", n_boostrap = 100)
+#'
+#' # Access activity level estimation
+#' fit_act$activity
+#'
 #' @export
 mm_fit_activity <- function(time_of_day,
                             weights = NULL,
@@ -33,12 +48,14 @@ mm_fit_activity <- function(time_of_day,
                               show = show)
 
   return(list(
-    Data = dplyr::tibble(time_of_day = fit_act@data),
-    Weight = fit_act@wt,
-    Bandwidth = fit_act@bw,
-    Adjustement = fit_act@adj,
-    `Probabilty Density Function` = dplyr::as_tibble(fit_act@pdf),
-    Activity = t(fit_act@act) %>% as.data.frame() %>% dplyr::as_tibble()
+    data = dplyr::tibble(time_of_day = fit_act@data),
+    weight = fit_act@wt,
+    bandwidth = fit_act@bw,
+    adjustement = fit_act@adj,
+    pdf = dplyr::as_tibble(fit_act@pdf),
+    activity = t(fit_act@act) %>%
+      as.data.frame() %>% dplyr::as_tibble() %>%
+      dplyr::rename(lower_ci = 3, upper_ci = 4)
   ))
 }
 
