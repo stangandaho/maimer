@@ -117,12 +117,12 @@ of sites per feature in <code>study_area</code>.</p></dd>
 
 
 <dt id="arg-min-distance">min_distance<a class="anchor" aria-label="anchor" href="#arg-min-distance"></a></dt>
-<dd><p>A numeric value specifying the minimum allowed distance
+<dd><p>A numeric value specifying the minimum allowed distance (in meter)
 between sampled sites (applied only for the random methods).</p></dd>
 
 
 <dt id="arg-distance">distance<a class="anchor" aria-label="anchor" href="#arg-distance"></a></dt>
-<dd><p>A numeric vector specifying the distance (x and y spacing)
+<dd><p>A numeric vector specifying the distance (x and y spacing in meter)
 between grid cells for regular sampling methods. If a single value is provided,
 it is used for both dimensions.</p></dd>
 
@@ -199,25 +199,7 @@ If a geographic CRS is detected, an error is raised.</p>
 <span class="r-in"><span>                               method <span class="op">=</span> <span class="st">"regular_cluster"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>                               total_site <span class="op">=</span> <span class="fl">3</span>, distance <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7000</span>, <span class="fl">6000</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                               min_distance <span class="op">=</span> <span class="fl">2000</span>, padding <span class="op">=</span> <span class="fl">2000</span>, set_seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 28 features and 1 field</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POINT</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 300935.6 ymin: 1188880 xmax: 375203.1 ymax: 1250255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Projected CRS: WGS 84 / UTM zone 31N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      cluster                        x</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  cluster_1 POINT (330170.3 1249595)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  cluster_1 POINT (332860.8 1249894)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  cluster_2 POINT (343060.1 1249925)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  cluster_2 POINT (347059.9 1249727)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  cluster_3 POINT (358208.8 1248588)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  cluster_3 POINT (360620.6 1248825)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  cluster_4 POINT (375203.1 1248952)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  cluster_4 POINT (370870.3 1250255)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  cluster_5 POINT (314593.9 1238168)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 cluster_5 POINT (319216.6 1238048)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 3 sites</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>                                 per cluster. Try to adjust distance and min_distance</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Cluster size doesn't allow to have 3 sites per cluster. Try to adjust distance and min_distance</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Regular-cluster sampling with regularly distributed sites within clusters</span></span></span>
 <span class="r-in"><span><span class="va">reg_c_reg_sdes</span> <span class="op">&lt;-</span> <span class="fu">mm_survey_design</span><span class="op">(</span>study_area <span class="op">=</span> <span class="va">pendjari_trans</span>,</span></span>
