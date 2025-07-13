@@ -45,10 +45,10 @@ of sites per feature in \code{study_area}.}
 \item "random": Distributes sites randomly within each cluster or feature (for "mask" method).
 }}
 
-\item{min_distance}{A numeric value specifying the minimum allowed distance
+\item{min_distance}{A numeric value specifying the minimum allowed distance (in meter)
 between sampled sites (applied only for the random methods).}
 
-\item{distance}{A numeric vector specifying the distance (x and y spacing)
+\item{distance}{A numeric vector specifying the distance (x and y spacing in meter)
 between grid cells for regular sampling methods. If a single value is provided,
 it is used for both dimensions.}
 

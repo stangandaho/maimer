@@ -22,9 +22,9 @@
 #' @param type_in A character string indicating the within-cluster sampling type. Options:
 #'   - "regular": Places sites in a structured grid within each cluster or feature (for "mask" method).
 #'   - "random": Distributes sites randomly within each cluster or feature (for "mask" method).
-#' @param min_distance A numeric value specifying the minimum allowed distance
+#' @param min_distance A numeric value specifying the minimum allowed distance (in meter)
 #' between sampled sites (applied only for the random methods).
-#' @param distance A numeric vector specifying the distance (x and y spacing)
+#' @param distance A numeric vector specifying the distance (x and y spacing in meter)
 #' between grid cells for regular sampling methods. If a single value is provided,
 #' it is used for both dimensions.
 #' @param padding A numeric value defining the buffer distance to exclude areas
@@ -127,9 +127,10 @@ mm_survey_design <- function(study_area,
   if (crs_type(study_area) == "Geographic") {
     sa_name <- deparse(substitute(study_area))
     msg <- paste0("Transform data from longitude/latitude (geographic) to projected system. Eg. ",
-                  sa_name, " %>% st_transform(crs = 'EPSG:32631'). You can use https://epsg.io/ to
-                  find the suitable crs. If the area of interest spans several
-                  UTM zones, consider to use `EPSG:6933`")
+                  sa_name, " %>% sf::st_transform(crs = 'EPSG:32631'). ",
+                  paste0("You can use https://epsg.io/ to find the suitable crs. "),
+                  paste0("If the area of interest spans several UTM zones, consider to use `EPSG:6933`")
+                  )
     rlang::abort(msg)
   }
   # Set distance
@@ -200,18 +201,39 @@ mm_survey_design <- function(study_area,
         dplyr::filter(grid_area >= (distance[1]*distance[2])) %>%
         dplyr::select(-grid_area)
 
+      if (hasArg(total_cluster) && inherits(total_cluster, "numeric")) {
+
+        if (verbose) {
+          if(nrow(cluster_grid) < total_cluster){
+            cli::cli_alert_warning("The distance of {paste0(distance, collapse = 'x')} cannot produce {total_cluster} cluster{?s}, but rather {.strong {.field {nrow(cluster_grid)}}}.")
+          }
+        }
+
+        ## Select exactly desired number of cluster
+        if (nrow(cluster_grid) > total_cluster) {
+          number_to_remove <- nrow(cluster_grid) - total_cluster
+          # If even, remove equal par at head and tail
+          if (number_to_remove %% 2 == 0) {
+            cluster_grid <- cluster_grid %>% dplyr::slice_head(n = - number_to_remove/2) %>%
+              dplyr::slice_tail(n = - number_to_remove/2)
+          }else{
+            eveness <- number_to_remove - 1
+            cluster_grid <- cluster_grid %>% dplyr::slice_head(n = - eveness/2) %>%
+              dplyr::slice_tail(n = -(eveness/2)+1)
+          }
+        }
+      }
+
       if (type_in == "random") {
 
         cl <- clustering(cluster = cluster_grid, total_site = total_site,
                          min_distance = min_distance, nest_padding = nest_padding,
                          verbose = verbose)
         designed <- cl[[1]]
-        print(designed)
 
         if (verbose) {
           if (any(unlist(cl[[2]]))) {
-            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites
-                                per cluster. Try to adjust distance and min_distance",
+            rlang::warn(sprintf("Cluster size doesn't allow to have %s sites per cluster. Try to adjust distance and min_distance",
                                 total_site))
           }
         }
@@ -351,8 +373,7 @@ random_sampling <- function(study_area,
     sa_grid_vec <- regular_grid(study_area = study_area, distance = min_distance,
                                 padding = padding)
     if (nrow(sa_grid_vec) == 0) {
-      rlang::abort("`min_distance` provided cannot produce a suitable space for
-                   sampling.", call = NULL)
+      cli::cli_abort("`min_distance` provided cannot produce a suitable space for sampling.")
     }
 
     single_random_point <- sample(x = 1:total_site, size = 1)
@@ -399,6 +420,9 @@ random_sampling <- function(study_area,
 #'
 
 regular_grid <- function(study_area, distance, padding){
+  if (is.null(distance)) {
+    cli::cli_abort("Distance cannot be null for regular sampling.")
+  }
   if (length(distance) == 1) {distance <- c(distance, distance)}
   padding_study_area <- study_area %>% sf::st_buffer(dist = - padding)
 
